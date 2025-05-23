@@ -28,6 +28,32 @@
       4) value 속성
         체크박스의 value 속성이 없으면, 체크박스를 체크한 상태로 폼을 제출할 때 서버로 전송되는 값은 기본적으로 "on"이 됩니다.
   -->
+        <!-- 여러 항목을 하나의 이름으로 전송하기: 서버 측에서 배열(String[])로 모든 항목을 받습니다. -->
+        <form action="/check">
+          <input type="checkbox" name="hobbies" value="running">러닝
+          <input type="checkbox" name="hobbies" value="swim">수영
+          <input type="checkbox" name="hobbies" value="golf">골프
+          <input type="checkbox" name="hobbies" value="game">게임<br>
+          <input type="submit" value="양식 제출">
+        </form>
+
+        <hr>
+
+        <!-- 여러 항목을 각자의 이름으로 전송하기: 서버 측에서 각 항목을 변수(String) 로 각 항목을 받습니다. -->
+         <form action="/check">
+          <input type="checkbox" name="nike">나이키
+          <input type="checkbox" name="adidas">아디다스
+          <input type="checkbox" name="puma">푸마<br>
+          <input type="submit" value="양식 제출">
+         </form>
+
+         <hr>
+
+         <form action="/check">
+         <input type="checkbox" name="americano">아메리카노
+         <input type="checkbox" name="latte">라떼<br>
+         <input type="submit" value="제출">
+         </form>
 
 </body>
 </html>

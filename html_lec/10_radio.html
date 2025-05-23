@@ -9,7 +9,8 @@
   
   <!--
     <input type="radio"> 태그
-
+    *반드시 name을 동일하게 설정해주어야 한다.
+    *value는 반드시 다르게 설정해야한다.
     1. 라디오 버튼은 여러 개의 옵션 중에서 하나만 선택할 수 있게 해주는 HTML 폼 요소입니다. 
     2. 주로 설문, 성별 선택, 선호도 선택 등에서 사용합니다.
     3. 기본 문법
@@ -29,6 +30,24 @@
         라디오 버튼에 value 속성이 없으면, 해당 라디오 버튼을 선택한 상태로 폼을 제출할 때 서버로 전송되는 값은 기본적으로 "on"이 됩니다.
         다만 해당 그룹의 어떤 항목을 선택한 상태로 제출했는지 알 수 없으므로 실제로 사용할때엔 value 속성은 반드시 지정해야 합니다.
   -->
+
+  <form action="/radio">
+    <input type="radio" name="gender" value="man">남자
+    <input type="radio" name="gender" value="woman">여자
+    <input type="radio" name="gender" value="none" checked>선택안함
+    <br>
+    <input type="submit" value="제출">
+    <hr>
+  </form>
+
+  <form action="/radio">
+    <input type="radio" name="shoes" value="270">270
+    <input type="radio" name="shoes" value="280">280
+    <input type="radio" name="shoes" value="none" checked>선택안함
+    <br>
+    <input type="submit" value="제출">
+    <hr>
+  </form>
 
 </body>
 </html>

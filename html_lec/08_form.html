@@ -29,6 +29,156 @@
           - application/x-www-form-urlencoded: <form> 태그의 기본 enctype 값, 폼 데이터는 서버로 전송되기 전에 URL-Encode되어 전송
           - multipart/form-data: <input type="file">을 포함하여 파일을 업로드하려는 <form> 태그에서 사용, 반드시 method="post"여야 함
   -->
+
+  <!--
+    URL 구성
+  
+    http://localhost:8080/users?page=1
+
+    프로토콜://호스트:포트번호/서버경로?쿼리스트링
+
+    프로토콜:통신규약
+    호스트:서버를 의미. 도메인 또는 IP 주소로 구성
+    포트번호: 서버에서 실행중인 특정 서비스의 식별번호
+    서버경로: 서버 내부에서 특정 기능을 수행하는 내부 주소
+    쿼리스트링: GET 방식일 때 확인 가능. 서버로 보내는 데이터를 의미함. ?파라미터1=값1&파라미터2=값2파라미터3=값3..
+    (물음표가 시작)
+  -->
+    <!-- 
+  양식 제출하기
+  1. action: 양식을 제출할 서버의 경로 (서버프로그래밍 배울 때 신경 쓰면 됩니다.)
+  2. method: 데이터를 전송하는 방식 (디폴트 get)
+  3. enctype: 데이터의 종류에 따라 다르게 설정 (디폴트 application/x-www-form-urlencoded: URL의 모든 데이터를 인코딩해서 전송)
+  4. type="email": email 입력 형식 체크. 단, 기능이 부족하기 때문에 실무에서는 잘 사용x(대신 정규식 사용)
+  5. name: 서버로 보내는 파라미터의 이름
+  6. type="submit":서버(action)로 폼 내부의 모든 입력 양식을 보내는 것것
+  -->
+     <form action="/users"
+          method="get"
+          enctype="application/x-www-form-urlencoded"
+          >
+
+      <input type="email"name= email placeholder="example@naver.com">
+      <input type="password" name="password" placeholder="비밀번호"><br>
+      <input type="text" name="phone" placeholder="전화번호"><br>
+      <input type="submit" value="제출하기">
+     </form>
+
+     <hr>
+     
+     <!-- post 방식으로 양식 제출하기 -->
+      <form action="/login"
+            method="post"1
+      >
+      <input type="text" name="uid" placeholder="아이디"><br>
+      <input type="password" name="upw" placeholder="비밀번호">
+      <input type="submit" value="로그인"><br>
+      <input type="reset" value="입력취소"><br>
+    </form>
+
+    <hr>
+    <form action="/login"
+          method="post"
+          >
+        <strong>개인정보작성</strong><br>
+        <form>
+        이름 <input type="text"><br>
+        메일 주소 <input type="text"><br>
+        연락처 <input type="text"><br>
+        블로그/홈페이지<input type="text"><br>
+        <input type="submit" value="제출하기">
+        <input type="reset"  value="다시작성">
+
+        </form> 
+        </form>
+
+    <!-- 네이버 검색 엔진 사용해 보기 -->
+     <form action="https://search.naver.com/search.naver">
+    <!-- 사용자가 입력하지 않아도 서버로 전송되는 데이터들은 hidden 처리해서 전송합니다. -->
+     <input type="hidden" name="where" value="nexearch">  
+      <input type="hidden" name="ie" value="utf8">
+      <input type="text" name="query" placeholder="검색어를 입력하세요"><br>
+      <input type="submit" value="검색">
+     </form>
+    <!-- 구글 검색 엔진 사용해 보기 -->
+     <form action="https://www.google.com/search">
+      <input type="text" name="query" placeholder="검색어를 입력하세요"><br>
+      <input type="submit" value="구글검색">
+     </form>
+
+     <hr>
+
+     <!--
+      파일 첨부 양식 제출하기 
+      
+      반드시 method="post"와 enctype="multipart/form-data"를 모두 사용해야 합니다.
+      -->
+      <form method="post"
+            enctype="multipart/form-data"
+            >
+          <input type="file" name="profile" accept="image/*"><br>
+          <input type="submit" value="제출">
+        </form><hr>
+        
+        <form action="/login"
+              method="post">
+
+         아이디 <input type="text" name="uid" placeholder="아이디">
+         <input type="submit" value="중복확인"><br>
+         비밀번호 <input type="password" name="upw" placeholder="새 비밀번호"><br>
+         비밀번호 확인 <input type="password" name="upw" placeholder="비밀번호 확인"><br>
+         이메일 <input type="email" name="email" placeholder="이메일">
+         @ <input type="email" name="email" placeholder="직접입력가능"><br>
+         <fieldset>
+          <legend>성별</legend>
+          <input type="radio" value="man">남자
+          <input type="radio" value="girl">여자
+         </fieldset>
+         <fieldset>
+          <legend>관심</legend>
+          <input type="checkbox" value="IT">IT
+          <input type="checkbox" value="경영">경영<br>
+          <input type="checkbox" value="금융">금융
+          <input type="checkbox" value="제조">제조<br>
+          <input type="checkbox" value="서비스">서비스
+          <input type="checkbox" value="기타">기타
+         </fieldset>
+        <label for="location"></label>거주지</label>
+        <select id="location" name="location">
+          <option value="">선택하세요</option>
+          <option value="seoul" >서울</option>
+          <option value="daejun">대전</option>
+          <option value="daegu" >대구</option>
+          <option value="busan" >부산</option>
+          <option value="incheon">인천</option>
+        </select><br>
+        자기소개
+        <textarea placeholder="200자이내 간단히 작성"></textarea><br>
+        이력서
+        <form method="post" enctype="multipart/form-data">
+          <input type="file" name="profile" accept="image/*"><br>
+        </form>
+        제출일<input type="text"><br>
+        <input type="submit" value="제출">
+        <input type="reset" value="다시입력">
+
+
+         
+
+
+
+
+            </form>
+
+        
+
+
+
+
+
+       
+            
+
   
 </body>
 </html>

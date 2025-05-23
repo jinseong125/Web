@@ -35,7 +35,21 @@
       required      | 폼 제출 전 반드시 입력하도록 설정
       wrap          | 줄바꿈 방식 지정(soft: 기본, hard: 줄바꿈 포함)
       form          | 소속할 form 요소의 id 지정(폼 외부에 있을 때 사용)
-  -->
+      row    
+      column 
+        -->
+
+  <form action="/textarea">
+    <textarea name="comment" placeholder="여기에 댓글을 입력하세요." rows="5" cols="30"></textarea>
+    <br>
+    <input type="submit" value="제출">
+  </form>
+
+  <form action="/textarea">
+    <textarea name="comment" placeholder="지이이이이인성" row="10" cols="30"></textarea>
+    <br>
+    <input type="submit" value="제출">
+  </form>
 
 </body>
 </html>

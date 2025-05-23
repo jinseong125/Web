@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>box_model</title>
+</head>
+<body>
+
+  <!--
+    border
+
+    1. 테두리를 지정하는 속성입니다.
+    2. 테두리의 두께, 종류,색상을 지정할 수 있습니다.
+    3. 원하는 위치의 테두리만 지정할 수 있습니다.
+  -->
+    <style>
+      .box1 {
+        border: 1px solid black;
+      }
+      .box2 {
+        border-left: 1px dotted black;
+        border-right: 1px dotted black;
+        border-top: 1px dashed black;
+        border-bottom: 1px dashed black;
+      }
+    </style>
+    <div class="box1">box1</div>
+    <span class="box1">box1</span>
+    <div class="box2">box2</div>
+
+    <!--
+      border-radius
+
+      1. 테두리 모서리를 지정한 크기만큼 둥글게 다듬는 속성입니다.
+      2. 4가지 사용방법
+       1) border-radius: 5px;
+        ┌─────┐
+        |5   5|
+        |     |
+        |5   5|
+        └─────┘
+      2) border-radius: 5px 6px;
+        ┌─────┐
+        |5   6|
+        |     |
+        |6   5|
+        └─────┘
+      3) border-radius: 5px 6px 7px;
+        ┌─────┐
+        |5   6|
+        |     |
+        |6   7|
+        └─────┘
+      4) border-radius: 5px 6px 7px 8px;
+        ┌─────┐
+        |5   6|
+        |     |
+        |8   7|
+        └─────┘
+    -->
+      <style>
+        .box3 {
+          border: 1px solid black;
+          border-radius: 5px;
+        }
+      </style>
+      <div class="box3">box3</div>
+
+      <!--
+        width/height
+
+        1. 콘텐츠(텍스트, 이미지 같은 실제 내용)의 너비/높이를 지정하는 속성입니다.
+        2. px, % 등의 단위를 사용합니다.
+          %는 부모 요소의 크기를 기준으로 합니다.
+        3. 인라인 요소는 너비/높이를 지정할 수 없습니다.  
+      -->
+          <style>
+            .box4 {
+              border: 1px solid black;
+              width: 200px;
+            }
+            .box4 > div {
+              border: 1px solid gray;
+              width: 50px;   /* .box4기준 50% (100px) */
+            }
+            .box5 {
+              border: 1px solid black;
+              width: 100px;
+              height: 100px;
+              text-align: center;  /* 수평 방향 가운데 정렬 */
+              line-height: 100px;  /* 수직 방향 가운데 정렬과 유사한 효과: line-height와 height값을 동일하게 맞춥니다. */
+              border-radius: 100px;
+              box-shadow: 50px 100px 5px pink;
+            }
+          
+          </style>
+          <div class="box4">
+            <div>box4</div>
+          </div>
+          <span class="box4">box4</span>
+
+          <div class="box5">box5</div>
+
+          <!--
+           padding
+          
+           1. 콘텐츠와 테두리 사이의 여백을 지정하는 속성입니다.
+           2. 투명하며, 배경색을 지정하면 패딩 영역까지 확장됩니다.
+           3. 흔히 내부 여백이라고 합니다.
+           4. 4가지 사용 방법
+           1) padding: 5px;
+           ┌─────┐
+           |  5  |
+           |5   5|
+           |  5  |
+           └─────┘
+           2) padding: 5px 6px;
+           ┌─────┐
+           |  5  |
+           |6   6|
+           |  5  |
+           └─────┘
+           3) padding: 5px 6px 7px;
+           ┌─────┐
+           |  5  |
+           |6   6|
+           |  7  |
+           └─────┘
+           4) padding: 5px 6px 7px 8px;
+           ┌─────┐
+           |  5  |
+           |8   6|
+           |  7  |
+           └─────┘
+           -->
+           <style>
+            .box6 {
+              border: 1px solid black;
+              padding: 100px 300px;
+            }
+           </style>
+
+        <div class="box6">box6</div>
+
+        <!--
+          margin
+
+          1. 테두리의 바깥 여백을 설정하는 속성입니다.
+          2. 다른 요소와의 간격 조절을 위해서 사용합니다.
+          3. 흔히 외부 여백이라고 합니다.
+          4. 원하는 방향의 마진만 적용할 수 있습니다.
+            margin-top, margin-bottem, margin-left, margin-right
+          5. 4가지 사용 방법법
+              1) margin: 5px;
+           5
+        ┌─────┐
+        |     |
+      5 |     | 5
+        |     |
+        └─────┘
+           5
+
+      2) margin: 5px 6px;
+           5
+        ┌─────┐
+        |     |
+      6 |     | 6
+        |     |
+        └─────┘
+           5
+
+      3) margin: 5px 6px 7px;
+           5
+        ┌─────┐
+        |     |
+      6 |     | 6
+        |     |
+        └─────┘
+           7
+
+      4) margin: 5px 6px 7px 8px;
+           5
+        ┌─────┐
+        |     |
+      8 |     | 6
+        |     |
+        └─────┘
+           7
+        -->
+       <style>
+        .box7 {
+          border: 1px solid black;
+          margin: 20px;
+        }
+        .box8 {
+          border: 1px solid black;
+          width: 100px;
+          height: 50px;
+          margin: 0 auto;  /* 박스를 화면의 수평 가운데로 보내기 위해서 좌우 마진을 auto로 설정합니다.*/
+        }
+       </style>
+       <div class="box7">box7</div>
+       <div class="box7">box7</div>
+       <div class="box8">box8</div>
+
+       <!--
+         Box 기본구조
+
+        +-------------------------------+
+        |           margin              |
+        |  +-------------------------+  |
+        |  |        border           |  |
+        |  |  +-------------------+  |  |
+        |  |  |     padding       |  |  |
+        |  |  |  +-------------+  |  |  |
+        |  |  |  |  content    |  |  |  |
+        |  |  |  +-------------+  |  |  |
+        |  |  +-------------------+  |  |
+        |  +-------------------------+  |
+        +-------------------------------+
+
+       -->
+
+       <!--
+         Box Sizing
+
+         1. 박스의 크기를 계산하는 방법입니다.
+         2. box-sizing 속성에 따라 박스의 크기를 계산하는 방법이 달라집니다.
+           1) content-Box
+             (1) 기본값입니다.
+             (2) width/height에 컨텐츠 영역이 포함됩니다.
+             (3) width/height에 테두리, 패딩, 마진영역은 포함되지 않습니다.
+           2) border-box
+             (1) width/height에 테두리 영역이 포함됩니다.
+             (2) width/height에 마진을 제외한 모든 영역이 포함됩니다.    
+         3. 크기 계산 공식
+           1) content-box
+             (1) 너비: width + padding-left + padding-right + border-left + border-right +
+              (margin-left + margin-right)
+             (2) 높이: height + padding-top + padding-bottom + border-top + border-bottom +
+             (margin-top + margin-bottom)
+           2) border-box
+             (1) 너비: width + (margin-left + margin-right)
+             (2) 높이: height + (margin=top + margin-bottom)
+       -->
+
+       <style>
+        .box9 {
+          box-sizing:  content-box;
+          border : 1px solid black;
+          padding: 10px;
+          margin : 10px;
+          width  : 100px;
+          height : 100px;
+        }
+        .box10 {
+          box-sizing: border-box;
+          border : 1px solid black;
+          padding: 10px;
+          margin : 10px;
+          width  : 100px;
+          height : 100px;
+        }
+        .box11,
+        .box12 {
+          width: 100px;
+          height: 100px;
+          border: 1px solid black;
+          display: inline-block;
+          margin: 10px;
+        }
+
+       </style>
+       <div class="box9">box9</div>
+       <div class="box10">box10</div>
+       <div class="box11">box11</div>♥
+       <div class="box12">box12</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>internal</title>
+  <style>
+    * {
+      color: teal;
+    }
+    h1 {
+      color: orange;
+    }
+    #title{
+      color:crimson;
+    }
+    .main-title{
+      color:lime;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    내부 스타일시트 방식
+
+    1. HTML 문서의 <head> 태그에 <style> 태그를 추가하고 스타일을 작성합니다.
+    2. 다음 기본 구조를 가집니다.
+      선택자(selector) {
+        속성1: 값1;
+        속성2: 값2;
+        ...
+      }     
+  -->
+
+  <!--  
+    선택자
+
+    1. CSS 선택자는 CSS 규칙을 적용할 요소를 정의합니다.
+    2. 기본 선택자
+      1) 전체 선택자  : *,말 그대로 모든요소를 선택합니다.
+      2) 태그 선택자  : 태그명, 지정한 모든 태그들을 선택합니다.
+      3) 아이디 선택자: #아이디, 지정한 아이디를 가진 특정요소를 선택합니다.
+      4) 클래스 선택자: .class클래스, 지정한 클래스를 가진 모든 요소들을 선택합니다.
+      5) 우선 순위   :  3(아이디)>4(클래스)>2(태그)>1(전체체)
+  -->
+
+  <h1 id="title" class="main-title">hello world</h1>
+   
+</body>
+</html>

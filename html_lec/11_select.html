@@ -32,7 +32,69 @@
         해당 옵션을 선택 불가로 만듭니다.
       4) hidden
         옵션을 목록에서 숨깁니다. 주로 안내문구를 나타내고자 하는 경우 사용합니다.
-  -->
+  --> 
+
+  <!-- option 태그의 내부 텍스트를 value로 사용합니다. -->
+    <form action="/select">
+      <select name="moble">
+        <option>SKT</option>
+        <option>KT</option>
+        <option>LGU+</option>
+      </select>
+      <input type="submit" value="제출">
+    </form>
+
+    <hr>
+
+  <!-- option 태그에 value 속성을 만들면 해당value 속성 값이 전달됩니다. -->
+    <form action="/select">
+      <select name="nation">
+        <option value="01">가나 +01</option>
+        <option value="02">가봉 +02</option>
+        <option value="82" selected>한국 +82</option>
+        <option value="99">일본 +99</option>
+      </select>
+      <input type="submit" value="제출">
+    </form>
+
+    <hr>
+
+    <!-- 사용자에게 안내 메시지를 보여주면서 동시에 반드시 항목을 선택하도록 유도할 수 있습니다. -->
+    <form action="/select">
+      <select name="menu" required>
+        <option value="" selected hidden disabled>주문할 메뉴를 선택해주세요</option>
+        <option value="1">짜장</option>
+        <option value="2">짬뽕</option>
+        <option value="3">탕수육</option>
+      </select>
+      <input type="submit" value="제출">
+    </form>
+
+    <hr>
+
+    <form action="/select">
+      <select name="phone" required>
+      <option value="" selected hidden disabled>기종을 선택하세요</option>
+      <option value="1">Apple</option>
+      <option value="2">Samsung</option>
+      <option value="3">LG</option>
+       </select>
+       <input type="submit" value="제출">
+    </form>
+
+    <hr>
+
+    <!-- multiple 속성을 추가하면 리스트 형태로 표시되어 다중 선택을 할 수 있고, 서버측에서는 배열로 해당 데이터를 받을 수 있습니다. -->
+    <form action="/select">
+      <select name="fruits" multiple>
+        <option value="apple">사과</option>
+        <option value="banana">바나나</option>
+        <option value="orange">오렌지</option>
+        <option value="kiwi">키위</option>
+        <option value="pineapple">파인애플</option>
+      </select>
+      <input type="submit" value="제출">
+    </form>
 
 </body>
 </html>

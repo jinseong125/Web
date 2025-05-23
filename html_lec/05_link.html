@@ -13,7 +13,7 @@
     1. <a> 태그는 anchor의 약자로, HTML에서 하이퍼링크(hyperlink)를 생성할 때 사용하는 태그입니다.
     2. 웹페이지에서 다른 페이지, 파일, 이메일 주소, 같은 페이지 내 특정 위치 등으로 이동할 수 있는 링크를 만들 때 사용합니다.
     3. 주요 속성
-      1) href
+      1) href = hyper reference
         링크의 목적지(이동할 주소)를 지정합니다. 필수 속성입니다. (예: <a href="https://example.com">Example</a>)
       2) target
         링크를 어디에서 열지 지정합니다. (예: <a href="https://naver.com" target="_blank">네이버</a>)
@@ -37,5 +37,46 @@
         <a> 태그는 감싼 내용(content)만큼만 영역을 차지하는 인라인 요소이므로 줄바꿈이 발생하지 않습니다. <a> 태그 내부에 블록 요소가 오지 않도록 주의해야 합니다.
   -->
 
+  <a href="https://www.naver.com" target="_blank">네이버</a>
+  <br>
+  <!--파일 연결-->
+  <ul>
+    <li><a href="./05_정치.html">정치</a></li>
+    <li><a href="./05_경제.html">경제</a></li>
+    <li><a href="./05_연예.html">연예</a></li>
+ </ul>
+
+<div id="part1">파트1</div>
+<br><br><br><br>
+ 
+ <div id="part2">파트2</div>
+ <br><br><br><br>
+ 
+
+ <a href="#part1">파트1 이동</a><br>
+ <a href="#part2">파트2 이동</a><br>
+
+<!--이미지 링크-->
+
+<img href="https://naver.com">
+ <img src="../assets/images/logo_naver.png"width="100" alt="네이버로고">
+
+ <img href="https://daum.net">
+ <img src="../assets/images/logo_daum.png"width="100" alt="다음로고">
+
+ <img href="https:/coupang.com">
+ <img src ="../assets/images/logo_coupang.png"width="100" alt="쿠팡로고">
+
+ <img href="https:/google.co.kr">
+ <img src ="../assets/images/logo_google.png"width="100" alt="구글로고">
+
+ <img href="flower">
+ <img src="../assets/images/flower1.jpg"width="100" alt="꽃">
+
+ <img href="image">
+ <img src="../assets/images/animal1.jpg"width="100" alt="사막여우우">
+
+ <a><div>클릭</div></a>  <!--불가능 : 인라인 a 태그 안에 블록 div 태그 넣기-->
+ <a><span>클릭</span></a><!--가능  : 인라인 a 태그 안에 인라인 span 태그 넣기-->
 </body>
 </html>

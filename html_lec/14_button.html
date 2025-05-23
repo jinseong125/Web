@@ -31,5 +31,26 @@
       3) <button> 태그는 스크린리더가 정확히 인지하고 전달하므로 웹 접근성 측면에서 더 유리합니다.
   -->
 
+        <!-- submit, reset 버튼 -->
+        <form action="/button">
+          <input type="text" name="query" placeholder="검색어 입력">
+          <br>
+          <button type="submit"><img alt="제출" src="../assets/images/r4.gif" width="20"></button>
+          <button type="reset">입력초기화</button>
+        </form>
+        <hr>
+
+        <!-- button 버튼 : 아무일도 하지 않는 버튼. 클릭 이벤트와 연동하여 기능을 직접 작성할 때 사용합니다. -->
+         <button type="button" onclick="clickHandler();">클릭해보시오</button>
+         <script>
+          function clickHandler() {
+            alert('Hello World');
+          }
+         </script>
+
+         <br>
+         <form>
+         <button type="submit"><img alt="제출" src="../assets/images/1.png" width="30"></button>
+         </form>
 </body>
 </html>

@@ -56,6 +56,269 @@
       2) colspan, rowspan: 셀을 가로(열) 또는 세로(행)로 병합할 때 사용
       3) width, height, align, bgcolor: 크기, 정렬, 배경색 지정 (CSS로 대체 권장)
   -->
+  <!--추가로 <tfooot></tfoot>가능 -->
+
+  <!--기본 테이블-->
+  <table border="1">
+    <caption>표의 제목을 의미합니다</caption>
+    <thead>
+    <tr>
+      <th>이름</th>
+      <th>중간</th>
+      <th>기말</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>홍길동</td>
+        <td>90</td>
+        <td>85</td>
+      </tr>
+      <tr>
+        <td>김영희</td>
+        <td>95</td>
+        <td>90</td>
+      </tr>
+      </tbody>
+     <tfoot>
+      <td>평균</td>
+      <td>92.5</td>
+      <td>87.5</td>
+
+     </tfoot>
+
+    </tbody>
+  </table>
+
+  <!-- 행/열이 일정하지 않은 테이블 -->
+   <table border="1">
+    <tbody>
+      <tr>
+        <td>a</td>
+        <td>b</td>
+        <td>c</td>
+      </tr>
+      <tr>
+        <td>d</td>
+        <td>e</td>
+      </tr>
+      <tr>
+        <td>f</td>
+      </tr>
+    </tbody>
+   </table>
+
+   <!-- 열 병합하기 가로 = colspan -->
+      <table border="1">
+    <tbody>
+      <tr>
+        <td>a</td>
+        <td>b</td>
+        <td>c</td>
+      </tr>
+      <tr>
+        <td>d</td>
+        <td colspan="2">e</td>
+        
+      </tr>
+      <tr>
+        <td colspan="3">f</td>
+      </tr>
+    </tbody>
+   </table>
+
+   <!-- 행 병합하기 세로 = rowspan -->
+     <table border="1">
+    <tbody>
+      <tr>
+        <td>a</td>
+        <td>b</td>
+        <td rowspan="3">c</td>
+      </tr>
+      <tr>
+        <td>d</td>
+        <td rowspan="2">e</td>
+      </tr>
+      <tr>
+        <td>f</td>
+      </tr>
+    </tbody>
+   </table>
+
+   <!-- tbody 태그를 사용하는 이유 : 작성한 태그 구조와 렌더링된 태그 구조를 동일하게 맞추기 위해서 사용하는 것이 좋습니다. -->
+    <table border="1">
+      <tr>
+        <td>a</td>
+        <td>b</td>
+        <td>c</td>
+      </tr>
+    </table>
+
+
+
+    <table border="1">
+      <tbody>
+        <tr>
+          <td rowspan="5">1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+        </tr>
+
+        <tr>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+        </tr>
+
+        <tr>
+          <td rowspan="3">10</td>
+          <td>11</td>
+          <td>12</td>
+          <td rowspan="2">13</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>17</td>
+          <td>18</td>
+        </tr>
+        <tr>
+          <td colspan="5">19</td>
+        </tr>
+      </tbody>
+
+      <table border="1">
+    <tbody>
+      <tr>
+        <td colspan="4">1</td>
+        <td rowspan="7">2</td>
+      </tr>
+      <tr>
+        <td rowspan="5">3</td>
+        <td rowspan="4">4</td>
+        <td colspan="2">5</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td rowspan="4">7</td>
+      </tr>
+      <tr>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td colspan="2">10</td>
+      </tr>
+      <tr>
+        <td colspan="4">11</td>
+      </tr>
+
+      <table border="1">
+        <tbody>
+          <tr>
+            <td>이름</td>
+            <td>나이</td>
+            <td>주소</td>
+          </tr>
+          <tr>
+            <td>홍길동</td>
+            <td>20세</td>
+            <td>서우리 마포구 노고산동</td>
+          </tr>
+          <tr>
+            <td>특기</td>
+            <td colspan="2">먹기</td>
+          </tr>
+
+          <tr>
+             <td rowspan="2">신체</td>
+            <td colspan="2">180.0cm</td>
+          </tr>
+          <tr>
+            <td colspan="2">83kg</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <table border="1">
+        <tbody>
+          <tr>
+            <td>방이름</td>
+            <td>고객구분</td>
+            <td>정원</td>
+            <td>가격</td>
+          </tr>
+          <tr>
+            <td>콜로라도</td>
+            <td>여성전용</td>
+            <td rowspan="3">4인실</td>
+            <td rowspan="4">100,000원</td>
+          </tr>
+          <tr>
+            <td rowspan="2">아레나도</td>
+            <td>가족용</td>
+          </tr>
+          <tr>
+            <td>커플용</td>
+          </tr>
+          <tr>
+            <td>엘레나</td>
+            <td>커플 전용</td>
+            <td>2인실</td>
+          </tr>
+          <tr>
+            <td colspan="4">6월 15일까지 전 객실 50% 할인</td>
+          </tr>
+
+          
+        </tbody>
+      </table>
+      
+
+
+
+    </tbody>
+   </table>
+
+   <table border="1">
+    <tbody>
+      <tr>
+        <td>이름</td>
+        <td>나이</td>
+        <td>주소</td>
+      </tr>
+      <tr>
+        <td>박진성</td>
+        <td>28세</td>
+        <td>부평구 부개로58,106동201호</td>
+      </tr>
+      <tr>
+        <td>취미</td>
+        <td colspan="2">게임</td>
+      </tr>
+      <tr>
+        <td rowspan="2">신체</td>
+        <td colspan="2">183</td>
+      </tr>
+      <tr>
+        <td colspan="2">83</td>
+      </tr>
+    </tbody>
+   </table>
+
+
+    
+  
+
 
 </body>
 </html>
