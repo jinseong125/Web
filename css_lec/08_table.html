@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>table</title>
+  
+</head>
+<body>
+
+  <style>
+    .members {
+      border: 1px solid black;
+      border-collapse: separate;   /* 디폴트 값으로 각 영역의 테두리를 구분합니다. */
+      border-collapse: collapse;   /* 각 영역의 빈 공간이 붕괴하여 테두리가 합쳐진다. */
+    }
+    .members td {
+      border: 1px solid silver;
+      text-align: center;     /* 수평 가운데 정렬 */
+      vertical-align: center; /* 수직 가운데 정렬 */
+    }
+    .members td:nth-child(1) {width: 200px;}
+    .members td:nth-child(2) {width: 400px;}
+    .members td:nth-child(3) {width: 600px;}
+    .members tr {height: 80px;}
+    .members > thead > tr,.members > tfoot > tr {
+      background-color: aqua;
+    }
+    .members > tbody > tr:hover {
+      background-color: skyblue;
+      cursor: pointer;  /* 링크의 포인터 모양 */
+    }
+    .members > tbody > tr:active {
+      background-color: blue;
+    }
+  </style>
+  <table class="members">
+    <thead>
+      <tr>
+        <td>회원번호</td>
+        <td>티파니</td>
+        <td>보유포인트</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>제시카</td>
+        <td>1000</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>티파니</td>
+        <td>500</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>모모</td>
+        <td>2500</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">포인트 합계</td>
+        <td>4000</td>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="title">
+    <span>2025</span>
+    <span class="month">6</span>
+    <span>June</span>
+  </div>
+  <table class="calendar">
+    <thead>
+      <tr>
+        <td class="sun">SUN</td>
+        <td>MON</td>
+        <td>TUE</td>
+        <td>WED</td>
+        <td>THU</td>
+        <td>FRI</td>
+        <td class="sat">SAT</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sun">1</td>
+        <td>2</td>
+        <td class="holiday">3</td>
+        <td>4</td>
+        <td>5</td>
+        <td class="holiday">6</td>
+        <td class="sat">7</td>
+      </tr>
+      <tr>
+        <td class="sun">8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td class="sat">14</td>
+      </tr>
+      <tr>
+        <td class="sun">15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+        <td>19</td>
+        <td>20</td>
+        <td class="sat">21</td>
+      </tr>
+      <tr>
+        <td class="sun">22</td>
+        <td>23</td>
+        <td>24</td>
+        <td>25</td>
+        <td>26</td>
+        <td>27</td>
+        <td class="sat">28</td>
+      </tr>
+      <tr>
+        <td class="sun">29</td>
+        <td>30</td>
+        <td class="next">1</td>
+        <td class="next">2</td>
+        <td class="next">3</td>
+        <td class="next">4</td>
+        <td class="next">5</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</body>
+</html>

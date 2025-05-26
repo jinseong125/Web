@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>background</title>
+  <style>
+    div {
+      box-sizing: border-box;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+
+  <style>
+    .box1 {
+      width: 50px;
+      height: 50px;
+      background-color: yellow;
+    }
+
+  </style>
+  <div class="box1"></div>
+
+  <hr>
+
+  <style>
+    .box2 {
+      width: 100px;
+      height: 100px;
+      background-image: url(../assets/images/logo_naver.png);
+      background-size: 100% 100%;    /* 100px 100px 와 동일한 뜻입니다. */
+      background-size: 50% 50%;
+      background-repeat: no-repeat;  /* repeat 반복해서 나타내기기 싫을때 사용 */
+      background-position: center;   /* top, bottom, left, right, center */
+    }
+  </style>
+  <div class="box2"></div>
+
+  <hr>
+
+  <style>
+    .box3 {
+      width: 100px;
+      height: 100px;
+      background-image: url(../assets/images/animal10.jpg);
+      background-size: 100% 100%;
+      background-size: 50% 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  </style>
+  <div class="box3"></div>
+
+  <hr>
+
+  <style>
+    .box4 {
+      width: 300px;
+      height: 300px;
+      background-image: url(../assets/images/animal10.jpg);
+      background-size: cover;  /* 이미지 너비/ 높이 중 작은 부분을 최대한 키웁니다. 박스 밖으로 나간 부분은 잘려서
+      표시되지 않습니다. */
+      background-size: contain;  /* 이미지 너비/높이 중 큰 부분에 맞춰 박스 안으로 넣습니다. 이미지가 잘리진 않지만, 
+      일부 여백이 보일수 있다. */
+    }
+  </style>
+  <div class="box4"></div>
+
+  <hr>
+
+  <style>
+    .box5 {
+      background-image: url(../assets/images/weather.png);
+      width: 120px;
+      height: 120px;
+      background-position: -145px 0;  /* 왼쪽으로 145px, 위아래는 이동이 없으니 0, 배경 이미지를 이동
+      -방향은 왼쪽,표시 안하면 오른쪽. */
+      background-position: -145px;  /* 왼쪽으로 145px, 위아래는 center(지정이 없으면 center적용.) */
+      background-position: 0 -145px; /* 좌우는 0, 위로145px 이동 */
+    }
+  </style>
+  <div class="box5"></div>
+  
+  
+</body>
+</html>

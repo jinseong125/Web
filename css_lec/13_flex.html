@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flex</title>
+</head>
+<body>
+  
+<!--
+  Flexbox
+  
+  1. CSS의 레이아웃 모델 중 하나입니다.
+  2. 컨테이너 안의 아이템들을 효율적으로 배치, 정렬 등의 작업을 할 수 있도록 합니다.
+  3. 기존 레이아웃 기술 float, display, position 등의 복잡성 및 한계 극복을 위해 도입되었습니다.
+  4. 기본 개념
+    1차원 레이아웃 모델: 한 번에 한 방향으로 아이템들을 배치하는 방식.
+  5. 구성 요소
+    1) 플렉스 컨테이너
+     display: flex; 또는 display: inLine-flex를 지정한 요소
+    2) 플렉스 아이템
+      플렉스 컨테이너 내부의 자식 요소  
+  -->
+      <style>
+        div {
+          box-sizing: border-box;
+        }
+        .container1 {
+          width:  202px;
+          height: 202px;
+          border: 1px solid black;
+          display: flex;         /* 플렉스 컨테이너로 만듭니다. */
+          flex-direction: row;   /* 방향: row(행, 디폴트), collum(열 방향) */
+          flex-wrap: nowrap;     /* 아이템 줄 바꿈 여부: nowrap(줄 바꿈 안함,디폴트), wrap(함) */
+        }
+        .container1 > div {
+          width: 100px;
+          height: 100px;
+          border: 1px solid blue;
+        }
+      </style>
+  <div class="container1">
+    <div>box1</div>
+    <div>box2</div>
+    <div>box3</div>
+  </div>
+
+  <hr>
+
+  <style>
+    .container2 {
+      width: 500px;
+      height: 200px;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center; /* 주 축(main axis, flex-direction에서 결정한 방향) 방향 정렬: flex-start, flex end, 
+      center,space-between, space-around, space-evenly */
+      align-items: center;  /* 교차 축 (cross axis) 방향 정렬: flex-start, flex-end, center */
+    }
+    .container2 > div {
+      width: 100px;
+      height: 100px;
+      border: 1px solid blue;
+    }
+  </style>
+   <div class="container2">
+    <div>box4</div>
+    <div>box5</div>
+    <div>box6</div>
+  </div>
+
+
+</body>
+</html>

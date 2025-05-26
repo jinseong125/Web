@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>float</title>
+</head>
+<body>
+
+  <!--
+    float 속성
+
+    1. HTML 문서 요소의 일반적인 흐름에서 띄워서 (부유시켜서) 왼쪽 또는 오른쪽에 배치하는 방식.
+    2. 최초 도입된 목적은 이미지와 텍스트를 자연스럽게 감싸기위해 도입됨.
+    3. 이후 레이아웃 구성에서도 많이 활용됨.
+  -->
+
+  <style>
+    .container1 > div {
+      width: 60px;
+      height: 60px;
+      border: 1px solid black;
+      text-align: center;
+      line-height: 60px;
+    }
+    .container1 > .box1 {
+      float: left;
+    }
+    .container1 > .box2 {
+      float: right;
+    }
+  </style>
+
+  <div class="container1">
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+    
+    <p>Nam ligula tellus, malesuada eget euismod at, ultricies nec lacus.
+       Sed mollis felis at tellus placerat lobortis nec vel orci. Viv
+       amus faucibus viverra egestas. Etiam aliquam scelerisque ex, at convalli
+       s massa bibendum ac. Sed varius arcu et tortor mollis porta. Donec consectetur 
+       aliquet nulla eget vulputate. Sed nec bibendum nisl. Etiam sapien dolor, dignissim ut nisi eu, di
+       gnissim suscipit eros. Proin et bibendum metus. Cras bibendu
+       m, neque et consectetur efficitur, mi ligula efficitur urna, eu malesuada nulla leo quis dui.
+        Donec tristique, ex sed pretium semper, urna nibh aliquam nunc, quis porta sem arcu quis nulla. Aliquam venenatis dui in purus tempor, 
+        eu faucibus odio ullamcorper. Phasellus vitae nibh vulputate lacus tristique tincidunt. Curabitur sit amet nibh dignissim,
+       porta purus blandit, laoreet massa.</p>
+  </div>
+
+  <hr>
+
+  <style>
+    .container2 > div {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      text-align: center;
+      line-height: 100px;
+      box-sizing: border-box;
+    }
+    .container2 > .box1, .container2 > .box2 {
+      float: left;
+    }
+    .container2 > .box3 { 
+      clear: left;  /* float: left; 영역을 벗어납니다. (left, right, both) */
+      width: 200px;
+    }
+      </style>
+
+  <div class="container2">
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+    <div class="box3">box3</div>
+  </div>
+  <hr>
+
+  <!-- 연습) GNB(Global Navigation Bar)-->
+   <style>
+    .gnb {
+      list-style: none;
+      padding: 0;
+    }
+    .gnb > li {
+      float: left;
+    }
+    
+    .gnb a {
+      padding: 10px 5px;
+      border-bottom: 1px solid green;
+      text-decoration: none;
+    }
+    .gnb a:hover{
+      border-bottom: 3px solid green;
+    }
+    .content{
+      clear: left;
+    }
+  
+   </style>
+
+   <ul class="gnb">
+    <li><a href="">홈</a></li>
+    <li><a href="">야구</a></li>
+    <li><a href="">해외야구</a></li>
+    <li><a href="">축구</a></li>
+    <li><a href="">해외축구</a></li>
+    <li><a href="">농구</a></li>
+    <li><a href="">배구</a></li>
+   </ul>
+
+   <div class="content">내용이 나타나는 곳</div>
+  
+</body>
+</html>

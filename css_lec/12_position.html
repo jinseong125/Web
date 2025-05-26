@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>position</title>
+</head>
+<body>
+  
+  <style>
+    .box1 {
+      width:  100%;
+      height: 100px;
+      background-color: beige;
+      position: fixed;
+    }
+  </style>
+<div class="box1">box1</div>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+
+<hr>
+
+<style>
+  .box2 {
+    width:  100px;
+    height: 100px;
+    position: static;  /* position static인 요소(디폴트 요소)는  top, bottom, left, right 등 이동옵션이 적용되지 않습니다. */
+    top:  50px;         /* 적용안됨 */
+    left: 50px;        /* 적용안됨 */
+  }
+</style>
+<div class="box2">box2</div>
+
+<hr>
+
+<style>
+  .wrap {
+    width:  200px;
+    height: 200px;
+    border: 1px solid black;
+  }
+  .wrap > .box3 {
+    width:  80px;
+    height: 80px;
+    border: 1px solid blue;
+    position: relative;       /* position 이 없으면 안쪽박스가 이동안함. position:relative인 요소는 이동옵션이 적용됨.*/
+    top:  10px;                /* 적용됨 */
+    left: 10px;               /* 적용됨 */
+  }
+</style>
+<div class="wrap">
+  <div class="box3">box3</div>
+</div>
+
+<hr>
+
+<style>
+  /*
+    position: absolute 는 HTML 요소의 기본 배치를 무시한 위치로 이동할 수 있습니다.
+    position: static 이 아닌 가장 가까운 조상 내부에서 top, bottom, left, right 같은 이동 옵션이 적용됩니다.
+  */
+  .container {
+    width:  200px;
+    height: 200px;
+    border: 1px solid black;
+    position: relative;  /* 부모 요소 */
+  }
+  .container > .box {
+    width:  50px;
+    height: 50px;
+    border: 1px solid blue;
+    position:absolute;  /*absolute(자식요소)는 가장 가까운 조상으로 이동을함(static 이 아닌) */
+  }
+  .container > .box:nth-child(1) {
+    top:  50px;
+    left: 50px;
+  }
+  .container > .box:nth-child(2) {
+    top:   50px;
+    right: 50px;
+  }
+  .container > .box:nth-child(3) {
+    bottom: 50px;
+    left:   50px;
+  }
+  .container > .box:nth-child(4) {
+    bottom: 50px;
+    right:  50px;
+  }
+</style>
+<div class="container">
+  <div class="box">a</div>
+  <div class="box">b</div>
+  <div class="box">c</div>
+  <div class="box">d</div>
+</div>
+
+
+</body>
+</html>
