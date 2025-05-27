@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>function</title>
+</head>
+<body>
+  
+<!--
+1. 함수란?
+  1) 함수는 특정 작업을 수행하는 코드 블록으로, 필요할 때마다 호출할 수 있습니다.
+  2) 코드의 재사용성, 가독성, 유지보수성, 추상화에 기여합니다.
+  3) 자바스크립트에서 함수는 “1급 객체(First-class object)”로, 변수에 할당하거나, 인자로 전달하거나, 반환값으로 사용할 수 있습니다.
+
+
+2. 함수 작성 방법
+  1) 함수 선언식
+    (1) function 키워드와 함수명으로 정의하고, 호이스팅됩니다.
+    (2) 형식: function 함수명() { ... }
+  2) 함수 표현식
+    (1) 함수를 변수에 할당합니다. 호이스팅되지 않습니다.
+    (2) 형식: const 변수명 = function() { ... }
+  3) 화살표 함수
+    (1) 간결한 함수 표현식을 지원합니다. this 바인딩이 불가합니다.
+    (2) 형식: const 변수명 = () => { ... }
+
+
+3. 함수의 구성 요소
+  1) 매개변수(Parameter)
+    → 함수 외부로부터 값을 받아 내부에서 사용하기 위해 사용하는 변수.
+  2) 반환값(Return value)
+    → 함수의 실행 결과를 반환. return 문이 없으면 undefined 반환.
+  3) 함수 본문(Body)
+    → 실제 실행되는 코드 블록.
+
+
+4. 매개변수(Parameter)
+  1) 함수를 정의할 때 소괄호 안에 선언하는 변수입니다.
+  2) 함수가 호출될 때 전달받는 값(인수, 인자, Argument)을 받아들이는 역할을 하며, 함수 내부에서 지역 변수로 사용됩니다.
+  3) 매개변수를 선언할 땐 변수 선언 키워드(var, let, const)를 사용하지 않고, 변수명만 작성합니다.
+    function 함수명(arg1, arg2) {
+      
+    }
+  4) 나머지 매개변수(Rest Parameter)
+    (1) 함수가 정해지지 않은 수의 매개변수를 배열로 받을 수 있습니다.
+    (2) JavaScript에서 가변항 함수를 표현할 때 사용합니다.
+    (3) 형식
+      function 함수명(...args) {  // args는 배열
+        
+      }
+    (4) 지정된 매개변수가 있는 경우 항상 마지막에 나머지 매개변수를 사용해야 합니다.
+      function 함수명(...args, arg) {  // 오류 발생
+        
+      }
+  5) 디폴트 매개변수(Default Parameter)
+    (1) 값이 전달되지 않거나 undefined가 전달되는 경우 사용할 기본값을 지정할 수 있습니다.
+    (2) 형식
+      function 함수명(a, b = 1) {  // b로 값이 전달되지 않거나 undefined가 전달되면 1로 초기화
+        return a * b;
+      }
+  6) arguments 객체
+    (1) 모든 함수에서 사용 가능한 유사 배열 객체로, 전달된 인자 전체에 접근 가능한 객체입니다.
+    (2) 형식
+      function 함수명() {
+        console.log(arguments);
+      }
+
+
+5. 반환값(Return value)
+  1) 함수를 호출하면 해당 함수의 실행 결과(반환값)를 반환받을 수 있습니다.
+  2) return문이 없는 경우에는 undefined를 반환합니다.
+
+
+6. 콜백 함수(Callback Function)
+  1) 다른 함수의 인자로 전달되어, 그 함수 내부에서 실행되는 함수를 의미합니다.
+  2) 함수 자체가 매개변수로 전달되며, 전달받은 함수를 필요에 따라 실행하는 구조입니다.
+  3) 일회성 동작이 많아 이름 없는 익명 함수로 전달하는 경우가 많습니다.
+  4) 예시
+    function 함수명(callback) {
+      callback();  //-------- ⓶ 전달된 익명 함수를 실행
+    }
+    함수명(() => {})  //----- ⓵ 익명 함수(화살표 함수)를 매개변수 callback에 전달
+  5) 동기 콜백과 비동기 콜백
+    (1) 동기 콜백
+      → 함수가 즉시 실행되는 경우(예: forEach, map).
+    (2) 비동기 콜백
+      → 특정 작업(이벤트, 타이머, 네트워크 등)이 끝난 후 나중에 실행(예: setTimeout, fetch).
+  6) 콜백 지옥(Callback hell)
+    콜백을 중첩해 사용하면 "콜백 지옥(callback hell)"이 발생해 코드가 복잡해질 수 있어, 이를 해결하기 위해 Promise, async/await 등이 등장하였습니다.
+    예시)
+    fa(function(resultFa) {
+      fb(resultFa, function(resultFb) {
+        fc(resultFb, function(resultFc) {
+          fd(resultFc, function(resultFd) {
+            console.log(resultFd);
+          })
+        })
+      })
+    })
+-->
+
+</body>
+</html>

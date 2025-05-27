@@ -11,7 +11,7 @@
   <style>
     .members {
       border: 1px solid black;
-      border-collapse: separate;   /* 디폴트 값으로 각 영역의 테두리를 구분합니다. */
+      border-collapse: separate;   /* <-x 디폴트 값으로 각 영역의 테두리를 구분합니다. */
       border-collapse: collapse;   /* 각 영역의 빈 공간이 붕괴하여 테두리가 합쳐진다. */
     }
     .members td {
@@ -24,7 +24,7 @@
     .members td:nth-child(3) {width: 600px;}
     .members tr {height: 80px;}
     .members > thead > tr,.members > tfoot > tr {
-      background-color: aqua;
+      background-color: navy;
     }
     .members > tbody > tr:hover {
       background-color: skyblue;
@@ -66,11 +66,25 @@
       </tr>
     </tfoot>
   </table>
+  <style>
+    table {}
+    .sun {
+      color: red;
+      font-weight: bold;
+    }
+    .sat {
+      color:blue;
+      font-weight: bold;
+    }
+   
+    
+  </style>
   <div class="title">
     <span>2025</span>
     <span class="month">6</span>
     <span>June</span>
   </div>
+  
   <table class="calendar">
     <thead>
       <tr>
@@ -127,7 +141,7 @@
         <td class="next">2</td>
         <td class="next">3</td>
         <td class="next">4</td>
-        <td class="next">5</td>
+        <td class="next sat">5</td>
       </tr>
     </tbody>
   </table>

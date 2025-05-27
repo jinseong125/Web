@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>variable</title>
+</head>
+<body>
+
+<!--
+1. JavaScript primitive (원시값)
+  1) 객체가 아니면서 메소드(method)와 속성(property)을 가지지 않는 데이터입니다.
+  2) 종류 (7가지)
+    (1) string
+      → 단일 문자와 문자열의 구분이 없음, 큰 따옴표("") 또는 작은 따옴표('') 또는 백틱(``) 모두 사용 가능
+    (2) number
+      → 정수와 실수의 구분이 없음, 64비트 부동소수점 형식
+      → 123과 123.0의 타입은 동일
+    (3) bigint
+      → 정수를 나타낼 수 있는 숫자 데이터 타입
+    (4) boolean *중요*
+      → true 또는 false
+      → 데이터가 있으면 true로 간주  (1, 1.5, 'hello' 등)
+      → 데이터가 없으면 false로 간주 (0, 0.0, '', undefined, null 등)
+    (5) undefined *중요*
+      → 선언 후 값을 할당하지 않은 변수 또는 값이 전달되지 않은 매개변수에 자동으로 할당되는 값
+    (6) symbol
+      → 유일한 식별자(unique identifier)를 만든 뒤 객체 속성(property)으로 사용할 수 있는 값
+    (7) null
+      → 존재하지 않거나 유효하지 않은 object 또는 주소를 의도적으로 가리키는 참조
+
+
+2. JavaScript 타입의 특징
+  1) 동적 타입(dynamic type)입니다. (변수가 어떤 특정 타입과 연결되어 있지 않고 언제든 다른 타입으로 바꿀 수 있습니다.)
+  2) 약 타입(weak type)입니다.      (일치하지 않는 타입이 포함된 경우 묵시적으로 스스로 타입 변환을 합니다.)
+  3) primitive 값이 마치 속성이나 메소드가 있는 것처럼 동작합니다.
+    (1) 'hello'.length 처럼 속성(property)이 있는 것처럼 동작합니다.
+    (2) 'hello'.at(0) 처럼 메소드(method)가 있는 것처럼 동작합니다.
+    (3) 원시값 'hello'를 자동으로 String wrapper 객체로 포장하기 때문입니다.
+
+
+3. JavaScript 변수 선언
+  1) 3가지 선언 키워드가 존재합니다.
+  2) 종류와 특징
+                | 스코프      | 재선언 | 할당 전     | 재할당 | 용도
+    ------------|------------
+    1|--------|------------|-------|----------
+    (1) var     | 전역 스코프 | 가능   | undefined   | 가능   | 전역 변수
+    (2) let     | 블록 스코프 | 불가능 | undefined   | 가능   | 지역 변수
+    (3) const   | 블록 스코프 | 불가능 | 사용 불가능  | 불가능 | 상수
+
+
+4. JavaScript 변수명(식별자) 규칙
+  1) 문자(ISO-8859-1 또는 Unicode), 숫자, 밑줄(_), 달러($) 기호 사용 가능합니다.
+  2) 첫 글자는 숫자일 수 없습니다.
+  3) 대소문자를 구분합니다.
+  4) Camel Case 방식의 이름 규칙(Naming Convention)을 사용합니다. (myHome, myMoney, ...)
+
+  * Naming convention
+    1) PascalCase
+    2) camelCase
+    3) snake_case
+    4) dash-case, kebab-case
+
+5. Template literals(Template strings)
+  1) 백틱(``, backtick)으로 묶은 문자열을 의미합니다.
+  2) 여러 줄로 이루어진 문자열(multi-line strings)을 처리할 수 있습니다.
+  3) 문자열 보간(string interpolation) 기능을 사용할 수 있습니다.
+    var n = 10; console.log(`${n}`);
+
+
+6. 호이스팅(hoisting)
+  1) 끌어 올리다.
+  2) JavaScript 인터프리터가 코드를 실행하기 전에 var 변수 선언, 함수 선언 또는 import를 해당 범위의 맨 위로 끌어올리는 것처럼 보이는 현상을 의미합니다.
+  3) 동작의 예시
+    (1) 변수가 선언된 줄(Line) 이전에 해당 범위에서 변수 값을 사용할 수 있습니다.
+    (2) 변수가 선언된 줄(Line) 이전에 해당 범위에서 변수를 참조할 수 있습니다. 변수에 값이 없으면 undefined 값을 확인할 수 있습니다.
+    (3) 범위가 다르면 호이스팅의 형태로 동작하지 않습니다.
+  4) var 키워드로 선언된 변수는 코드 어디에 존재하든 가장 먼저 처리되는 것으로 이해할 수 있습니다.
+  5) 변수 선언과 초기화가 동시에 진행되는 경우 변수 선언만 분리해서 먼저 처리합니다.
+-->
+
+<script>
+
+  // 코드 블록 구성하기: { . . . }
+  {
+    // 변수 a 선언: undefined 값을 가짐-값을 저장한적이 없으니까까
+    var a; 
+    console.log(a);
+
+    // 변수 a 재선언: var 선언만 가능
+    var a;
+    console.log(a, typeof a);
+
+    // number 할당 = 저장한단 뜻
+    a = 10;
+    console.log(a, typeof a);
+
+    // string 재할당 = 다른값으로 바꿀수잇음
+    a="hello world";
+    console.log(a, typeof a);
+  }
+  // var a는 전역 스코프를 가지므로 코드 블록 외부에서도 확인 가능
+  console.log('코드블록외부', a, typeof a);
+
+</script>
+<script>
+
+// 코드 블록({})
+{
+  // 변수 x는 undefined 값을 가짐
+  let x;
+  console.log(x)
+
+  // 변수 x 재선언: 불가능
+  // let x;
+
+  // number 할당
+  x = 2.0;
+  console.log(x, typeof x);
+}
+
+// 코드 블록을 벗어난 경우 접근 불가능
+// console.log(x);  // Uncaught ReferenceError: x is not defined
+
+</script>
+
+
+<script>
+
+// 코드 블록
+{
+
+  // const변수는 반드시 선언과 할당을 모두 해야 함 (초기값이 반드시 필요합니다.)
+  const y = 'hello world';
+  console.log(y);
+
+  // const 변수 재선언: 불가능
+
+  // const 변수값 재할당: 불가능
+  // y = 10;  // Uncaught TypeError: Assignment to constant variable.
+
+}
+
+  // 코드 블록을 벗어난 경우 접근 불가능
+  // console.log(y);   // Uncaught ReferenceError: y is not defined
+</script>
+
+
+<script>
+
+// Template literals을 이용한 다중 라인 처리
+const iconArt = `^      ^
+      
+ -- `;
+ console.log(iconArt);
+
+ // Template literals을 이용한 문자열 보간(표현식 보간: 문자여렝 변수 포함하는 방법)
+ const year = 2025;
+ const month = 5;
+ const day = 27;
+ console.log(`오늘은 ${year}년 ${month}월 ${day}일입니다.`);
+
+</script>
+
+<script>
+
+money = 50000;
+console.log(money);
+var money;                   //----- var 변수 선언은 호이스팅에 의해서 항상 먼저 처리됩니다.
+
+console.log(car);
+var car = '랜드로버 디펜더';  //----- 변수 선언만 호이스팅 됩니다. 할당은 호이스팅되지 않는다.
+
+</script>
+
+<script>
+
+// 연습) 본인 이름, 나이, 성별을 변수에 저장하고 아래와 같이 출력합니다.
+// 나는 또치라고해. 남자이고 18살이야.
+
+let name = '또치';
+let age = '18';
+let gender = '남자';
+
+console.log(`나는 ${name}라고해 ${gender}이고 ${age}살이야`);
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>timer</title>
+</head>
+<body>
+
+<!--
+1. setTimeout()
+  1) 전역 메소드 setTimeout()은 만료된 후 함수나 지정한 코드 조각을 한 번 실행하는 타이머를 설정합니다.
+  2) 구문
+    (1) setTimeout(functionRef);
+    (2) setTimeout(functionRef, delay);
+    (3) setTimeout(functionRef, delay, param1, param2, /* … ,*/ paramN);
+  3) 매개변수
+    (1) functionRef
+      타이머가 만료된 뒤 실행할 function입니다.
+    (2) delay
+      주어진 함수 또는 코드를 실행하기 전에 기다릴 밀리초 단위 시간입니다.
+      생략하거나 0을 지정할 경우 "즉시", 더 정확히는 다음 이벤트 사이클에 실행한다는 뜻입니다.
+    (3) param1, param2, /* … ,*/ paramN
+      functionRef에 전달할 추가 파라미터입니다.
+  4) 반환
+    (1) 양의 정수 timeoutID를 반환합니다. 이 값은 setTimeout()이 생성한 타이머를 식별할 때 사용합니다.
+    (2) timeoutID를 clearTimeout()에 전달하면 타임아웃을 취소할 수 있습니다.
+      let timeoutID = setTimeout();
+      clearTimeout(timeoutID);
+  5) 주의사항
+    setTimeout()은 비동기 함수로서, 함수 스택의 다른 함수 호출을 막지 않습니다. 
+    달리 말하자면, setTimeout()을 사용해서 다음 함수 호출을 "일시정지" 할 수는 없습니다.
+
+
+2. setInterval()
+  1) setInterval() 메소드는 각 호출 사이에 고정된 시간 지연으로 함수를 반복적으로 호출하거나 코드 스니펫을 실행합니다.
+  2) setTimeout() 메소드가 타이머 만료 후 한 번만 함수를 실행한다면 setInterval() 메소드는 타이머 만료마다 반복적으로 함수를 실행합니다.
+  3) 구문
+    (1) setInterval(func);
+    (2) setInterval(func, delay);
+    (3) setInterval(func, delay, arg1, arg2, /* … ,*/ argN);
+  4) 매개변수
+    (1) func
+      delay(밀리초)마다 실행되는 function입니다. 첫 번째 실행은 delay(밀리초) 후에 발생합니다.
+    (2) delay
+      타이머가 지정된 함수 또는 코드 실행 사이에 지연해야 하는 밀리초(1/1000초) 단위의 시간입니다.
+      지정하지 않으면 기본 값은 0입니다. 
+    (3) arg1, arg2, /* … ,*/ argN
+      타이머가 만료되면 func에서 지정한 함수로 전달되는 추가 인수입니다.
+  5) 반환
+    (1) 0이 아닌 숫자 값 intervalID를 반환합니다.
+    (2) intervalID를 clearInterval()에 전달하면 interval을 취소할 수 있습니다.
+      let intervalID = setInterval();
+      clearInterval(intervalID);
+-->
+
+</body>
+</html>

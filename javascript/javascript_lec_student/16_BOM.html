@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOM</title>
+</head>
+<body>
+  
+<!--
+BOM
+
+1. Browser Object Model (브라우저 객체 모델)
+2. 브라우저의 구성 요소를 JavaScript 객체로 저장한 뒤 사용할 수 있습니다.
+3. 주요 BOM 요소
+  1) window
+    (1) 현재 스크립트가 작동 중인 창을 나타내는 전역 객체입니다.
+    (2) 모든 JavaScript 객체의 최상위 객체입니다.
+    (3) JavaScript 코드상에서 생략할 수 있습니다. (예: window.alert() → alert())
+  2) history
+    (1) 방문했던 경로를 기억하고 있는 객체입니다.
+    (2) 히스토리 객체를 이용해서 이전 화면으로 손쉽게 이동할 수 있습니다.
+    (3) 사용 예시
+      ① 뒤로 가기        : history.back()
+      ② 앞으로 가기      : history.forward()
+      ③ 특정 위치로 가기 : history.go(N)
+  3) location
+    (1) 문서의 현재 위치에 대한 정보가 담긴 Location 객체를 반환합니다.
+    (2) 사용 예시
+      ① 새로운 페이지로 이동
+        location.href = 'https://www.naver.com'   , 뒤로 가기 가능 (.href 생략 가능)
+        location.assign('https://www.naver.com')  , 뒤로 가기 가능
+        location.replace('https://www.naver.com') , 뒤로 가기 불가능
+      ② 새로 고침
+        location.reload()
+  4) screen
+    (1) 브라우저 화면 정보를 관리하는 객체입니다.
+    (2) 화면의 너비/높이 정보를 알아낼 수 있습니다.
+-->
+
+</body>
+</html>

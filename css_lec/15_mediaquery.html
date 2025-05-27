@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mediaquery</title>
+</head>
+<body>
+
+  <!--
+    mediaquery
+
+    1. 미디어의 종류와 크기에 따라서 레이아웃을 다르게 구성할 수 있습니다.
+    2. 선언: @media
+    3. 종류: screen
+    4. 크기: 
+       1) width: 100px;            너비가 정확히 100px인 경우
+       2) min-width: 100px;        너비가 100px 이상인 경우(최소 너비가 100px)
+       3) max-width: 100px;        너비가 100px 이하인 경우(최소 너비가 100px)
+       4) orientation: portrait;   화면을 세운 경우
+       5) orientation: landscape;  화면을 눕힌 경우
+  -->
+  <style>
+    div {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      border: 1px solid black;
+    }
+    /* 1. 너비 480px 이하 : 4행 1열로*/
+    @media screen and (max-width: 480px) {
+      .wrap {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+      }
+      .wrap > .item {
+        width: 100%;
+        background-color: blue;
+      }
+    }
+    /* 2. 너비 481 ~ 1024px : 2행 2열로 */
+    @media screen and (min-width: 481px) and (max-width: 1024px) {
+      .wrap {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin: 0 auto;
+      }
+      .wrap > .item {
+        width: 48%;
+        background-color: tomato; 
+      }
+    }
+    /* 3. 너비 1025px 이상 : 1행 4열 */
+    @media screen and (min-width: 1025px) {
+      .wrap {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        margin: 0 auto;
+      }
+      .wrap > .item {
+        width: 24%;
+        background-color: aqua;
+      }
+    }
+  </style>
+  <div class="wrap">
+    <div class="item">item1</div>
+    <div class="item">item2</div>
+    <div class="item">item3</div>
+    <div class="item">item4</div>
+  </div>
+  
+
+</body>
+</html>

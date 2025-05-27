@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<!--
+1. Fetch API
+  1) HTTP 파이프라인을 구성하는 요청과 응답 등의 요소를 JavaScript 에서 접근하고 조작할 수 있는 인터페이스를 제공합니다.
+  2) Fetch API가 제공하는 fetch() 전역 함수를 이용해 네트워크의 리소스를 쉽게 비동기적으로 취득할 수 있습니다.
+  3) Fetch API는 XMLHttpRequest와 달리 Promise 기반으로 개선되었습니다.
+
+
+2. fetch() 전역 함수
+  1) 네트워크에서 자원을 취득한 뒤 응답 가능 상태가 되면 이를 이행하는 프로미스를 반환하는 함수입니다.
+  2) fetch() 전역 함수가 반환하는 프로미스는 요청에 대한 응답 정보를 가진 Response 객체를 이행합니다.
+  3) fetch() 프로미스는 네트워크 오류(보통 권한 문제 등)가 있을 때만 거부되며, 404 등의 HTTP 오류 시에는 거부되지 않습니다.
+    따라서, then() 메소드에서는 Response.ok 또는 Response.status(200) 속성을 확인해 성공 여부를 확인해야 합니다.
+  4) 형식
+    fetch(resource, [options])
+  5) 매개변수
+    (1) resource : 취득하려는 리소스(자원)의 정보
+      ① 리소스의 URL 문자열 정보
+      ② Request 객체
+    (2) options : 리소스를 요청할 때 적용하고자 하는 사용자 지정 설정
+      ① method      : 요청 메소드 (GET, POST, PUT, DELETE 등)
+      ② headers     : 요청에 추가할 헤더 (Headers 객체, 문자열로 작성한 객체 리터럴)
+      ③ body        : 요청에 추가할 본문 (Blob, ArrayBuffer, FormData, URLSearchParams, ReadableStream 등)
+      ④ mode        : 요청에 사용할 모드 (cors, no-cors, same-origin)
+      ⑤ credentials : 요청할 때 브라우저의 자격증명 처리 방법 (omit, include, same-origin)
+
+
+3. Request
+  1) Fetch API의 Request 객체는 네트워크 요청의 상세 정보를 담고 있는 객체입니다.
+  2) fetch 함수의 두 번째 매개변수 options 객체를 통해 Request의 다양한 속성을 직접 설정하거나, 명시적으로 new Request()를 사용해 Request 객체를 만들 수도 있습니다.
+  3) 주요 인스턴스 속성
+    ---------------------------------------------------------------------------------------------------
+    인스턴스 속성           | 의미                                 | 값
+    ------------------------+--------------------------------------+-----------------------------------
+    Request.body            | 요청 본문의 ReadableStream 입니다.   |
+    Request.bodyUsed        | 요청 본문의 사용 여부를 나타냅니다.  | true, false
+    Request.cache           | 요청의 캐시 모드입니다.              | default, reload, no-cache 등
+    Request.credentials     | 요청의 자격증명입니다.               | omit, same-origin, include 등
+    Request.headers         | 요청에 연관된 Headers 객체입니다.    |
+    Request.method          | 요청 메소드입니다.                   | GET, POST 등
+    Request.mode            | 요청 모드입니다.                     | cors, no-cors, same-origin 등
+    Request.referrer        | 요청의 리퍼러입니다.                 |
+    Request.referrerPolicy  | 요청의 리퍼러 정책입니다.            | no-referrer, same-origin 등
+    Request.url             | 요청 URL 입니다.                     |
+    ---------------------------------------------------------------------------------------------------
+  4) 주요 인스턴스 메소드
+    ---------------------------------------------------------------------------------------------------
+    인스턴스 메소드         | 의미
+    ------------------------+--------------------------------------------------------------------------
+    Request.blob()          | 요청 본문의 Blob 표현으로 이행하는 프로미스를 반환합니다. (binary)
+    Request.formData()      | 요청 본문의 FormData 표현으로 이행하는 프로미스를 반환합니다. (FormData)
+    Request.json()          | 요청 본문을 JSON으로 파싱한 결과로 이행하는 프로미스를 반환합니다. (JSON)
+    Request.text()          | 요청 본문의 Text 표현으로 이행하는 프로미스를 반환합니다. (Text, XML)
+    ---------------------------------------------------------------------------------------------------
+
+
+4. Response
+  1) Fetch API에서 서버로부터 받은 HTTP 응답 정보를 담고 있는 객체입니다. 
+  2) fetch 함수로 요청을 보내면, 그 결과(응답)로 Promise가 반환되고, 이 Promise가 성공하면 Response 객체가 resolve 값으로 전달됩니다.
+  3) 주요 인스턴스 속성
+    ----------------------------------------------------------------------------------------------------
+    인스턴스 속성           | 의미                                     | 값
+    ------------------------+------------------------------------------+--------------------------------
+    Response.body           | 본문 내용의 ReadableStream 입니다.       |
+    Response.bodyUsed       | 응답 본문의 사용 여부를 나타냅니다.      | true, false
+    Response.headers        | 응답에 연관된 Headers 객체입니다.        |
+    Response.ok             | 응답의 성공 여부를 나타냅니다.           | true, false
+    Response.status         | 응답의 상태 코드입니다.                  | 성공 시 200
+    Response.statusText     | 상태 코드에 해당하는 상태 메시지입니다.  | 200이면 OK
+    Response.url            | 응답 URL 입니다.                         |
+    ----------------------------------------------------------------------------------------------------
+  4) 주요 인스턴스 메소드
+    ----------------------------------------------------------------------------------------------------
+    인스턴스 메소드         | 의미
+    ------------------------+---------------------------------------------------------------------------
+    Response.blob()         | 응답 본문의 Blob 표현으로 이행하는 프로미스를 반환합니다. (binary)
+    Response.formData()     | 응답 본문의 FormData 표현으로 이행하는 프로미스를 반환합니다. (FormData)
+    Response.json()         | 응답 본문을 JSON으로 파싱한 결과로 이행하는 프로미스를 반환합니다. (JSON)
+    Response.text()         | 응답 본문의 Text 표현으로 이행하는 프로미스를 반환합니다. (Text, XML)
+    ----------------------------------------------------------------------------------------------------
+
+
+5. fetch 기본 사용 예시
+  fetch('https://api.example.com/user')  //------ ① 비동기 요청 수행
+    .then(response => {  //---------------------- ② 응답 객체를 받음
+      if (!response.ok) {
+        throw new Error('서버 오류!');  //------- ③ 응답 실패 시 예외 발생
+      }
+      return response.json();  //---------------- ④ 응답 결과를 JSON으로 파싱해 반환
+    })
+    .then(jsonData => {  //---------------------- ⑤ JSON으로 파싱해 반환한 응답 결과를 받음
+      console.log(jsonData);
+    })
+    .catch(error => {  //------------------------ ⑥ 예외 처리
+      console.error(error);
+    });
+
+
+6. async 함수
+  1) async function 선언을 통해 하나의 비동기 함수를 정의할 수 있습니다.
+  2) 항상 Promise를 반환합니다. 만약 반환 값이 명시적으로 Promise가 아니라면 암묵적으로 Promise를 사용하여 결과를 처리하여 반환합니다.
+  3) 아래는 동일한 코드입니다.
+    ----------------------------------------------------------------
+      async function fnName() {   |   function fnName() {
+        return 1;                 |     return Promise.resolve(1);
+      }                           |   }
+    ----------------------------------------------------------------
+  4) async 함수에는 await 문이 포함될 수 있습니다.
+
+
+7. await 문
+  1) 함수의 실행을 일시 중지하고 전달된 Promise의 해결을 기다린 다음 async 함수의 실행을 시작하고 완료 후 값을 반환합니다.
+  2) 아래는 동일한 코드입니다.
+    -----------------------------------------------------------------------------------
+      async function fnName() {   |   function fnName() {
+        await 1;                  |     return Promise.resolve(1).then(() => undefined)
+      }                           |   }
+    -----------------------------------------------------------------------------------
+  3) async 함수가 아닌 곳에서 사용하면 SyntaxError 가 발생합니다.
+  4) await 문이 없는 async 함수는 일반 함수처럼 동기적으로 실행됩니다.
+-->
+
+</body>
+</html>

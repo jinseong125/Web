@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>operator</title>
+</head>
+<body>
+
+<!--
+1. 산술 연산자
+  1) 더하기 : +,           5 + 2 == 7
+  2) 빼기   : -,           5 - 2 == 3
+  3) 곱하기 : *,           5 * 2 == 10
+  4) 나누기 : /,           5 / 2 == 2.5
+  5) 나머지 : %,           5 % 2 == 1
+  * Tip. 몫이 필요한 경우
+    parseInt() 전역 함수를 사용
+    → parseInt(5 / 2) == 2
+
+2. 증감 연산자
+  1) ++a : 전위 증가 - 1 증가(증가 후에 사용됩니다.)
+  2) a++ : 후위 증가 -      (사용 후에 증가합니다.)
+  3) --a : 전위 감소 - 1 감소(감소 후에 사용됩니다.)
+  4) a-- : 후위 감소 -      (사용 후에 감소됩니다.)
+
+3. 대입 연산자 / 복합 대입 연산자
+  1) 대입 (할당, Assingment)
+    a = b : b에 저장된 값을 변수 a로 보냄
+  2) 복합 (연산 + 할당)
+    (1) a += 1 : a = a + 1 로 해석 (a + 1 값을 a에 할당: a를 1 증가시킨다.)
+    (2) a -= 1 : a = a - 1 로 해석 
+    (3) a *= 1 : a = a * 1 로 해석
+    (4) a /= 1 : a = a / 1 로 해석
+    (5) a %= 1 : a = a % 1 로 해석
+
+4. 비교 연산자
+  1) >
+    greater than
+  2) >=
+    greater than equal
+  3) <
+    less than
+  4) <= 
+    less than equal
+  5) ==
+    equal value
+    (값 자체만 비교. 1 == '1' 결과는 true 임)
+  6) !=
+    not equal value
+    (값 자체만 비교. 1 != '1' 결과는 false 임)
+  7) ===
+    equal value & type
+    (타입과 값 모두 비교. 1 === '1' 결과는 false 임)
+  8) !==
+    not equal value & type
+    (타입과 값 모두 비교. 1 !== '1' 결과는 true 임)
+
+5. 논리 연산자
+  1) &&
+    논리 AND. 모두  만족하면 true 아니면 false (short circuit 지원,하나라도 false이면 최종적으로 false.)
+  2) ||
+    논리 OR. 하나만 만족해도 true 아니면 false (short circuit 지원,하나라도 true이면 최종적으로 true.)
+  3) !
+    논리 NOT. true 와 false 를 반대로 바꿈
+
+6. 조건 연산자(항이 3개이므로 삼항 연산자라고도 함)
+  1)조건식 ? 2) true 일 때 반환값 : 3) false 일 때 반환값
+
+7. 문자열 연결 연산자
+  1) +
+    console.log('hello' + ' world')
+      -> hello world
+  2) += (태그들을 문자열로 정리할때 많이 사용용)
+    var str = 'hello';
+    str += 'world';
+    console.log(str);
+      -> hello world
+-->
+
+<script>
+
+const a = 5;
+      b = 2;
+
+  console.log(a + b);    
+  console.log(a - b);    
+  console.log(a * b);    
+  console.log('나누기',a / b);    
+  console.log('나머지',a % b);    
+  console.log('몫',parseInt(a / b));    
+
+</script>
+
+<script>
+
+let n =1;
+
+console.log('++n',++n);  // n을 증가하고 보여줍니다.
+console.log('n++',n++);  // n을 보여주고 증가합니다.
+
+console.log('n',n);
+
+</script>
+
+<script>
+
+let i = 10;
+
+i += 5; // i = i + 5
+
+console.log(i);
+
+console.log(i += 5); 
+
+</script>
+
+<script>
+
+const x = 1;
+const y = '1';
+
+console.log(x==y);
+console.log(x===y);
+
+console.log(x==y && x===y);
+console.log(x==y || x===y);
+console.log(!x==y);
+</script>
+
+<script>
+
+// true: 어떤 값이든 가지고 있는 경우
+// false : 0, "", undefined, null 중 하나인 경우우
+const z = 1;
+
+console.log(!z);
+
+</script>
+
+<script>
+
+let number1 = 10;
+let number2 = 10;
+
+// short circuit: &&의 경우 false 발생 시 즉시 false를 사용하고, && 이후 연산을 종료합니다.
+console.log(++number1 == 10 && ++number2 == 10);
+console.log('number1',number1);
+console.log('number2',number2); // 앞이 false여서 뒤는 바로 연산 종료,따라서 10이됨
+
+//-----short circuit: ||의 경우 true 발생 시 해당 연산을 사용하고, ||이후  연산을 종료합니다.
+let num1 = 10;
+let num2 = 10;
+
+console.log (num1++ == 10 || num2++ == 10);
+console.log ('num1',num1);
+console.log ('num2',num2);
+
+
+// short circuit의 실무 예
+let money;
+console.log(money || 10000);  // 디폴트 처리: money로 값이 전달되면 전달된 값을 사용하고, 전달되지 않으면 10000을 사용하겠다는 의미.
+
+
+</script>
+
+<script>
+
+let p = -1;
+console.log(p >= 0 ? '양수' : '음수');
+
+let q = 3;
+console.log(q % 3 ==0 ? '3의 배수' : '3의 배수 아님');
+
+let r = 5;
+console.log(r % 2 ? '홀수' : '짝수');
+
+</script>
+
+<script>
+
+//------연습1) 한 상자에 라면 20개가 들어갑니다. 라면 65개는 몇 상자가 나오고, 몇 개가 남는지 계산하시오.
+let ramen = 65;
+let box = parseInt(65/20);
+console.log(`라면 ${ramen}개는 ${parseInt(ramen/20)}박스가 나오고 ${ramen % 20}개가 남습니다.`);
+
+
+//------연습2) 시급 10,030원 입니다. 10시간 근무하면 일급은 얼마인지 계산하시오. 
+// 참고로 8시간 초과 근무 시 초과 근무 시급은 1.5배입니다.
+const wage = 10030;
+const time = 10;
+const pay = wage * time;
+const extraPay = time <= 8 ? 0 : (time - 8) * wage * 0.5;
+console.log(pay + extraPay);
+
+
+</script>
+
+
+</body>
+</html>

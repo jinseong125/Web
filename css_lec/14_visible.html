@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>visible</title>
+</head>
+<body>
+
+  <style>
+    .flowers {
+      width: 192px;
+      height: 128px;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    .flowers:nth-child(1) {background-image: url("../assets/images/flower1.jpg");}
+    .flowers:nth-child(2) {background-image: url("../assets/images/flower2.jpg");}
+    .flowers:nth-child(3) {background-image: url("../assets/images/flower3.jpg");}
+    .flowers:nth-child(4) {background-image: url("../assets/images/flower4.jpg");}
+    .flowers:nth-child(5) {background-image: url("../assets/images/flower5.jpg");}
+    .wrap {
+      display: flex;
+    }
+    /* 2번째 flowers을 화면에서 숨기기 (영역이 없어집니다.) */
+    .flowers.flowers:nth-child(2) {
+    /* width: 0; height: 0; */
+    /* display: none; */
+    /* position: absolute; top: -9999px; */
+    }
+    /*  2번째 flowers 화면에서 숨기기(영역은 남아 있습니다) */
+    .flowers.flowers:nth-child(2) {
+      /* visibility: hidden;   사진을 숨기기 */
+      opacity: 0;   /* 투명도 설정하기(0: 투명, 0.5: 흐릿하게 보임, 1: 불투명)*/
+    }
+  </style>
+  <div class="wrap">
+    <div class="flowers"></div>
+    <div class="flowers"></div>
+    <div class="flowers"></div>
+    <div class="flowers"></div>
+    <div class="flowers"></div>
+  </div>
+
+  <hr>
+
+  <!-- 연습) 체크된 라디오 버튼의 설명만 표시하기 -->
+   <style>
+    .memo {
+      display: none;
+    }
+    .container > input[type=radio]:checked + label + div {
+      display: block;
+    }
+   </style>
+   <div class="container">
+    <input type="radio" name="auth" value="mobile" id="mobile">
+    <label for="mobile">본인 명의 휴대전화로 인증</label>
+    <div class="memo">내 명의(주민등록번호)로 가입한 아이디를 찾을 수 있습니다.</div>
+    <br>
+    <input type="radio" name="auth" value="i-pin" id="i-pin">
+    <label for="i-pin">아이핀 인증</label>
+    <div class="memo">내 명의 (주민등록번호)로 가입한 아이디의 일부분을 볼 수 있습니다.</div>
+   </div>
+  
+</body>
+</html>

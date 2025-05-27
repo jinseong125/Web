@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date</title>
+</head>
+<body>
+
+<!--
+Date 내장 객체
+
+1. Date() 생성자
+  1) 특정 날짜와 시간을 가진 Date 객체를 반환
+  2) 호출 형식
+    (1) new Date()
+    (2) new Date(value)                 // value : unix timestamp (1970-01-01 0:00:00 초부터 카운트하는 시간(단위:밀리초))
+    (3) new Date(dateString)            // 문자열 인식의 경우 동작이 일관적이지 않으므로 사용 안 하기를 권장
+    (4) new Date(year, monthIndex)      // monthIndex : 0 ~ 11
+    (5) new Date(year, monthIndex, day)
+    (6) new Date(year, monthIndex, day, hours)
+    (7) new Date(year, monthIndex, day, hours, minutes)
+    (8) new Date(year, monthIndex, day, hours, minutes, seconds)
+    (9) new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)
+
+2. Date.now()
+  1) 현재 시각의 타임스탬프 값을 반환
+  2) 타임스탬프(Timestamp)
+    (1) 특정 시점을 숫자로 표현한 값
+    (2) 주로 컴퓨터 시스템에서는 1970년 1월 1일 00:00:00 UTC(유닉스 에포크)부터 경과한 시간을 밀리초(ms) 또는 초(s) 단위의 정수로 나타냄
+    (3) 자바스크립트에서는 밀리초(ms) 단위의 값을 반환
+  3) Date.prototype.getTime()와 동일한 값을 반환
+
+3. Date.prototype.getFullYear()
+  1) 현지 시간 기준 연도 반환
+
+4. Date.prototype.getMonth()
+  1) 현지 시간 기준 월 반환
+  2) 0 - 11(1월 - 12월)
+
+5. Date.prototype.getDate()
+  1) 현지 시간 기준 일 반환
+  2) 1 - 31
+
+6. Date.prototype.getDay()
+  1) 현지 시간 기준 요일 반환
+  2) 0 - 6(일 - 토)
+
+7. Date.prototypye.getHours()
+  1) 현지 시간 기준 시 반환
+  2) 0 - 23
+
+8. Date.prototype.getMinutes()
+  1) 현지 시간 기준 분 반환 (0 - 59)
+  2) 0 - 59
+
+9. Date.prototype.getSeconds()
+  1) 현지 시간 기준 초 반환
+  2) 0 - 59
+-->
+
+</body>
+</html>

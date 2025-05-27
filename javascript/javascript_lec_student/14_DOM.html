@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM</title>
+</head>
+<body>
+
+<!--
+1. DOM
+  1) Document Object Model, 문서 객체 모델
+  2) HTML, XML 문서의 프로그래밍 인터페이스입니다.
+  3) 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공하여 문서 구조, 스타일, 내용 등을 변경할 수 있게 돕습니다.
+
+  ■■■ HTML ■■■                              ■■■ DOM tree ■■■
+  <html lang="ko">                              Document
+  <head>                                           ↓
+    <title>My Document</title>                    HTML
+  </head>                                     ↙          ↘
+  <body>                                  HEAD             BODY
+    <h1>Header</h1>                        ↓             ↙      ↘
+    <p>Paragraph</p>                     TITLE        H1          P
+  </body>                                  ↓           ↓          ↓
+  </html>                            "My Document"  "Header"  "Paragraph"
+
+                      DOM 객체 계층 구조
+
+                          EventTarget
+                                ↑
+                              Node
+                ┌--------------┼------------┐
+              Text          Element       Comment
+                                ↑
+                          HTMLElement
+      ┌------------------------┼------------------------┐
+  HTMLInputElement       HTMLBodyElement        HTMLAnchorElement ...
+
+
+2. Node(노드)
+  1) Node는 DOM 트리 구조를 구성하는 모든 단위를 통칭하는 상위 개념입니다.
+  2) HTML 문서의 각 부분(태그, 텍스트, 주석, 속성 등)은 모두 노드로 표현됩니다.
+  3) 주요 노드
+    (1) Element Node  : HTML 요소(예: <div>, <p> 등)
+    (2) Text Node     : 태그 사이에 들어가는 텍스트
+    (3) Comment Node  : 주석
+    (4) Document Node : 전체 문서
+  4) 주요 인스턴스 프로퍼티
+    (1) firstChild      : 현재 Node의 첫 번째 자식 Node 반환, 없으면 null 반환
+    (2) lastChild       : 현재 Node의 마지막 자식 Node 반환, 없으면 null 반환
+    (3) previousSibling : 현재 Node의 이전 형제 Node 반환, 없으면 null 반환
+    (4) nextSibling     : 현재 Node의 다음 형제 Node 반환, 없으면 null 반환
+    (5) parentElement   : 현재 Node의 부모 Element 반환, 없으면 null 반환
+    (6) parentNode      : 현재 Node의 부모 Node 반환, 없으면 null 반환
+    (7) textContent     : 현재 Node와 그 자손의 텍스트 콘텐츠를 가져오거나 설정함
+
+
+3. Element(엘리먼트)
+  1) Element는 Node의 하위 개념으로, HTML 태그 요소에 해당하는 노드만을 의미합니다.
+  2) <div>, <p>, <span> 등 실제 태그로 표현되는 부분이 Element입니다.
+  3) 모든 Element는 Node이지만, 모든 Node가 Element는 아닙니다.
+  4) 주요 인스턴스 프로퍼티
+    (1) className    : class 속성(attribute)
+    (2) id           : id 속성(attribute)
+    (3) innerHTML    : 요소(element) 내에 포함된 HTML 또는 XML 마크업을 가져오거나 설정함
+    (4) scrollHeight : 요소(element) 콘텐츠의 총 높이
+    (5) scrollTop    : 수직 스크롤 바의 위치
+
+
+4. 주요 Document 객체 반환 메소드
+  1) Document.getElementById(id)
+    (1) 주어진 문자열과 일치하는 id 속성을 가진 요소를 Element 객체로 반환합니다.
+    (2) 없으면 null을 반환합니다.
+  2) Document.getElementsByClassName(class)
+    (1) 주어진 문자열과 일치하는 class 속성을 가진 모든 요소를 HTMLCollection 객체로 반환합니다.
+    (2) 없으면 null을 반환합니다.
+    (3) 반환된 HTMLCollection 객체는 변경 사항이 실시간으로 반영되는 Live HTMLCollection 객체입니다.
+    (4) HTMLCollection 객체는 유사 배열(array-like object)이지만 엄밀히 배열과는 다릅니다.
+      예를 들어, Array.prototype.forEach() 와 같은 Array 객체의 메소드는 사용할 수 없습니다.
+      ① HTMLCollection.length:          컬렉션 항목의 갯수를 반환
+      ② HTMLCollection.item(index):     주어진 인덱스의 Node를 반환
+      ③ HTMLCollection.namedItem(name): 주어진 id 속성 또는 name 속성을 가진 Node를 반환  
+  3) Document.getElementsByTagName(tag)
+    (1) 주어진 문자열과 일치하는 모든 태그를 가진 HTMLCollection 객체를 반환합니다.
+    (2) 없으면 null을 반환합니다.
+  4) Document.querySelector(selectors)
+    (1) 제공한 선택자와 일치하는 문서 내 첫 번째 Element 객체를 반환합니다.
+    (2) 없으면 null을 반환합니다.
+  5) Document.querySelectorAll(selectors)
+    (1) 제공한 선택자와 일치하는 문서 내 모든 요소를 가진 NodeList 객체를 반환합니다.
+    (2) 반환된 NodeList 객체는 변경 사항이 실시간으로 반영되지 않는 Static NodeList 객체입니다.
+    (3) 없으면 null 을 반환합니다.
+  
+  
+5. HTMLCollection vs NodeList
+  ----------------------------------------------------------------------------------
+                  | HTMLCollection           | NodeList
+  ----------------|--------------------------|--------------------------------------
+  대상            | DOM 요소                 | DOM 요소, Node(텍스트, 주석, 속성 등)
+  ----------------|--------------------------|--------------------------------------
+  생성 방법       | getElementsByTagName()   | querySelectorAll()
+                  | getElementsByClassName() | Node.childNodes
+  ----------------|--------------------------|--------------------------------------
+  Live 여부       | Yes                      | No  (querySelectorAll())
+                  |                          | Yes (Node.childNodes)
+  ----------------|--------------------------|--------------------------------------
+  Array 여부      | No                       | No
+  ----------------|--------------------------|--------------------------------------
+  유사 배열 여부  | Yes                      | Yes
+                  | 대괄호[]와 인덱스 지원   | 대괄호[]와 인덱스 지원
+  ----------------|--------------------------|--------------------------------------
+  length 속성     | Yes                      | Yes
+  ----------------|--------------------------|--------------------------------------
+  for    문       | Yes                      | Yes
+  for in 문       | Yes (Not Recommend)      | Yes (Not Recommend)
+  for of 문       | Yes                      | Yes
+  ----------------|--------------------------|--------------------------------------
+  forEach()       | No                       | Yes 
+  ----------------------------------------------------------------------------------
+  * Live 여부: 실시간 컬렉션을 의미합니다. 즉, DOM이 변경되면 컬렉션의 내용도 즉시 반영됩니다.
+  * Array 여부: 실제 배열이 아니므로 map, reduce 등 배열 메서드는 사용할 수 없고, 필요하다면 Array.from()이나 스프레드 연산자(...)로 배열로 변환해야 합니다.
+
+
+6. CSS 적용
+  1) HTMLElement 객체의 style 속성을 이용합니다.
+  2) 인라인 방식의 CSS가 적용됩니다.
+  3) CSS 속성 적용 방식
+    (1) 점 표기법(.)
+      ① CSS 속성 이름을 Dash Case 에서 Camel Case로 바꿔서 사용합니다.
+      ② font-size ▶︎ fontSize
+      ③ 예) HTMLElement.style.fontSize = '12px';
+    (2) 대괄호 표기법([])
+      ① CSS 속성 이름을 문자열 형식으로 그대로 사용합니다.
+      ② font-size ▶︎ ["font-size"]
+      ③ 예) HTMLElement.style['font-size'] = '12px';
+
+
+7. HTML Attribute
+  1) HTML 문서 내에서 태그에 직접 작성된 정적인 속성입니다.
+  2) HTML 소스에 적힌 "원본 값"을 의미합니다.
+  3) 예시
+    <input type="text" name="mobile" id="mobile" class="inp">
+      → Attribute는 총 4개 : type, name, id, class 
+  4) 관련 메소드
+    1) 가져오기: getAttribute(attribute)
+    2) 수정하기: setAttribute(attribute, value)
+    3) 삭제하기: removeAttribute(attribute)
+
+    
+8. DOM property
+  1) 브라우저가 HTML을 파싱해 DOM 트리를 만들 때 생성되는 자바스크립트 객체의 속성입니다.
+  2) 자바스크립트에서 접근하고 조작할 수 있는 "실시간 값"입니다.
+  3) 호출 방식
+    (1) 객체.property
+    (2) 객체["property"]
+
+
+9. HTML Attribute vs DOM Property
+  1) 주요 특징 | HTML Attribute     | DOM Property
+  -------------|--------------------|----------------------------------
+  위치         | HTML 텍스트 문서   | HTML DOM Tree
+  확인         | [F12] - [Elements] | [F12] - [Elements] - [Properties]
+  동작         | 정적               | 동적
+  Naming       | Dash Case          | Camel Case
+  
+  2) 주요 속성 | HTML Attribute     | DOM Property
+  -------------|--------------------|----------------------------------
+  id           | id="man"           | id: "man"
+  class        | class="blind"      | className: "blind"
+  checked      | checked            | checked: true
+               | checked="checked"  |
+-->
+
+</body>
+</html>
