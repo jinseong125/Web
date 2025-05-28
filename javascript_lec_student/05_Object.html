@@ -14,8 +14,8 @@
   2) 데이터와 함수(메소드)를 하나로 묶어 관리할 수 있는 자료구조입니다.
   3) 데이터가 저장되는 순서는 관리하지 않습니다.
   4) 객체를 구성하는 하나의 데이터는 속성(property): 값(value) 조합으로 구성됩니다. (key: value 구조를 가짐)
-    (1) 속성(property, 프로퍼티): 문자열 또는 심볼
-    (2) 값(value): 문자열, 숫자, boolean, 배열, 다른 객체, 함수 등 모든 타입 가능
+    (1) 속성(property, 프로퍼티):문자열 또는 심볼
+    (2) 값(value): 문자열 , 숫자, boolean, 배열, 다른 객체, 함수 등 모든 타입 가능
   5) 각 데이터들은 쉼표(comma)로 구분하며, trailing comma(후행 쉼표)를 사용할 수 있습니다.
   6) 객체 생성 방식
     (1) 객체 리터럴(literal): 메이저 방식
@@ -82,6 +82,29 @@
     let {name, ...rest} = {name: "홍길동", age: 30, tel: '010-0000-0000'};
     // name = "홍길동", rest = {age: 30, tel: '010-0000-0000'}
 -->
+
+<script>
+  {
+    // 객체 생성
+    const person = {
+      name:"진성", 
+      age: 28,
+      hobbies:[ "game", "swimming", "book"],
+    }
+    // 객체 확인하기
+    console.log(person);
+  
+    // 프로퍼티 확인하기
+    console.log(person.name);
+    console.log(person.age);
+    console.log(person.hobbies);
+
+    console.log(person["name"]);
+    console.log(person["age"]);
+    console.log(person["hobbies"]);
+  }
+</script>
+
 
 </body>
 </html>

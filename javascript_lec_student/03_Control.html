@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>control</title>
+</head>
+<body>
+
+<!--
+1. if 문
+  1) 형식
+    if(조건식) {
+      본문
+    }
+  2) if 문의 조건식의 결과가 true 이면 본문을 실행합니다.
+  3) 본문이 1개 코드로 구성되는 경우 중괄호{}를 생략할 수 있습니다.
+
+
+2. else if 문
+  1) 형식
+    if(조건식) {
+      본문
+    } else if(조건식) {
+      본문
+    } else if(조건식) {
+      본문
+    }
+  2) if 문의 조건식의 결과가 false 이면 else if 문의 조건식이 실행됩니니다.
+  3) 다른 특징은 if 문과 동일합니니다.
+
+
+3. else 문
+  1) 형식
+    if(조건식) {
+      본문
+    } else if(조건식) {
+      본문
+    } else {
+      본문
+    }
+  2) if 문과 else if 문의 모든 조건식의 결과가 false 이면 else 문의 본문을 실행합니다.
+  3) 조건식을 작성하지 않음에 주의합니다.
+
+
+4. switch 문
+  1) 형식
+    switch(표현식) {
+      case 결과1:
+        본문
+      case 결과2:
+        본문
+      ...
+      default:
+        본문
+    }
+  2) switch 문의 표현식의 결과가 일치하는 첫 번째 case 부터 모두 실행합니다.
+  3) switch 문의 실행을 종료하기 위해서 break 문을 추가할 수 있습니다.
+  4) 모든 case 문이 작성된 이후 마지막에 default 문을 추가할 수 있습니다.
+
+
+5. while 문
+  1) 형식
+    while(조건식) {
+      본문
+    }
+  2) while 문의 조건식의 결과가 true 이면 본문을 실행한 다음 다시 while 문의 조건식으로 되돌아가서 실행합니다.
+  3) while 문의 조건식의 결과가 false 이면 본문을 실행하지 않고 while 문을 종료합니다.
+  4) 본문이 1개 코드로 구성되는 경우 중괄호 {}를 생략할 수 있습니다.
+
+
+6. for 문
+  1) 형식
+    for(초기상태; 조건식; 상태변화) {
+      본문
+    }
+  2) 초기상태를 처리한 뒤 조건식으로 이동합니다.
+  3) 조건식의 결과가 true 이면 본문을 실행한 뒤 상태변화를 처리합니다.
+  4) 상태변화를 처리한 뒤 다시 조건식으로 이동합니다.
+  5) 조건식의 결과가 false 이면 본문을 실행하지 않고 for 문을 종료합니다.
+  6) 본문이 1개 코드로 구성되는 경우 중괄호 {}를 생략할 수 있습니다.
+
+
+7. break 문
+  1) switch 문을 종료할 때 사용합니다.
+  2) while 문이나 for 문 같은 반복문을 종료할 때도 break 문을 사용합니다.
+-->
+
+<script>
+
+// if 문을 이용한 성적 처리
+let score = prompt("점수를 입력하세요(0~100).");
+console.log(score, typeof score);  //----- prompt 대화 상자로 입력한 모든 값은 string 타입입니다.
+
+let result;
+
+if(score >= 90) {
+  result = "수";
+} else if(score >= 80) {
+  result = "우";
+} else if(score >= 70) {
+  result = "미";
+} else if(score >= 60) {
+  result = "양";
+} else {
+  result = "가"
+}
+console.log(score,result);
+
+// if 문을 이용한 올바른 계절 출력하기
+//--- 실수로 12 초과 값을 입력해도 올바른 계절이 나올 수 있도록 고려해 보기
+let month = prompt("계절을 알고 싶은 월을 입력하세요(1~12).");
+let season;
+
+if(month >= 3 && month <=5){
+  season = "봄";
+} else if(month >= 6 && month <= 8) {
+  season = "여름";
+} else if(month >= 9 && month <= 11) {
+  season = "가을";
+} else {
+  season = "겨울";
+}
+console.log(month,season);
+
+//--- 실수로 12 초과 값을 입력해도 올바른 계절이 나올 수 있도록 고려해보기
+let mod = month % 12; 
+if(mod <= 2) {               
+
+  season = "겨울";
+} else if (mod <= 5) {
+  season = "봄";
+} else if (mod <= 8) {
+  season = "여름";
+} else {
+  season = "가을";
+}
+console.log(mod,season);
+
+</script>
+
+<script>
+  /* number 타입 */
+  let number = 1;
+  switch(number) {
+    case 1:
+     console.log("1이다.");
+     break;
+    case 2:
+     console.log("2이다.");
+    default:
+     console.log("1,2가 아니다.");
+  }
+</script>
+
+
+<script>
+  switch(number % 2) {
+    case 0:
+      console.log("짝수");
+      break;
+      case 1:
+      console.log("홀수");
+      break;
+  } 
+
+  let hour = prompt("현재 시간을 입력하세요(0~23).");
+ switch(parseInt(hour / 12)) {
+  case 0:
+    console.log(`${hour}시는 오전입니다.`);
+    break;
+    case 1:
+    console.log(`${hour}시는 오후입니다.`);
+    break;
+ } 
+
+ // 계절 (봄:0~2, 여름:3~5, 가을:6~8,겨울9~11)
+switch (parseInt(month % 12 / 3)) {
+  case 0: console.log("겨울"); break;
+  case 1: console.log("봄"); break;
+  case 2: console.log("여름"); break;
+  case 3: conseol.log("겨울"); break;
+}
+
+
+
+ /* string 타입 */
+ let n = 1;
+ let cmd = "increment"    // increment, decrement1
+ switch (cmd) {
+  case "increment":
+    console.log(n + 1);
+    break;
+    case "decrement":
+    console.log(n - 1);
+    break;
+ } 
+
+ /* boolean 타입 (좋지 않은 개발 스타일입니다.) */
+ let input = prompt("정수를 입력하세요.");
+ let isPositive = input >= 0;                // 식별자이름이 is로 시작하면 true, false로 시작
+ switch(isPositive) {       
+  case true:
+    console.log("양수입니다.");
+    break;
+    case false:
+      console.log("음수입니다.");
+      break;
+ }                     
+</script>
+
+<script>
+  {
+// 1,2,3,4,5 문자열 만들기
+let value = 1;
+let str = '';
+
+while (value <= 5) {        // value가 6이면 종료해야함. (value != 6, value < 6, value <= 5)
+  str += value;   // 1
+  str += ',';     // 1,
+  value++;
+}
+console.log(str);
+
+// 5,4,3,2,1 문자열 만들기
+value = 5;
+str = '';
+ while (value >= 1) {  //str += value-- + ",";
+  str += value;
+  str += ',';
+  value--;
+ }
+ console.log(str);
+
+// 연습) 1 ~ 100 사이 정수 중에서 3, 6, 9로 끝나는 정수를 쉼표(,)로 연결하는 문자열 만들기
+// 3,6,9,13,16,19,...
+value = 1;
+str = '';
+while (value <= 100) {
+   if (value % 10 !=0 && value % 10 % 3 ==0) {// if (num % 10===3 || num % 10 ===6 || num % 10 ===9)
+   str += value + ",";
+}
+   value++;
+}
+  console.log(str);
+  }
+</script>
+  
+<script>
+{
+// 1,2,3,4,5
+let str = '';
+for (let value = 1; value <= 5; value++) {
+  str += value +',';
+}
+console.log(str);
+}
+{
+  // 1일차 1교시 ...8교시, 2일차 1교시...8교시, ...5일차 1교시 ...8교시
+  let str = '';
+  for(let day = 1; day <= 5; day++){
+    str += day + '일차';
+    for(let hour = 1; hour <= 8; hour++) {
+      str += hour +'교시';
+    }
+    str += ',';
+  }
+  console.log(str);
+}
+
+{
+  // 연습) <ul><li>1분기</li>, <li>2분기</li>, <li>3분기</li>, <li>4분기</li> </ul> 문자열을 만들어서
+  // 화면에 출력하기(document.write(출력))
+let str = '<ul>';
+  for(let value = 1; value <= 4; value++) {
+    str +=`<li>${value}분기</li>`;
+  }
+  str += '</ul>';
+  document.write(str);
+}
+// <select><option value ="1월">1월</option><option value="2">2월</option>...</select>
+{
+  let i = 1;
+  let str = '<select>';
+    while (i <='12') {
+    str += '<option value>' + i +'월 </option>';
+    i++;
+}
+    str+='</select>';
+      document.write(str);
+}
+
+{
+   // 연습) <div><img src="../assets/images/??"><img src="..."><img src ="..."></div> x 3:
+   // 총 9개 이미지를 화면에 출력하기.
+
+   let imgnumber =1;
+   let str = '';
+   for (let i = 1; i <=3; i++) {
+    str += '<div>';
+      for (let j = 1; j <= 3; j++) {
+        str += `<img src="../assets/images/animal${imgnumber}.jpg" width="100px">`;
+        imgnumber++;
+      }
+      str += '</div>';
+   }
+   document.write(str);
+}
+</script>
+
+<script>
+{
+// 무한 루프 : 의도적으로 반복문이 끝나지 않도록 설정한 루프
+// 1,2,3,4,5 문자열 출력하기
+let str = "";
+let value = 1;
+while (true) {       // for (;;)
+  str += value++ +",";
+  if (value > 5) {   // value == 6
+     break;          // 루프 종료 시 사용하는 break
+  }
+  
+}
+console.log(str);
+}
+</script>
+</body>
+</html>
