@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>탭메뉴</title>
+</head>
+<body>
+  
+  <div class="wrap">
+
+    <!-- 상단 탭 -->
+    <input type="radio" name="tab" id="first-tab-chk" class="screen-out" checked>
+    <input type="radio" name="tab" id="second-tab-chk" class="screen-out">
+    <div class="tab-menu">
+      <label for="first-tab-chk">동물</label>
+      <label for="second-tab-chk">건축물</label>
+    </div>
+    
+    <!-- 1번째 탭 (동물) -->
+    <div class="tab-content">
+      <ul>
+        <li class="content">
+          <div class="thumbnail animal"></div>
+          <div class="description">
+            <h4>동물1</h4>
+            <p>내용1</p>
+          </div>
+        </li>
+        <li class="content">
+          <div class="thumbnail animal"></div>
+          <div class="description">
+            <h4>동물2</h4>
+            <p>내용2</p>
+          </div>
+        </li>
+        <li class="content">
+          <div class="thumbnail animal"></div>
+          <div class="description">
+            <h4>동물3</h4>
+            <p>내용3</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 2번째 탭 (건축물) -->
+    <div class="tab-content">
+      <ul>
+        <li class="content">
+          <div class="thumbnail building"></div>
+          <div class="description">
+            <h4>건축물1</h4>
+            <p>내용1</p>
+          </div>
+        </li>
+        <li class="content">
+          <div class="thumbnail building"></div>
+          <div class="description">
+            <h4>건축물2</h4>
+            <p>내용2</p>
+          </div>
+        </li>
+        <li class="content">
+          <div class="thumbnail building"></div>
+          <div class="description">
+            <h4>건축물3</h4>
+            <p>내용3</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</body>
+</html>
