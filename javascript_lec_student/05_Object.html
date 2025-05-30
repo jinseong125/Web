@@ -102,9 +102,107 @@
     console.log(person["name"]);
     console.log(person["age"]);
     console.log(person["hobbies"]);
-  }
+
+    // 값이 배열인 프로퍼티 확인하기
+    for(let i = 0; i < person.hobbies.length; i++) {
+      console.log(i, person.hobbies[i]);
+    }}
+
+    {
+      // 연습) 모든 책 정보를 테이블로 화면에 표시하기
+      const course = {
+        name: "자바/스프링 부트캠프",
+        teacher:"민경태",
+        level:3,
+        books: [
+          {
+            title:"혼공자바스크립트",
+            author:"윤인성",
+            publisher:"한빛미디어",
+          },
+          {
+            title: "혼공자바",
+            author: "신용권",
+            publisher:"한빛미디어",
+          },
+          {
+            title:"스프링 부트3",
+            author:"홍팍",
+            publisher:"길벗",
+          }
+        ]
+      }
+    let str = '<table border ="1"><thead><tr><th>제목</th><th>저자</th><th>출판사</th></tr></thead><tbody>';
+      for(const book of course.books) {
+        str += '<tr>';
+        str += '<td>' + book.title + '</td>';
+        str += '<td>' + book.author+ '</td>';
+        str += '<td>' + book.publisher+'</td>';
+        str += '</tr>';
+
+      } str += '</tbody></table>'
+      document.write(str);     
+
+    }
 </script>
 
+<script>
 
+{
+  const movie = {
+    title:"기생충",
+    director:"봉준호",
+    runningTime:120,
+  }
+
+  // 프로퍼티 모두 하나씩 조회
+  for (const p in movie) {
+    console.log(p, movie[p]);
+  }
+}
+
+</script>
+
+<script>
+{
+  // 객체
+  const qna = {
+    question: "대한민국의 수도는?",
+    answer:"서울",
+  }
+  // 구조 분해 할당
+  const{question, answer} = qna;
+
+  // 분해된 변수 확인
+  console.log(question, answer);
+}
+
+{
+   // 연습) 각 항목에 링크가 걸린 ul 목록 만들어 화면에 출력하기
+   const info = {
+    sites: [
+      {
+        name:'네이버',
+        url:'https://www.naver.com',
+      },
+      {
+        name:'카카오',
+        url:'https://www.kakao.com',
+      },
+      {
+        name:'구글',
+        url:'https://www.google.com',
+      }
+    ]
+   }
+
+let str = '<ul>';
+  for (const {name, url} of info.sites) {
+  str += `<li><a href="${url}" target="_blank">${name}</a></li>`;
+  } 
+  str += '</ul>';
+  document.write(str);
+}
+</script>
 </body>
 </html>

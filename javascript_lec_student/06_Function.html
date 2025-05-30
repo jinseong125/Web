@@ -17,10 +17,10 @@
 2. 함수 작성 방법
   1) 함수 선언식
     (1) function 키워드와 함수명으로 정의하고, 호이스팅됩니다.
-    (2) 형식: function 함수명() { ... }
+    (2) 형식: function 함수명() { ... }          // ----기명 함수 (이름이 있는 함수)
   2) 함수 표현식
     (1) 함수를 변수에 할당합니다. 호이스팅되지 않습니다.
-    (2) 형식: const 변수명 = function() { ... }
+    (2) 형식: const 변수명 = function() { ... }  //----익명 함수 (이름이 없는 함수)
   3) 화살표 함수
     (1) 간결한 함수 표현식을 지원합니다. this 바인딩이 불가합니다.
     (2) 형식: const 변수명 = () => { ... }
@@ -41,7 +41,9 @@
   3) 매개변수를 선언할 땐 변수 선언 키워드(var, let, const)를 사용하지 않고, 변수명만 작성합니다.
     function 함수명(arg1, arg2) {
       
-    }
+     }
+    Argument - 함수를 전달하는 값.
+            을 저장하는 변수 - parametor
   4) 나머지 매개변수(Rest Parameter)
     (1) 함수가 정해지지 않은 수의 매개변수를 배열로 받을 수 있습니다.
     (2) JavaScript에서 가변항 함수를 표현할 때 사용합니다.
@@ -99,6 +101,185 @@
       })
     })
 -->
+    <script>
 
+      //--- 1.함수 선언식
+      function declaration() {
+        console.log('declaration 함수가 호출 되었습니다');
+      }
+
+      //--- 2.함수 표현식
+      const expr = function() {
+        console.log('expr 함수가 호출되었습니다.');
+      }
+
+      //--- 3.화살표 함수
+      const arrow = () => {
+        console.log('arrow 함수가 호출되었습니다.');
+      }
+
+      // 함수 호출하기
+      declaration();
+      expr();
+      arrow();
+    </script>
+
+    <script>
+      function info(name, age) { // 매개변수 (파라미터)
+        console.log("이름:",name);
+        console.log("나이:",age);
+      }
+
+      info("홍길동",30);  // 인자(Argument)
+      info("둘리",10);
+
+      let name = "고길동";
+      let age = 45;
+      info(name,age);    // 인자 :name, age
+    </script>
+
+    <script>
+
+      // 배열을 받아서 사용하는 함수
+      const infoArray = function(numbers) {
+        for (let i = 0; i < numbers.length; i++) {
+          console.log(numbers[i]);
+        }
+      }
+
+      infoArray([10,20,30,]);
+
+      // rest 문법을 활용하는 함수
+      const infoRest = function(arg,...rest) { //여기서 사용된 rest 매개변수는 배열. 나머지 매개변수는 항상 마지막에 선언한다 
+        console.log(arg);
+        for (let i=0; i < rest.length; i++){
+          console.log(rest[i]);
+        }
+      }
+
+      // 전달하는 인자(Argument)의 개수가 다른 경우
+      infoRest("x");
+      infoRest("x", "y");
+      infoRest("x","y","z");
+
+    </script>
+
+    <script>
+      const infoObject = ({model, maker, price}) => {//객체가 전달되는 경우 구조분해할당을 매개변수에서도 적용가능능
+        console.log(model);
+        console.log(maker);
+        console.log(price);
+      }
+
+      infoObject({
+        model: "BMW 530d",
+        maker: "BMW",
+        price: 8000,
+      })
+    </script>
+
+    <script>
+      function handle(callback) { // 전달된 익명 함수를 매개변수에 저장(함수 표현식)
+        callback();  // 함수 사용을 위해 호출(전달된 익명함수가 실행)
+      }
+      handle(function() { // 익명 함수를 handle 함수에 인자로 전달
+        console.log('Anonymous 함수가 호출되었습니다.');
+      });
+      // 연습) greet 함수에 콜백 함수와 이름을 전달하면 해당이름이 출력한다
+      function greet(callback,name) { //2. 전달된 인자 "박진성"을 매개변수 name에 저장한다.
+        callback(name);  // 3."박진성"(매개변수 name에 저장된 값)을 다시 callback 함수에 전달된다.여기에 있는 name은 인자이다. 
+      }
+
+      greet(function(name) { //4. 전달된 인자 name이 익명 함수의 매개변수 name에 저장된다.
+        console.log("안녕하세요" + name + "님"); //5. 매개변수 name에 저장된 값을 사용한다.
+      },"박진성"); //1. 인자 "박진성"을 greet 함수의 매개변수 name에 전달한다.
+
+
+      // 연습) summaryArray 함수에 콜백 함수와 양의 정수를 전달하면 1부터 전달된 양의 정수까지 모두 더한 결과를 출력
+      function summaryArray(callback,num) {
+        callback(num);
+      }
+
+      summaryArray(function(num) {
+        let sumResult = 0;
+        for (let n = 1; n <= num; n++) {
+          sumResult += n;
+        }; 
+        console.log("1부터" + num + "까지 더한 결과:" + sumResult);
+      },10);
+
+    </script>
+
+    <script>
+      //----- 반환
+      function one() {
+        return 1; // 1. one 함수를 호출한 곳으로 1을 반환
+      }
+      const oneResult = one();  // 2. 함수 호출은 반환 값으로 바뀐다
+      console.log(oneResult);
+
+      // 전달된 값보다 1 큰수 반환
+      function plusOne(arg) {
+        return arg + 1;
+      }
+      console.log(plusOne(10));
+
+      // 배열을 전달하면 해당 배열의 모든 값을 더한 값을 반환
+      function sumArray(numbers) {
+        let total = 0;
+        for (const number of numbers) {
+          total += number;
+        }
+        return total;
+      }
+
+      const sumResult = sumArray([1, 2, 3, 4, 5]);
+      console.log(sumResult);
+
+      // 4) 배열을 반환하는 함수
+      function retArray() {
+        return ["봄", "여름","가을", "겨울"];
+      }
+
+      // 반환하는 배열의 첫 요소와 마지막 요소만 출력하기
+      const seasonArray = retArray();
+      console.log(seasonArray[0]);
+      console.log(seasonArray[seasonArray.length - 1]);
+      const [first, , , last] = retArray();   // 배열의 첫 요소와 4번째 요소를 저장하는 구조 분해 할당 문법
+      console.log(first);
+      console.log(last);
+
+      // 객체를 반환하는 함수
+      function retObject(nickname, age) {
+        return {
+          nickname: name,  // name: "홍길동"
+          age : age,       // age : 30
+        }
+      }
+      const user = retObject("홍길동",30);
+      console.log(user.nickname, user.age);
+      const { nickname } = retObject("고길동",40);
+      console.log(nickname);
+      
+      // 6) 함수를 변환하는 함수
+      function retFunction() {
+        return function() {
+          console.log('hello world');
+        }
+      }
+      const func = retFunction(); // 익명함수가 반환된다
+      func();
+      retFunction()();
+    </script>
+
+  <!--연습) 어떤 놀이기구는 몸무게가 90 이상인 경우 이용이 불가능합니다.
+  //       몸무게가 40 미만인 경우 부모의 동의가 있으면 이용이 가능합니다. (confirm 함수를 찾아보세요.)
+  //       나머지 경우에는 부모의 동의가 없어도 이용이 가능합니다.
+  //       prompt를 이용해서 몸무게를 입력 받아 isPossible 함수에 전달합니다.
+  //       isPossible 함수는 놀이기구의 이용이 가능하면 true 아니면 false를 반환합니다.
+  //      최종 실행 시 "놀이기구 탑승이 가능합니다.","놀이기구 탑승이 거절되었습니다."중 하나의 메시지를 
+  //      출력하시오. -->
+
+        
 </body>
 </html>
