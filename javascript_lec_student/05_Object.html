@@ -89,7 +89,11 @@
     const person = {
       name:"진성", 
       age: 28,
-      hobbies:[ "game", "swimming", "book"],
+      hobbies:[
+         "game",
+         "swimming",
+         "book"
+          ],
     }
     // 객체 확인하기
     console.log(person);
@@ -171,7 +175,7 @@
     answer:"서울",
   }
   // 구조 분해 할당
-  const{question, answer} = qna;
+  const{question, answer} = qna;  // 프로퍼티 이름이 같아야한다
 
   // 분해된 변수 확인
   console.log(question, answer);
@@ -203,6 +207,43 @@ let str = '<ul>';
   str += '</ul>';
   document.write(str);
 }
+</script>
+
+<script>
+
+const user = { 
+  name: "Jackson",
+  age : 20,
+  phone:"010-1111-2222",
+  gender:"male",
+  addr:"seoul",
+}
+
+// 객체나 배열에서 사용할 수 있는 새로운 연산자: 스프레드 연산자(...)
+// 객체나 배열을 펼쳐서(복사해서) 새로운 객체나 배열을 만들 때 사용합니다.
+const newUser = {
+  ...user,   // 객체 use의 모든 프로퍼티를 펼쳐서 사용합니다.
+  age: 21,   // age만 덮어쓰기 합니다.
+}
+
+console.log(newUser);
+
+</script>
+
+<script>
+
+// 객체 리터럴 생성 시 프로퍼티와 값이 동일한 경우
+// 프로퍼티만 작성합니다. (프로퍼티 단축 표기법)
+const title = "미션임파서블";
+const actor = "톰 크루즈";
+const movie = {
+  title,   //title: title,
+  actor,   //actor: actor,
+}
+
+console.log(movie);
+//const movie = { title, actor }
+
 </script>
 </body>
 </html>

@@ -47,5 +47,62 @@ Math 내장 객체
   2) 암호학적으로 안전한 난수를 제공하지 않으므로 보안과 관련된 용도로 사용 금지(대신 window.crypto.getRandomValues() 메소드 권장)
 -->
 
+<script>
+
+// 연습) 원하는 자릿수로 올림 처리한 결과를 반환하는 함수를 구현하세요.
+
+// getCeil(123.45, 1) : 123.5
+// getCeil(123.45, 0) : 124
+// getCeil(123.45)    : 124
+// getCeil(123.45,-1) : 130
+// getCeil(123.45,-2) : 200
+
+// getCeil(123.45, 1)   동작 확인하기
+// 1) 123.45 * 10       => 1234.5
+// 2) Math.ceil(1234.5) => 1235
+// 3) 1235 / 10         => 123.5
+
+// getCeil(123.45, -2)  동작 확인하기
+// 1) 123.45 / 100      => 1.2345
+// 2) Math.ceil(1.2345) => 2
+// 3) 2 * 100           => 200
+
+const getCeil = (number, digit = 0) => Math.ceil( number * Math.pow(10, digit)) / Math.pow(10, digit);
+const value = 123.456;                   // floor round trunc
+console.log(getCeil(value, 2));
+console.log(getCeil(value, 1));
+console.log(getCeil(value, 0));
+console.log(getCeil(value,));
+console.log(getCeil(value, -1));
+console.log(getCeil(value, -2));
+ // digit에 매개변수로 전달 된 인자가 없어서 0
+
+</script>
+
+<script>
+
+// 난수 조정하기
+//----------------------------------------------------
+// Math.random()        0.0 <= 난수 < 1.0
+// Math.random() * 5    0.0 <= 난수 < 5.0
+// Math.floor(Math.random() * 5)
+// Math.floor(Math.random() * 5 + 1)   1 <= 난수 < 6
+
+console.log('로또볼', Math.floor(Math.random() * 45 + 1));
+
+// 연습) 전달된 두 값 사이의 난수를 반환하는 함수를 구현합니다.
+//       예: 1과 10 전달 시 1~9 사이 난수를 발생합니다
+
+  
+// function getRandom(){
+  // return Math.floor(Math.random() * (value2 - 1) + 1 );
+  //}
+  
+  const getRandom = (begin, end) => Math.floor(Math.random() * (end - begin) + begin);
+  
+  console.log(getRandom(1, 10));
+
+</script>
+
 </body>
 </html>

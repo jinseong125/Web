@@ -48,8 +48,17 @@ Number 내장 객체 (숫자를 표현하고 다루는 Primitive wrapper object)
 
 9. Number.prototype.toFixed([digits])
   1) 고정 소수점 표기법을 사용하여 나타낸 수를 문자열로 바꾼 값을 반환
-  2) 소수점 뒤에 나타날 자릿수, 0 ~ 20 사이 값을 가짐, 기본값은 0
+  2) digits: 소수점 뒤에 나타날 자릿수, 0 ~ 20 사이 값을 가짐, 기본값은 0
 -->
 
+<script>
+
+  console.log(Number.isInteger(10), Number.isInteger(3.14));
+  console.log(Number.isNaN(5 / 2), Number.isNaN("hello" / 2));
+  console.log(Number.parseInt("10"), Number.parseInt("10.5"), Number.parseInt(10.5));
+  
+  const number = 12345;
+  console.log(number.toFixed(2));
+</script>
 </body>
 </html>

@@ -13,7 +13,7 @@ Date 내장 객체
 1. Date() 생성자
   1) 특정 날짜와 시간을 가진 Date 객체를 반환
   2) 호출 형식
-    (1) new Date()
+    (1) new Date()                      // 밀리초: 1000분의 1초
     (2) new Date(value)                 // value : unix timestamp (1970-01-01 0:00:00 초부터 카운트하는 시간(단위:밀리초))
     (3) new Date(dateString)            // 문자열 인식의 경우 동작이 일관적이지 않으므로 사용 안 하기를 권장
     (4) new Date(year, monthIndex)      // monthIndex : 0 ~ 11
@@ -58,6 +58,67 @@ Date 내장 객체
   1) 현지 시간 기준 초 반환
   2) 0 - 59
 -->
+
+<script>
+
+  {
+    // Date 객체 생성
+    const now = new Date();  // 지금 날짜/ 시간을 Date 객체로 반환
+    console.log(now);
+
+    // string 객체 생성
+    const str = Date();      // 지금 날짜 / 시간을 string 타입으로 반환
+    console.log(str);
+
+    // 타임스탬프 확인
+    const timestamp1 = Date.now();
+    //const timestamp2 = now.getTime();  밀리초 예시
+    const timestamp2 = new Date().getTime();
+    console.log(timestamp1);
+    console.log(timestamp2);
+  }
+
+  
+   {
+   // Date 객체 생성
+   const now = new Date();
+
+   // 각 날짜 / 시간 단위
+   /*const year = now.getFullYear();
+   const month = now.getMonth() + 1;  // getMonth()는 *0~11* 사이의 값을 반환합니다.
+   const day = now.getDate();         // * 주의 - day(X)  Date(O) day는 요일을 알기위해서 사용. getDate는 1~31 사이값을 반환합니다.
+   const dayNo = now.getDay();        // getDay()는 0~6 사이값을 반환합니다. 0은 "일요일"을 의미합니다.*/
+   
+   // 연습) 전달한 날짜를 "2025-05-31 금" 형식(yyyy-MM-dd a)의 문자열로 반환하는 함수를 구현합니다.
+   const prefixZero = value => value < 10 ? "0" + value : value;
+   const getFormattedDate = (date) => {
+   const year = date.getFullYear();
+   const month = date.getMonth() + 1;
+   const day = date.getDate();
+   const dayNo = date.getDay();
+   const weekNames = ["일", "월", "화", "수", "목", "금", "토"];
+   return year + "-" + prefixZero(month) + "-" + prefixZero(day) + " " + weekNames[dayNo];
+   }
+   console.log(getFormattedDate(new Date()));
+  }
+  {
+   // 위의 문제를 이렇게 생각해 봅시다.
+   const prefixZero = value => value < 10 ? "0" + value : value;
+   const getFormattedDate = date => [date.getFullYear(),
+                                     prefixZero(date.getMonth() + 1),
+                                     prefixZero(date.getDate())].join("-")
+                                     +" "
+                                     +["일", "월", "화", "수", "목", "금","토"][date.getDay()];
+   console.log(getFormattedDate(new Date()));
+   
+  
+  
+
+
+
+
+  }
+</script>
 
 </body>
 </html>
