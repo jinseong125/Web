@@ -88,7 +88,7 @@ String 내장 객체
   1) 전달된 구분자를 이용해 여러 개의 문자열로 나눈 값을 저장한 배열(Array)을 반환
   2) 옵션 separator : 문자열 또는 정규식 가능, 빈 문자열("")을 지정하는 경우 각각의 문자가 배열의 요소 하나로 변환됨
   3) 옵션 limit : 끊어진 문자열의 최대 개수, 배열의 요소가 limit개가 되면 split을 멈춤
-
+ 
 19. String.prototype.toLowerCase()
   1) 호출 문자열을 소문자로 변환한 새로운 문자열을 반환
 
@@ -99,6 +99,114 @@ String 내장 객체
   1) 호출 문자열의 시작과 끝에서 공백이 제거된 새로운 문자열을 반환
   2) 한쪽 끝의 공백만 제거하려면 trimStart() 나 trimEnd() 를 사용
 -->
+
+<script>
+
+{
+  // 문자열과 인덱스 살펴보기
+  const str = "JavaScript";
+
+  console.log('첫 글자', str.charAt(0));
+  console.log('마지막 글자', str.charAt(str.length - 1));  // *마이너스 인덱스
+  console.log('첫 글자', str.at(0));
+  console.log('마지막 글자',str.at(-1));
+
+  console.log('첫 번째 소문자 a의 인덱스', str.indexOf("a"));
+  console.log('마지막 소문자 a의 인덱스', str.lastIndexOf("a"));
+
+  console.log('Java', str.substring(0, 4)); // 인덱스 0 <= 문자열 < 인덱스 4
+  console.log('Script', str.substring(4));  // 인덱스 4 <= 문자열
+  // deprecated - 더이상 사용X
+
+  // 연습) 파일명과 확장자를 분리해보자.
+  const fullname = "aaa.bbb.ccc.ddd.eee.jpg";
+  const lastDotPos = fullname.lastIndexOf(".");
+  const filename = fullname.substring(0, lastDotPos);
+  const extname  = fullname.substring(lastDotPos + 1);
+  console.log('파일명', filename);
+  console.log('확장자', extname);
+}
+
+{
+  // 원하는 문자열이 포함되어있는지 확인
+  const str = "Hello JavaScript Nice To Meet You";
+  console.log(str.startsWith("Hello"));
+  console.log(str.endsWith("You"));
+  console.log(str.includes("JavaScript"));
+
+  // 연습) 배열에 저장된 객체를 순회하면서 다음 작업을 진행하세요.
+  //       배열에 저장된 자동차 객체의 모델명이 "K", "k"로 시작하면 제조자(maker)를 'Kia'로 저장하세요.
+  
+  let cars = [
+    {
+      model: "K9",
+    },
+    {
+      model: "e300",
+    },
+    {
+      model: "G80",
+    },
+    {
+      model: "530i",
+    },
+    {
+      model: "k5",
+    }
+  ]
+cars.map(car => {
+  if(car.model.toUpperCase().startsWith("K")) {
+    car.maker = "Kia";
+  }
+  return car;
+});
+console.log(cars);
+}
+
+{
+  // 문자 채우기
+  const str = "JavaScript";
+  console.log(str.padStart(15, "*")); // 전체 길이가 15가 되도록 앞에 * 채우기.1
+  console.log(str.padEnd(15, "*"));   // 전체 길이가 15가 되도록 뒤에 * 채우기.
+
+  // 기존 문자열의 일부를 다른 문자열로 바꾸기기
+  console.log(str.replace("a","A"));    // 첫번째 "a"를 "A"로 바꾸기
+  console.log(str.replaceAll("a","A")); //   모든 "a"를 "A"로 바꾸기
+
+  // 정규 표현식을 이용한 바꾸기가 가능하므로 가급적 정규 표현식을 배운 뒤 replace, replaceAll활용 권장합니다.
+  /*const sample = "192.168.0.0";
+  console.log(sample.replace(".","_"));
+  console.log(sample.replaceAll(".","_"));*/
+}
+{
+  // 문자열과 배열 다루기
+
+  // 1) 문자열을 배열로 분해하기: 한 글자씩 분해
+  const str = "Hello World";
+  const arr = [...str];   // 스프레드 연산자(...) 사용
+  console.log(arr);
+
+  // 2) 문자열을 배열로 분해하기: 원하는 구분자를 전달해서 분해
+  const data = "봄,여름,가을,겨울";
+  const seasons = data.split(",");
+  console.log(seasons); 
+
+  // 연습) 파일명과 확장자를 분리해보자.
+  const fullname = "aaa.bbb.ccc.ddd.eee.jpg";
+  const parts = fullname.split(".");  // parts = ["aaa","bbb", ..., "jpg"]
+  const extname  = parts.pop();       // parts 배열의 마지막 요소를 제거하고 제거한 요소를 반환함
+  const filename = parts.join(".");   // parts 배열의 모든 요소를 .로 연결한 문자열을 반환환
+  console.log('파일명', filename);
+  console.log('확장자', extname);
+
+  // 연습) 모든 점(.)을 밑줄로 바꿔보자. (풀이 제한: split, join으로 풀어보기)
+  const ip = "192.168.0.0";
+  const assadasd = ip.split(".");
+  const askjhdk = assadasd.join("_");
+  console.log(askjhdk);
+}
+
+</script>
 
 </body>
 </html>

@@ -12,7 +12,9 @@
   1) Document Object Model, 문서 객체 모델
   2) HTML, XML 문서의 프로그래밍 인터페이스입니다.
   3) 프로그래밍 언어가 DOM 구조에 접근할 수 있는 방법을 제공하여 문서 구조, 스타일, 내용 등을 변경할 수 있게 돕습니다.
-
+  attribute (.get, set, remove)     ->          property(obj. , obj["property"])
+  class. readonly                   ->          className. readonly
+  readonly:""                       ->          readonly: true
   ■■■ HTML ■■■                              ■■■ DOM tree ■■■
   <html lang="ko">                              Document
   <head>                                           ↓
@@ -21,17 +23,17 @@
   <body>                                  HEAD             BODY
     <h1>Header</h1>                        ↓             ↙      ↘
     <p>Paragraph</p>                     TITLE        H1          P
-  </body>                                  ↓           ↓          ↓
-  </html>                            "My Document"  "Header"  "Paragraph"
+  </bodyy>                                  ↓           ↓          ↓
+  </htmll>                            "My Document"  "Header"  "Paragraph"
 
                       DOM 객체 계층 구조
 
                           EventTarget
-                                ↑
+                               ↑
                               Node
                 ┌--------------┼------------┐
               Text          Element       Comment
-                                ↑
+                               ↑
                           HTMLElement
       ┌------------------------┼------------------------┐
   HTMLInputElement       HTMLBodyElement        HTMLAnchorElement ...
@@ -68,25 +70,25 @@
 
 
 4. 주요 Document 객체 반환 메소드
-  1) Document.getElementById(id)
-    (1) 주어진 문자열과 일치하는 id 속성을 가진 요소를 Element 객체로 반환합니다.
+  1) Document.getElementById(id) -- 중요
+    (1) 주어진 문자열과 일치하는 id 속성을 가진 요소를 HTMLElement 객체로 반환합니다.
     (2) 없으면 null을 반환합니다.
-  2) Document.getElementsByClassName(class)
-    (1) 주어진 문자열과 일치하는 class 속성을 가진 모든 요소를 HTMLCollection 객체로 반환합니다.
+  2) Document.getElementsByClassName(class) -- 조금 중요
+    (1) 주어진 문자열과 일치하는 class 속성을 가진 모든 요소를 HTMLCollection 객체로 반환합니다. // class 속성 - 동일한 클래스를 여러요소가 가질수있다.
     (2) 없으면 null을 반환합니다.
     (3) 반환된 HTMLCollection 객체는 변경 사항이 실시간으로 반영되는 Live HTMLCollection 객체입니다.
     (4) HTMLCollection 객체는 유사 배열(array-like object)이지만 엄밀히 배열과는 다릅니다.
       예를 들어, Array.prototype.forEach() 와 같은 Array 객체의 메소드는 사용할 수 없습니다.
-      ① HTMLCollection.length:          컬렉션 항목의 갯수를 반환
-      ② HTMLCollection.item(index):     주어진 인덱스의 Node를 반환
+      ① HTMLCollection.length         : 컬렉션 항목의 갯수를 반환
+      ② HTMLCollection.item(index)    : 주어진 인덱스의 Node를 반환
       ③ HTMLCollection.namedItem(name): 주어진 id 속성 또는 name 속성을 가진 Node를 반환  
-  3) Document.getElementsByTagName(tag)
+  )3) Document.getElementsByTagName(tag  -- 그렇게 중요하지 않음
     (1) 주어진 문자열과 일치하는 모든 태그를 가진 HTMLCollection 객체를 반환합니다.
     (2) 없으면 null을 반환합니다.
-  4) Document.querySelector(selectors)
+  4) Document.querySelector(selectors) -- 알아두면 좋음
     (1) 제공한 선택자와 일치하는 문서 내 첫 번째 Element 객체를 반환합니다.
     (2) 없으면 null을 반환합니다.
-  5) Document.querySelectorAll(selectors)
+  5) Document.querySelectorAll(selectors) -- 알아두면 좋음
     (1) 제공한 선택자와 일치하는 문서 내 모든 요소를 가진 NodeList 객체를 반환합니다.
     (2) 반환된 NodeList 객체는 변경 사항이 실시간으로 반영되지 않는 Static NodeList 객체입니다.
     (3) 없으면 null 을 반환합니다.
@@ -106,7 +108,7 @@
   ----------------|--------------------------|--------------------------------------
   Array 여부      | No                       | No
   ----------------|--------------------------|--------------------------------------
-  유사 배열 여부  | Yes                      | Yes
+  유사 배열 여부   | Yes                      | Yes
                   | 대괄호[]와 인덱스 지원   | 대괄호[]와 인덱스 지원
   ----------------|--------------------------|--------------------------------------
   length 속성     | Yes                      | Yes
@@ -163,13 +165,148 @@
   동작         | 정적               | 동적
   Naming       | Dash Case          | Camel Case
   
-  2) 주요 속성 | HTML Attribute     | DOM Property
+  2) 주요 속성 | HTML Attribute       | DOM Property
   -------------|--------------------|----------------------------------
   id           | id="man"           | id: "man"
   class        | class="blind"      | className: "blind"
   checked      | checked            | checked: true
                | checked="checked"  |
 -->
+
+<script>
+</script>
+<div id="box1" class="my-box">my box1</div>
+<div id="box2" class="my-box">my box2</div>
+<div id="box3" class="my-box">my box3</div>
+<script>
+{
+ //----- HTMLElement 객체를 반환하는 메소드 다루기
+ const box1 = document.getElementById("box1"); 
+ const box2 = document.querySelector("#box2");  // CSS 선택자 활용하기, null: 값이없음을 의미
+ console.log(box1);
+ console.log(box2);
+ console.log(document.querySelector(".my-box"));// queryselector를 사용하면 첫 번째 요소만 선택됩니다
+}
+{
+  //----- HTMLCollection 객체를 반환하는 메소드 다루기
+  const divList = document.getElementsByTagName("div");
+  const myBoxList = document.getElementsByClassName("my-box");
+  console.log(divList);
+  console.log(myBoxList);
+}
+{
+  //----- NodeList 객체를 반환하는 메소드 다루기
+  const divList = document.querySelectorAll("div");         // CSS 태그 선택자
+  const myBoxList = document.querySelectorAll(".my-box");   // CSS 클래스 선택자
+  console.log(divList);
+  console.log(myBoxList);
+}
+</script>
+
+<hr>
+
+<ol id="seasons"> 
+
+</ol>
+<script>
+  {
+ //----- DOM 조작하기: HTML 요소 조작하기 (한마디로 태그 조작하기)      (innerHTML)
+ const ol = document.getElementById("seasons");
+ const seasons = ["spring","summer","autumn","winter"];
+ let str = "";
+ // seasons.forEach((season) => { str + "<li>" + season + "</li>"});
+ seasons.forEach(season => str += "<li>" + season + "</li>");
+ const fourSeasons = str;
+ // const fourSeasons ="<li>spring</li><li>summer</li><li>autumn</li><li>winter</li>";
+ ol.innerHTML = fourSeasons;
+  }
+</script>
+
+<hr>
+
+<p id="paragraph"><strong>나는 문단이다</strong></p>
+<script>
+  {
+    //----- DOM 조작하기: 텍스트 조작
+    const paragraph = document.getElementById("paragraph");
+    console.log(paragraph.textContent);  // Node   : textContent (권장)
+    console.log(paragraph.innerText);    // Element: innerText
+    paragraph.textContent =  "문단에 전달하는 텍스트입니다.";  // 수정하기
+    paragraph.textContent += "문단에 추가하는 텍스트입니다.";  // 추가하기
+  }
+</script>
+
+<hr>
+
+<p>
+  <a id ="naver-link" href="htpps://www.naver.com">네이버</a>
+</p>
+<script>
+  {
+    // DOM 조작하기: CSS 조작하기
+    const naverLink = document.getElementById("naver-link");
+    naverLink.style.color ="red";                // red와 동일한 색상:"#ff0000", rgb(255, 0, 0) 000000은 검정, ffffff는 흰색 등 (점 표기법:CamelCase) 
+    naverLink.style["text-decoration"] = "none"; // 밑줄 및 장식선 없애기 (대괄호 표기법: dash-case / kebab-case)
+  }
+</script>
+
+<hr>
+
+<p>
+  <input type="text" id="id" class="inp" value="admin" readonly>
+</p>
+<script>
+
+  {
+   // 속성(Attribute) 다루기: 태그 작성 시 명시한 속성을 Attribute라고 합니다.
+   const input = document.getElementById("id");
+
+   // 속성 확인: getAttribute()
+   console.log("type 속성",input.getAttribute("type"));
+   console.log("id 속성", input.getAttribute("id"));
+   console.log("class 속성", input.getAttribute("class"));
+   console.log("value 속성", input.getAttribute("value"));
+   console.log("readonly 속성", input.getAttribute("readonly"));  // readonly 속성에는 값이 없으므로 빈 문자열("")
+   console.log("name 속성", input.getAttribute("name"));          // name 속성 자체가 없으므로 null
+
+   // 속성 변경: setAttribute()
+   input.setAttribute("value", "jinseong");   // value = "master" 로 바꾸겠다는 의미
+
+   // 속성 삭제: removeAttribute()
+   input.removeAttribute("readonly");         // readonly 속성 지우기
+  }
+
+</script>
+
+<hr>
+
+<p>
+  <input type="text" id="pw" class="inp" value="1234" readonly>
+</p>
+<script>
+
+{
+  // 속성(Property) 다루기: DOM Tree에서 처리하는 속성을 의미합니다. 태그에 명시한 속성과 다를 수 있습니다.
+  // Attribute랑 Property는 이름도 다르고 값도 다를 수 있다.
+  const input = document.getElementById("pw");
+
+  console.log(input);  // 프로퍼티 확인하기 가장 좋은 방법.
+
+  // 프로퍼티 확인
+  console.log(input.type);
+  console.log(input.id);
+  console.log(input.className);
+  console.log(input.value);
+  console.log(input.readonly);
+
+  // 프로퍼티 수정
+  input.type = "password";
+
+  // 프로퍼티 삭제 (DOM 객체의 프로퍼티는 지울 수 없습니다.)
+  delete input.value;  // 동작 X
+}
+
+</script>
 
 </body>
 </html>

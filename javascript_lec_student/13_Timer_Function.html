@@ -54,5 +54,89 @@
       clearInterval(intervalID);
 -->
 
+<script>
+  
+{
+  
+  const id = setTimeout(() => {
+    alert("Hello World");
+    }, 1000);   // 1000밀리초(1초) 후에 화살표 함수가 동작합니다.
+    alert(id);  // setTimeout은 비동기 함수이므로, 실행순서에 영향을 미치지 않습니다.
+                // *중요* 비동기 함수란 실행의 완료를 기다리지 않고(1초를 기다리지 않고), 다음 실행을 진행하는 함수입니다.
+    clearTimeout(id);  // 타이머 아이디가 id인 타이머를 취소합니다.
+}
+
+{
+   // "Hello" 출력 후 5초 지나면 "World" 출력하기
+   alert("Hello");
+   setTimeout(() => {
+   alert("World");  
+   }, 3000);
+   
+   // 3초 후 "Hello" 출력 후 3초 지나면 "World" 출력하기 (콜백 지옥: Callback Hell)
+   
+   setTimeout(() => {
+    alert("Hello");
+    setTimeout(() => {
+      alert("World");
+    }, 3000);
+   }, 3000);
+   
+}
+
+{
+  // 연습) 1초마다 회면에 1씩 줄어든 값을 보여주는 타이머를 구현하시오
+  //      전달한 인자 값에 따라 타이머가 동작합니다.
+  //      timer(3) 호출하면 화면에 "3", "2", "1", "타이머완료 메시지가 1초마다 순차적으로 나타납니다."
+  // 변수 = 익명 함수
+  const timer = (second) => {
+    setTimeout(() => {
+      if(second === 0 )  // if(!second) 
+        document.write("타이머완료");
+        return;    
+               // setTimeout에 전달한 화살표함수(콜백함수)를 종료합니다. 그러면 timer 함수를 더 이상 호출할 수 없으므로 전체 타이머가 종료합니다.
+      document.write(`<div>${second--}</div>`);
+      timer(second); // timer 함수 내부에서 timer 함수를 호출합니다. 이와 같은 호출을 재귀호출 (Recursive Call)이라고 합니다.
+    }, 1000);
+  }
+
+  timer(3);
+ 
+}
+
+</script>
+
+<script>
+
+  {
+    let count = 0;
+    const id = setInterval(() => {
+      count++
+      if(count === 5) {
+        clearInterval(id);  // id를 가진 interval을 중지합니다.
+      }
+   // console.log(count + "번째 Hello World");
+   }, 1000);   // 1000밀리초(1초)마다 화살표 함수를 반복해서 실행합니다.
+  }
+  {
+   // 연습) 1초마다 회면에 1씩 줄어든 값을 보여주는 타이머를 구현하시오
+   //      전달한 인자 값에 따라 타이머가 동작합니다.
+   //      timer(3) 호출하면 화면에 "3", "2", "1", "타이머완료 메시지가 1초마다 순차적으로 나타납니다."
+   
+   const timer = (second) => {  // timer 함수 호출 시 전달한 인수 3이 매개변수 second에 전달됩니다.
+   const id = setInterval(() => {
+     if(second === 0) {
+      document.write("타이머완료");
+      clearInterval(id);
+      return;
+     }
+     document.write(`<div>${second--}</div>`);
+    }, 1000);
+   }
+
+   timer(3);  // timer 함수호출
+    
+  }
+</script>
 </body>
 </html>
