@@ -297,13 +297,14 @@
   console.log(input.id);
   console.log(input.className);
   console.log(input.value);
-  console.log(input.readonly);
+  console.log(input.readOnly);
 
   // 프로퍼티 수정
   input.type = "password";
-
+  input.readOnly = false;
   // 프로퍼티 삭제 (DOM 객체의 프로퍼티는 지울 수 없습니다.)
   delete input.value;  // 동작 X
+  
 }
 
 </script>
