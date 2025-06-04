@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS_연습문제1</title>
+</head>
+<body>
+
+  <!--
+    문제1.
+    영화코드, 썸네일, 영화제목, 영화감독 순으로 테이블에 데이터를 표시하세요.
+    썸네일을 클릭하면 포스터 이미지가 나타나도록 처리하세요.
+  -->
+  <table border="1">
+    <thead>
+      <tr>
+        <td>영화코드</td>
+        <td>썸네일</td>
+        <td>영화제목</td>
+        <td>영화감독</td></tr>
+    </thead>
+    <tbody id="movies"></tbody>
+  </table>
+  <script>
+    const movies = {
+      genre: 'SF',
+      items: [
+        {
+          code: '20125086',
+          thumbnail: 'https://kobis.or.kr/common/mast/movie/2012/03/thumb_x192/thn_c21d5213789f439daa69421bf34adbc8.jpg',
+          poster: 'https://kobis.or.kr/common/mast/movie/2012/03/c21d5213789f439daa69421bf34adbc8.jpg',
+          title: '프로메테우스',
+          director: '리들리 스콧',
+        },
+        {
+          code: '19840091',
+          thumbnail: 'https://kobis.or.kr/upload/up_img/cleansing/x00/00/01/thumb_x192/thn_mov_19840091_31446.jpg',
+          poster: 'https://kobis.or.kr/upload/up_img/cleansing/x00/00/01/mov_19840091_31446.jpg',
+          title: '터미네이터',
+          director: '제임스 카메론',
+        },
+        {
+          code: '20210087',
+          thumbnail: 'https://kobis.or.kr/common/mast/movie/2022/01/thumb_x192/thn_c64d69dcafd34d718795608f38ec5837.jpg',
+          poster: 'https://kobis.or.kr/common/mast/movie/2022/01/c64d69dcafd34d718795608f38ec5837.jpg',
+          title: '듄',
+          director: '드니 빌뇌브',
+        }
+      ]
+    }
+  </script>
+
+  <hr>
+
+  <!--
+    문제2.
+    현재 날짜와 시간을 1초 마다 화면에 표시하세요.
+    예시 형식) 2025년 06월 01일 14시 05분 05초
+  -->
+  <div>
+    <span id="year">0000</span>년
+    <span id="month">00</span>월
+    <span id="day">00</span>일
+    <span id="hour">00</span>시
+    <span id="minute">00</span>분
+    <span id="second">00</span>초
+  </div>
+  <script>
+
+  </script>
+
+  <hr>
+
+  <!--
+    문제3.
+    2025년 11월 13일 (목)이 수능일입니다.
+    수능 D데이를 1초마다 갱신해서 화면에 나타내세요.
+    1) 1일 이상 남은 경우 : D-DAY 270일
+    2) 1일 미만 남은 경우 : D-DAY 15:30:45
+    3) 디데이가 지난 경우 : D-DAY가 지났습니다.
+    [Hint] 남은 시간 = 수능일's 타임스탬프 - 현재's 타임스탬프
+    타임스탬프(밀리초)로 계산된 남은 시간은 일/시/분/초 단위로 변환 후 처리합니다.
+  -->
+  <div id="d-day"></div>
+  <script>
+
+  </script>
+
+  <hr>
+  
+  <!--
+    문제4.
+    버튼을 클릭할때마다
+    lightOn.png/lightOff.png 이미지를 스위칭하고, 버튼의 텍스트도 ON/OFF를 스위칭하세요.
+  -->
+  <div>
+    <button id="switch" type="button" style="width: 60px; text-align: center;">ON</button>
+    <img id="light" src="../assets/images/lightOff.png" width="50px">
+  </div>
+  <script>
+
+  </script>
+
+  <hr>
+
+  <!-- 
+    문제5.
+    아이콘을 클릭할때마다
+    <input type="password" id="pw">와 <input type="text" id="pw">를 서로 스위칭하고, 아이콘도 스위칭하세요.
+    아이콘은 fontawesome의 무료 아이콘을 활용하세요.
+  -->
+  <div>
+    <input type="password" id="pw">
+    <span id="icon">
+      <i class="fa-regular fa-eye"></i>
+    </span>
+  </div>
+  <script>
+
+  </script>
+
+  <hr>
+
+  <!-- 
+    문제6.
+    전체 선택 및 개별 선택이 정상적으로 동작하도록 구현하세요.
+    구현이 끝나면 CSS를 이용하여 체크박스를 이미지로 바꾸세요. (해제 시 check1.png, 체크 시 check2.png 이미지를 체크박스 대신 표시하면 됩니다.)
+    [Hint] 체크박스를 체크하면 checked 프로퍼티 값이 true입니다. 이 값을 숫자로 바꾸면 1입니다. (true == 1)
+    체크박스를 해제하면 checked 프로퍼티 값이 false입니다. 이 값을 숫자로 바꾸면 0입니다. (false == 0)
+    개별 선택 구현 시 모든 체크박스들의 checked 프로퍼티 값을 더해서 모두 체크되었는지 확인하는 방법을 고려해 보세요.
+  -->
+  <style>
+
+  </style>
+  <div class="agree">
+    <div>
+      <input type="checkbox" id="chk_all">
+      <label for="chk_all">전체선택</label>
+    </div>
+    <div>
+      <input type="checkbox" id="chk_one" class="chk_each">
+      <label for="chk_one">필수 동의합니다.</label>
+    </div>
+    <div>
+      <input type="checkbox" id="chk_two" class="chk_each">
+      <label for="chk_two">필수 동의합니다.</label>
+    </div>
+    <div>
+      <input type="checkbox" id="chk_three" class="chk_each">
+      <label for="chk_three">필수 동의합니다.</label>
+    </div>
+  </div>
+  <script>
+    
+  </script>
+
+  <hr>
+
+  <!-- 
+    문제7.
+    끝말잇기를 구현하세요.
+    게임 시작 단어는 배열에 저장된 5개 단어 중 하나를 랜덤하게 사용합니다.
+    랜덤하게 제시된 단어의 마지막 글자로 시작하는 단어를 입력 상자에 입력하면서 끝말잇기를 진행하세요. (글자 수, 입력 시간 등의 제한은 없습니다.)
+    입력한 단어가 맞으면 "딩동댕" 경고 메시지를 출력하고, 입력한 단어를 이용해 계속 끝맛잇기를 진행합니다.
+    입력한 단어가 틀리면 "땡" 경고 메시지를 출력하고, 다시 입력해야 합니다.
+  -->
+  <div id="word">여기에 게임 시작 단어를 표시하세요.</div>
+  <div>
+    <input type="text" id="input">
+    <button type="button" id="btn" autofocus tabindex="0">단어제출</button>
+  </div>
+
+  <script>
+    const words = ["자바", "자바스크립트", "데이터베이스", "스프링", "도커",];
+  </script>
+
+</body>
+</html>
