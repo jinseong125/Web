@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- fontawesome 아이콘 사용을 위한 CDN 등록(cdnjs.com에서 fontawesome 검색해서 찾습니다.) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>JS_연습문제1</title>
 </head>
 <body>
@@ -23,6 +25,15 @@
     <tbody id="movies"></tbody>
   </table>
   <script>
+    function printData(data) {
+      let result = data.items.map(movie => `<tr>
+                                              <td>${movie.code}</td>
+                                              <td><a href="${movie.poster}"><img src="${movie.thumbnail}" width="50px"></a></td>
+                                              <td>${movie.title}</td>
+                                              <td>${movie.director}</td>
+                                            </tr>`).join('');
+      document.getElementById('movies').innerHTML = result;
+    }
     const movies = {
       genre: 'SF',
       items: [
@@ -49,15 +60,7 @@
         }
       ]
     }
-    
-    let str = '<tr>';
-      movies.items.forEach((movie) => {
-      str += `<tr><td>${movie.code}</td><td><a href=${movie.poster}><img src="${movie.thumbnail}" width="50px"></a></td><td>${movie.title}</td><td>${movie.director}</td></tr>`;
-
-      })
-          const movieTbody  = document.getElementById('movies');
-          movieTbody.innerHTML = str;
-
+    printData(movies);
   </script>
 
   <hr>
@@ -76,17 +79,18 @@
     <span id="second">00</span>초
   </div>
   <script>
-    function updateTime() {
-      const date = new Date();
-      document.getElementById('year').innerHTML = date.getFullYear();
-      document.getElementById('month').innerHTML = String(date.getMonth() + 1).padStart(2, '0');
-      document.getElementById('day').innerHTML = String(date.getDate()).padStart(2, '0');
-      document.getElementById('hour').innerHTML = String(date.getHours()).padStart(2, '0');
-      document.getElementById('minute').innerHTML = String(date.getMinutes()).padStart(2, '0');
-      document.getElementById('second').innerHTML = String(date.getSeconds()).padStart(2, '0');
+    function watch() {
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById('year').textContent = now.getFullYear();
+        document.getElementById('month').textContent = String(now.getMonth() + 1).padStart(2, '0');
+        document.getElementById('day').textContent = String(now.getDate()).padStart(2, '0');
+        document.getElementById('hour').textContent = String(now.getHours()).padStart(2, '0');
+        document.getElementById('minute').textContent = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('second').textContent = String(now.getSeconds()).padStart(2, '0');
+      }, 1000);
     }
-    setInterval(updateTime,1000);
-     updateTime();
+    watch();
   </script>
 
   <hr>
@@ -103,7 +107,33 @@
   -->
   <div id="d-day"></div>
   <script>
-
+    function dday() {
+      const now = new Date();
+      const dday = new Date(2025, 10, 13);  // 2025-11-13
+      const remainMillis = dday.getTime() - now.getTime();
+      const remainSeconds = parseInt(remainMillis / 1000);
+      const day = parseInt(Math.ceil(remainSeconds / 60 / 60 / 24));
+      let msg = 'D-DAY';
+      if(remainSeconds < 0) {
+        msg += '가 지났습니다.';
+      } else {
+        if(day >= 1) {
+          msg += '&nbsp;' + day + '일';
+        } else {
+          const hour = parseInt(remainSeconds / 60 / 60) % 24;
+          const minute = parseInt(remainSeconds / 60) % 60;
+          const second = remainSeconds % 60;
+          msg += '&nbsp;'
+              + String(hour).padStart(2,'0')
+              + ':'
+              + String(minute).padStart(2,'0')
+              + ':'
+              + String(second).padStart(2,'0');
+        }
+      }
+      document.getElementById('d-day').innerHTML = msg;
+    }
+    setInterval(dday, 1000);
   </script>
 
   <hr>
@@ -118,7 +148,19 @@
     <img id="light" src="../assets/images/lightOff.png" width="50px">
   </div>
   <script>
-
+    function switchLight() {
+      document.getElementById('switch').onclick = function(e) {
+        const img = document.getElementById('light');
+        if(e.target.textContent === 'ON') {
+          img.src = '../assets/images/lightOn.png';
+          e.target.textContent = 'OFF';
+        } else {
+          img.src = '../assets/images/lightOff.png';
+          e.target.textContent = 'ON';
+        }
+      }
+    }
+    switchLight();
   </script>
 
   <hr>
@@ -136,7 +178,20 @@
     </span>
   </div>
   <script>
-
+    function switchIcon() {
+      document.getElementById('icon').onclick = function() {
+        const inp = document.getElementById('pw');
+        const icon = document.getElementById('icon');
+        if(inp.type === 'password') {
+          inp.type = 'text';
+          icon.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+        } else {
+          inp.type = 'password';
+          icon.innerHTML = '<i class="fa-regular fa-eye"></i>';
+        }
+      }
+    }
+    switchIcon();
   </script>
 
   <hr>
@@ -150,7 +205,20 @@
     개별 선택 구현 시 모든 체크박스들의 checked 프로퍼티 값을 더해서 모두 체크되었는지 확인하는 방법을 고려해 보세요.
   -->
   <style>
-
+    .agree input[type=checkbox] {
+      display: none;
+    }
+    .agree label {
+      padding-left: 20px;
+      background-image: url('../assets/images/check1.png');
+      background-size: 16px 16px;
+      background-repeat: no-repeat;
+      background-position: 0 3px;
+      cursor: pointer;
+    }
+    .agree input[type=checkbox]:checked + label {
+      background-image: url('../assets/images/check2.png');
+    }
   </style>
   <div class="agree">
     <div>
@@ -171,7 +239,22 @@
     </div>
   </div>
   <script>
-    
+    const chkAll = document.getElementById('chk_all');
+    const chkEach = document.getElementsByClassName('chk_each');
+    chkAll.onclick = function(e) {
+      for(let i = 0; i < chkEach.length; i++) {
+        chkEach[i].checked = e.target.checked;
+      }
+    }
+    for(let i = 0; i < chkEach.length; i++) {
+      chkEach[i].onclick = function(e) {
+        let total = 0;
+        for(let j = 0; j < chkEach.length; j++) {
+          total += chkEach[j].checked;
+        }
+        chkAll.checked = (total === chkEach.length);
+      }
+    }
   </script>
 
   <hr>
@@ -191,7 +274,24 @@
   </div>
 
   <script>
+
     const words = ["자바", "자바스크립트", "데이터베이스", "스프링", "도커",];
+    const word = document.getElementById('word');
+    word.textContent = words[Math.floor(Math.random() * words.length)];
+
+    const input = document.getElementById('input');
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', event => {
+      if(word.textContent[word.textContent.length - 1] === input.value[0]) {
+        alert('딩동댕');
+        word.textContent = input.value;
+      } else {
+        alert('땡');
+      }
+      input.value = '';
+      input.focus();
+    });
+
   </script>
 
 </body>
