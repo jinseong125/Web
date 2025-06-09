@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오늘의팝업</title>
+  <style>
+    .popup-image {
+      width: 320px;
+      height: 450px;
+      background-image: url("../assets/images/domino.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+  <div class="popup-image"></div>
+  <div>
+      <input type="checkbox" id="chk">
+      <label for="chk">오늘그만열기</label>
+      <button type="button" id="btn">닫기</button>
+    </div>
+  </div>
+
+  <script>
+    /*
+      쿠키(Cookie)란?
+      
+      인터넷 쿠키란 웹 서버가 사용자의 웹 브라우저에 전송하는 작은 데이터 파일(텍스트 정보)을 의미합니다.
+      사용자가 웹 사이트에 방문할 때 쿠키가 생성되어 사용자의 컴퓨터(브라우저)에 저장합니다.
+      사용자가 같은 웹 사이트를 다시 방문할 때 저장되어 있던 쿠키를 웹 서버에 전송함으로써, 
+      사용자의 상태나 환경 설정, 사용자 정보(로그인)등을 확인할 수 있도록 합니다.
+    */
+
+    const chk = document.getElementById('chk');
+    const btn = document.getElementById('btn');
+    
+    btn.addEventListener('click',function() {
+      let now = new Date();
+      //now.setSeconds(now.getSeconds() + 30);  만료시간 30초
+      now.setDate(now.getDate() + 1);        // 만료시간 1분
+      if(chk.checked) {
+        document.cookie = `popup=신메뉴출시기념이벤트;expires=${now.toUTCString()}`;
+      }
+      window.close();
+    }) 
+  </script>
+</body>
+</html>
