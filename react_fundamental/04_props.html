@@ -243,5 +243,63 @@ ReactDOM.createRoot(document.getElementById('root3')).render([
 
 </script>
 
+
+<hr>
+
+<div id="root4"></div>
+<script type="text/babel">
+
+  // 연습) 아래와 같이 컴포넌트를 호출할 때 전달한 color를 배경색으로 가지도록 컴포넌트를 구현하세요.
+    const ColorBox = ({color}) => {
+      return (
+        
+         <div style={{
+        backgroundColor: color,
+        width: '100px', 
+        height: '100px',
+      }}
+    />
+     )
+    }
+
+  // 연습) 아래와 같이 컴포넌트를 호출할 때 전달한 배열의 요소를 모두 출력하도록 컴포넌트를 구현하세요.
+  //      <Items data={["봄", "여름", "가을", "겨울"]} />
+  const Items = ({data}) => {
+    return(
+      <>
+       { data.map(elem => <h1>{elem}</h1>) }
+      </>
+    )
+  }
+  
+  // 연습) 아래와 같이 컴포넌트를 호출할 때 전달한 객체의 속성값을 모두 출력하도록 컴포넌트를 구현하세요.
+  //      <Person friend={{name: "jack", age: 20}} />
+  const Person = ({friend}) => {
+    const {name,age} = friend;
+    return(
+      <>
+      <h1>{name}</h1>
+      <h1>{age}</h1>
+      </>
+    )
+  }
+
+  // 연습) 아래와 같이 컴포넌트를 호출할 때 내부 요소로 전달한 값을 정사각형의 너비로 계산하여 정사각형의 넓이를 출력하는 컴포넌트를 구현하세요.
+  //      <Square>5</Square>
+  const Square =({children}) => {
+    return(
+      <h1>정사각형의 넓이 {Math.pow(children, 2)}</h1>
+    )
+  }
+  ReactDOM.createRoot(document.getElementById('root4')).render([
+    <ColorBox color = {"red"} />,
+     <Items data={["봄", "여름", "가을", "겨울"]} />,
+    <Person friend={{name: "jack", age: 20}} />,
+    <Square>5</Square>,
+  ])
+  
+</script>
+
+
 </body>
 </html>
