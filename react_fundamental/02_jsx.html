@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>JSX</title>
+</head>
+<body>
+
+<!--
+1. babel.min.js
+  1) https://babeljs.io/setup#installation
+  2) Babel(바벨)의 브라우저용 독립 실행 파일을 불러오는 역할을 합니다.
+  3) Babel은 최신 문법(화살표 함수, 클래스, 템플릿 리터럴 등)이나 React의 JSX 문법, TypeScript 등을 브라우저에서 바로 사용할 수 있도록, 실시간으로 ES5 이하의 자바스크립트 코드로 변환해줍니다.
+  4) @babel/standalone은 Node.js나 빌드 도구 없이, 브라우저 환경에서 <script type="text/babel">로 작성된 코드를 읽어 즉석에서 변환·실행할 수 있게 해줍니다. 개발·학습 환경이나 간단한 데모에서 주로 사용됩니다.
+  5) Babel을 통해 변환된 코드는 다양한 브라우저(특히 구형 브라우저)에서도 동일하게 동작할 수 있습니다. 즉, 브라우저 호환성을 높여줍니다.
+    
+    
+2. JSX
+  1) JSX(JavaScript XML)는 React에서 UI를 정의하기 위해 사용하는 자바스크립트의 확장 문법입니다. 
+  2) HTML과 매우 유사한 구조를 자바스크립트 코드 안에서 직접 사용할 수 있게 해주며, 가독성과 직관성을 높여줍니다.
+  3) JSX는 브라우저에서 직접 실행되지 않고, Babel 등의 트랜스파일러에 의해 React의 createElement 함수 호출로 변환되어 실행됩니다.
+  4) JSX 문법
+    (1) HTML과 유사한 구조
+      ① JSX는 HTML과 거의 비슷한 문법을 사용하지만, 자바스크립트 코드 안에서 작성됩니다.
+      ② 예시
+        const element = <h1>Hello, World!</h1>;
+    (2) 단일 루트 요소 필요
+      ① JSX에서 여러 태그를 반환할 때 반드시 하나의 부모(루트) 요소로 감싸야 합니다.   
+      ② 최상위 Node로 사용할 태그가 없는 경우에는 React가 지원하는 Fragment를 사용할 수 있습니다. (<React.Fragment></React.Fragment> 또는 <></>)
+      ③ 예시
+        return (
+          <div>
+            <h1>Hello, World!</h1>
+            <p>Nice to meet you!</p>
+          </div>
+        );
+    (3) 자바스크립트 표현식 삽입
+      ① JSX 내부에서 중괄호 {}를 사용해 자바스크립트 변수, 연산, 함수 호출, 주석 등을 삽입할 수 있습니다.
+      ② 예시
+        const numA = 1, numB = 2;
+        <h1>{numA} + {numB} = {numA + numB}</h1>    
+    (4) 속성 작성
+      ① JSX의 속성은 HTML과 비슷하지만, 자바스크립트 예약어와 충돌하지 않도록 일부 속성은 변경된 이름을 사용합니다.
+      ② 예시
+        - class   -> className
+        - for     -> htmlFor
+        - onclick -> onClick (이벤트 속성: 기본 소문자 조합에서 Camel Case 방식으로 변경)
+    (5) 닫는 태그 필수
+      ① 모든 태그는 반드시 닫아야 합니다. 셀프 클로징 태그도 /를 붙여 닫아야 합니다.
+      ② 예시
+        - <br />, <img />, <input /> 등
+    (6) 조건부 렌더링
+      ① 삼항 연산자, 논리 연산자(&&) 등을 사용해 조건에 따라 다른 내용을 렌더링할 수 있습니다.
+      ② 예시
+        { isLoggedIn ? <LogoutButton /> : <LoginButton /> }
+    (7) 스타일 적용
+      ① 인라인 스타일은 객체 형태로 style 속성에 전달합니다.
+      ② 기존 dash-case(kebab-case) 형식의 CSS 속성명을 camelCase 방식으로 변경합니다.
+      ③ 예시
+        <div style={{ color: 'red', backgroundColor: 'yellow' }}>Hello</div>
+    (8) 객체 직접 출력 불가
+      ① JSX에서는 객체 자체를 직접 렌더링할 수 없어 문자열로 변환해야 합니다.
+      ② 객체의 속성에 접근하는 것은 가능합니다.
+      ③ 예시
+        - 객체를 문자열로 변환
+          { JSON.stringify(obj) }
+        - 객체의 속성에 접근
+          { obj.a }
+  -->
+
+<div id="root1"></div>
+<script type="text/babel">
+
+  //----- JSX를 이용한 Element 만들기
+  const h1Element = <h1>Hello World</h1>;
+
+  //----- rendering
+  ReactDOM.createRoot(document.getElementById('root1')).render(h1Element);
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script type="text/babel">
+
+ //----- 여러 태그를 단일 태그로 생성하기
+ const divElement = <React.Fragment>
+   <div>Hello World</div>
+   <div>Nice to meet you</div>
+  </React.Fragment>
+
+  // <React.Fragment>의 축약버전
+    const pElement = <>
+    <p>Hello World</p>
+    <p>Nice to meet you</p>
+    </>
+
+  // rendering
+  ReactDOM.createRoot(document.getElementById('root2')).render([divElement,pElement]);
+
+</script>
+
+<hr>
+
+<div id="root3"></div>
+<script type="text/babel">
+
+  //----- 중괄호 {}를 이용한 표현식/주석 작성
+  
+  const radius = 3.5;
+  
+  const circleElement = <>
+  <h1
+     id="radius"
+     className="radius"  // 태그 내부의 주석은 중괄호를 사용하지 않습니다. (주로 시작 태그에 주석을 답니다.)
+     >반지름: {radius}</h1>
+    <h1>원둘레: {2 * Math.PI * radius}</h1>  {/* 태그 외부의 주석은 중괄호를 사용해야 합니다. */}    
+    <h1>원넓이: {Math.PI * Math.pow(radius, 2)}</h1>
+    {
+      // 슬래시 2개 주석(single line comment)은 중괄호와 다른 줄에 작성해야 합니다.
+    }  
+  </>
+
+  //rendering
+  ReactDOM.createRoot(document.getElementById('root3')).render(circleElement);
+
+</script>
+
+<hr>
+
+<div id="root4"></div>
+<script type="text/babel">
+
+  //----- 셀프 클로징 태그는 반드시 슬래시(/)를 추가해야 합니다.
+  const inputElement = <input type="text" />
+
+  // rendering
+  ReactDOM.createRoot(document.getElementById('root4')).render(inputElement);
+
+</script>
+
+<hr>
+
+<div id="root5"></div>
+<script type="text/babel">
+
+ //----- 삼향 연산자/논리 연산자를 이용한 조건부 렌더링
+
+ const condition = true;
+
+ const spanElement = <>
+ { condition ? <span>True</span> : <span>False</span> }
+ <br/>
+ { condition && <span>Text1</span> }  {/* True */}
+ <br/>
+ { condition || <span>Text2</span> }  {/* False */}
+ </>;
+
+ // rendering
+  ReactDOM.createRoot(document.getElementById('root5')).render(spanElement);
+
+</script>
+
+<hr>
+
+<div id="root6"></div>
+<script type="text/babel">
+
+//----- 객체 리터럴 형식으로 스타일을 전달합니다.
+
+const boxStyle = {
+  width: '100px',
+  height: '100px',
+  border: '1px solid black',
+  backgroundColor:'red',
+  textAlign:'center',
+  fontSize: '32px',
+  lineHeight: '100px',
+  color: 'white',
+}
+
+const boxElement = <div style={boxStyle}>Hi</div>
+
+// rendering
+ReactDOM.createRoot(document.getElementById('root6')).render(boxElement);
+
+</script>
+
+<hr>
+
+<div id="root7"></div>
+<script type="text/babel">
+
+ // 객체
+ const book = {
+  title:'어린왕자',
+  author:'생택쥐베리',
+ }
+
+ // Element
+ const ulElement = <ul>
+  <li>{ JSON.stringify(book) }</li>
+  <li>{ book.title }</li>
+  <li>{ book.author }</li>
+  </ul>
+
+  // rendering
+  ReactDOM.createRoot(document.getElementById('root7')).render(ulElement);
+
+</script>
+
+<hr>
+
+<div id="root8"></div>
+<script type="text/babel">
+
+  // 연습) 아래 변수에 저장된 값을 <div> 태그로 화면에 표시하세요.
+  const name = 'Tom';
+  const a = <div>{name}</div>;
+  //ReactDOM.createRoot(document.getElementById('root8')).render(divElementName);
+
+  // 연습) 아래 객체에 저장된 값 중 model 속성만 <div> 태그로 화면에 표시하세요.
+  const car = {
+    model: 'sorento',
+    price: 4000,
+  }
+  const b = <div>
+    {
+      car.model
+    }
+    </div>;
+    //ReactDOM.createRoot(document.getElementById('root8')).render(carElement);
+
+  // 연습) 아래 score 값이 60 이상이면 "합격", 아니면 "불합격"을 <div> 태그로 화면에 표시하세요.
+  const score = 80;
+  const c = <div>{score >= 60 ? '합격' : '불합격'}</div>;
+    
+  
+
+  // 연습) 아래 변수에 저장된 값이 없으면 "값없음", 값이 있으면 저장된 값을 <div> 태그로 화면에 표시하세요.
+  let value;
+  const d = <div>{value || '값없음'}</div>;
+  
+
+  // 연습) 아래 color 값이 "r"이면 "red", "g"이면 "green", "b"이면 "blue" 배경색을 <div> 태그에 적용해 화면에 표시하세요.
+  const color = "r";
+  const style = {
+    width: '100px',
+    height:'100px',
+    backgroundColor: color == 'r' ? 'red' : color == 'g' ? 'green' : color == 'b' ? 'blue' : 'white',
+    }
+    const e = <div style={style}></div>;
+    ReactDOM.createRoot(document.getElementById('root8')).render([a,b,c,d,e]);
+
+
+</script>
+
+</body>
+</html>

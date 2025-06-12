@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>useMemo</title>
+</head>
+<body>
+
+<!--
+1. React.useMemo()
+  1) 계산 비용이 높은 연산의 결과를 메모이제이션(memoization)하여, 컴포넌트가 리렌더링될 때마다 불필요하게 같은 연산을 반복하지 않도록 성능을 최적화하는 훅(Hooks) 입니다.
+  2) 계산이 오래 걸리는 경우 해당 계산 결과를 캐싱(caching)해 두면 리렌더링할 때 재계산을 생략할 수 있습니다.
+  3) 반환할 계산 결과를 캐싱해 두는 것을 Memoization(메모이제이션)이라고 합니다.
+  4) 주요 특징
+    (1) 메모이제이션
+      ▶︎ 의존성 배열에 명시된 값이 변경되지 않으면, 이전에 계산된 값을 재사용합니다.
+    (2) 렌더링 최적화
+      ▶︎ 불필요한 연산을 줄여 컴포넌트의 렌더링 성능을 향상시킵니다.
+    (3) 참조 동일성 유지
+      ▶︎ 객체나 배열과 같은 참조형 데이터를 useMemo로 감싸면, 리렌더링 시에도 동일한 참조를 유지할 수 있어 불필요한 자식 컴포넌트의 렌더링을 방지할 수 있습니다.
+
+
+2. React.useMemo() 구문
+  1) 형식
+    const memoizedValue = React.useMemo(calculateValue, [dependencies])
+  2) 설명
+    (1) memoizedValue
+      - 최초 렌더링 시 calculateValue 함수가 반환한 값입니다.
+      - 리렌더링 시 의존성 배열(dependencies)에 명시된 값이 변경되지 않으면 이전에 저장된 memoizedValue를 그대로 사용합니다.
+    (2) calculateValue
+      - 계산 비용이 높은 연산을 수행하는 함수입니다.
+      - 인자는 없고, 연산 결과를 반환합니다. 모든 타입의 값을 반환할 수 있습니다.
+    (3) dependencies
+      - 의존성 배열입니다. 선택 인자이지만 사실상 필수 인자입니다.
+      - 의존성 배열을 전달하지 않으면, useMemo는 모든 렌더링마다 calculateValue 함수를 실행하게 되어 메모이제이션의 효과를 얻을 수 없습니다. (useMemo를 사용하지 않은 것과 같습니다.)
+      - 의존성 배열을 빈 배열([])로 전달하면 컴포넌트가 처음 마운트될 때 한 번만 실행되고, 이후에는 값이 변경되지 않습니다. 마지막 렌더링에서 캐싱한 값을 반환합니다.
+      - 의존성 배열에 특정 값을 넣으면 그 값이 변경될 때만 calculateValue 함수가 실행되고 반환된 값을 다시 캐싱합니다.
+
+
+3. object type problem
+  useEffect()의 의존성 배열에 컴포넌트에서 선언한 객체를 전달하는 경우
+  해당 객체는 useMemo()를 이용해 캐싱해야 합니다.
+  그렇지 않으면 객체가 가진 값의 변경이 없더라도 항상 useEffect()이 동작하는 문제가 발생합니다.
+-->
+
+</body>
+</html>

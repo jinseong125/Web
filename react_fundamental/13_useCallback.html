@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>useCallback</title>
+</head>
+<body>
+
+<!--
+1. React.useCallback()
+  1) 리렌더링 시 함수 정의는 항상 재할당됩니다.
+  2) 함수형 컴포넌트에서 함수 자체를 메모이제이션(memoization)하여 불필요한 함수 재생성을 방지하고, 성능을 최적화하는 훅(Hooks) 입니다.
+  3) 컴포넌트 내부에서 정의한 함수는 렌더링마다 새로 생성되기 때문에 useCallback의 주요 대상이지만, 컴포넌트 외부에서 정의한 함수는 원래 한 번만 생성되므로 useCallback이 필요 없습니다.
+  4) 주요 특징
+    (1) 함수 메모이제이션
+      ▶︎ 의존성 배열에 명시된 값이 변경될 때만 새로운 함수를 생성하고, 그렇지 않으면 이전에 생성한 동일한 함수 인스턴스를 재사용합니다.
+    (2) 불필요한 렌더링 방지
+      ▶︎ 함수가 자식 컴포넌트의 props로 전달될 때, 함수의 참조가 변하지 않으므로 자식 컴포넌트의 불필요한 리렌더링을 막을 수 있습니다.
+
+
+2. React.useCallback() 구문
+  1) 형식
+    const memoizedCallback = React.useCallback(callback, [dependencies])
+  2) 설명
+    (1) memoizedCallback
+      - 최초 렌더링 시 useCallback에 전달한 callback을 그대로 반환 받습니다.
+      - 리렌더링 시 의존성 배열(dependencies)에 명시한 값에 변경이 없으면 이전에 캐싱한 함수를 그대로 반환받고, 변경이 있으면 callback 함수를 다시 호출해 반환 받습니다.
+    (2) callback
+      - 메모이제이션(memoization)할 함수입니다.
+      - 해당 함수는 어떤 인자나 반환 값을 가질 수 있습니다.
+    (3) dependencies
+      - 의존성 배열입니다. 선택 인자이지만 사실상 필수 인자입니다.
+      - 의존성 배열을 전달하지 않으면, useCallback은 모든 렌더링마다 callback 함수를 재할당하므로 메모이제이션의 효과를 얻을 수 없습니다. (useCallback을 사용하지 않은 것과 같습니다.)
+      - 의존성 배열을 빈 배열([])로 전달하면 컴포넌트가 처음 마운트될 때 한 번만 callback 함수가 생성되고 이후에는 재생성되지 않습니다.
+      - 의존성 배열에 특정 값을 넣으면 그 값이 변경될 때만 callback 함수가 생성됩니다.
+-->
+
+</body>
+</html>

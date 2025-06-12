@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <title>Element</title>
+</head>
+<body>
+
+<!--
+1. react.development.js
+  1) https://ko.legacy.reactjs.org/docs/cdn-links.html
+  2) React의 코어 라이브러리를 불러옵니다.
+  3) 컴포넌트(component), 상태(state), 생명주기(lifecycle) 등 React의 핵심 기능을 제공합니다.
+  4) UI를 선언적으로 구성할 수 있게 해주는 모든 React의 내부 로직이 이 파일에 포함되어 있습니다.
+  5) 개발용(development) 버전이므로, 개발 중에는 더 많은 경고와 오류 메시지를 제공하여 디버깅에 도움이 됩니다.
+
+2. react-dom.development.js
+  1) https://ko.legacy.reactjs.org/docs/cdn-links.html
+  2) React에서 만든 UI를 실제 브라우저의 DOM에 렌더링할 수 있게 해주는 라이브러리입니다.
+  3) React의 가상 DOM(Virtual DOM)과 실제 DOM 간의 연결고리 역할을 하며, React Element를 브라우저 화면에 그려줍니다.
+  4) React 18부터는 ReactDOM.createRoot와 같은 새로운 API를 통해 더 효율적이고 동시적인 렌더링(concurrent rendering)을 지원합니다.
+  5) 역시 개발용 버전으로 개발 중에만 사용하며, 실제 배포시에는 production 버전을 사용하는 것이 권장됩니다.
+
+3. Element
+  1) Element는 리액트 애플리케이션을 구성하는 가장 작은 단위입니다.
+  2) 화면에 표시되는 내용을 기술하는 자바스크립트 객체로, 실제 DOM 요소의 가상 표현입니다.
+  3) React Element는 불변(immutable)하며, 한 번 생성되면 변경되지 않습니다. 화면을 업데이트할 때는 새로운 Element를 생성해 교체합니다.
+  4) 실제로 화면에 렌더링될 때, React Element는 DOM Element로 변환되어 브라우저에 표시됩니다.
+  5) React.createElement() 또는 JSX를 이용해서 작성합니다.
+    (React.createElement()는 직관적이지 않아 사용하기 불편하기 때문에 JSX라는 새로운 문법이 나중에 제시되었습니다.)
+
+4. Rendering
+  1) React Element 같은 구성 요소들을 화면에 그리는 작업입니다.
+  2) Root DOM Node : ReactDOM 에서 관리하는 DOM Node 입니다. React Element 들이 그려질(Rendering) 하나의 DOM Node 를 의미합니다.
+  3) ReactDOM 은 Element 와 그 자식 Element 를 이전의 Element 와 비교하고 변경된 부분만 업데이트 합니다.
+-->
+
+<div id="root1"></div>
+<script>
+
+  //----- Element(태그) 만들기 (React.createElement() 메소드 이용)
+  const h1Element = React.createElement(
+    'h1',  //-------------------------- <h1>
+     {
+       id: 'title',  //---------------- id="title"
+      className: 'title',  //---------- class="title"
+     },
+       'Hello World'  //--------------- <h1 id="title" class="title">"Hello World"</h1>
+     );
+
+     //----- rendering (Element를 화면에 표시하기)
+     const  root1 = document.getElementById('root1');
+     ReactDOM.createRoot(root1).render(h1Element);
+
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script>
+  
+  const root2 =ReactDOM.createRoot(document.getElementById('root2'));
+ setInterval(() => {
+  const textElement = React.createElement(
+    'div',
+    { className: 'text'},
+    '간단한 시계'
+  )
+  const timeElement = React.createElement(
+    'div',
+    {className: 'time'},
+    new Date().toLocaleTimeString()
+  )
+  root2.render([textElement, timeElement]); //여러 개의 Element는 배열로 전달해서 렌더링합니다
+ }, 1000)
+
+</script>
+
+</body>
+</html>

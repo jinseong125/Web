@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Component</title>
+</head>
+<body>
+  
+<!--
+1. 컴포넌트(Component)
+  1) 컴포넌트는 특정 기능이나 UI를 담당하는 독립적인 코드 블록입니다.s
+  2) 여러 개의 Element를 조합하여 더 큰 UI 단위를 만들 수 있으며, 재사용이 가능합니다.
+  3) 컴포넌트는 props와 state를 통해 동적인 데이터를 다루고, 상태(state)가 변경될 때마다 자동으로 다시 렌더링됩니다.
+  4) 컴포넌트의 이름은 PascalCase 방식을 따릅니다.
+  5) 클래스형 컴포넌트의 render 함수(혹은 함수형 컴포넌트의 반환값)는 React Element를 반환합니다.
+  6) JSX와 React 컴포넌트의 관계
+    (1) React 컴포넌트는 JSX를 반환하며, JSX는 컴포넌트 내부에서 UI를 선언적으로 정의하는 역할을 합니다.
+    (2) JSX를 사용하지 않을 경우, React.createElement 함수를 직접 호출해야 하므로 코드가 복잡해집니다.
+  7) 함수형 컴포넌트와 클래스형 컴포넌트 두 가지 방식으로 정의할 수 있습니다.
+  8) 컴포넌트 합성
+    (1) 컴포넌트는 다른 컴포넌트를 이용해 구성할 수 있습니다.
+    (2) 가능한 컴포넌트를 작게 만들어서 사용하는 것이 좋습니다.
+    (3) 리액트에서는 버튼, 폼 등 대부분의 구성 요소를 컴포넌트로 만들어서 사용합니다.
+
+
+2. 클래스형 컴포넌트
+  1) JavaScript 클래스를 이용합니다.
+  2) state와 life cycle API를 사용할 수 있습니다.
+  3) 상대적으로 복잡합니다.
+  4) React.Component를 상속 받아서 작성합니다.
+  5) render() { return 엘리먼트 } 형식으로 화면에 표시할 엘리먼트를 반환합니다.
+  6) 예시 : class Welcome extends React.Component { ... }
+  
+  
+3. 함수형 컴포넌트
+  1) JavaScript 함수를 이용합니다.
+  2) 함수형 컴포넌트는 최초엔 state와 life cycle API를 사용할 수 없었습니다.
+  3) React v16.8 이후로 state와 life cycle API를 훅(hooks)을 통해 사용할 수 있습니다.
+  4) 상대적으로 간결합니다.
+  5) 리액트 개발자 진영에서는 함수형 컴포넌트 사용을 권장합니다.
+  6) 예시 : function Welcome(props) { ... }
+-->
+
+<div id="root1"></div>
+<script type="text/babel">
+
+  //-----클래스형 컴포넌트 만들기: 컴포넌트 기능을 활용하기 위해서 React.component를 상속받도록 만듭니다.
+ class ClassComp extends React.Component {
+
+  render() {
+    return <h1>Hello Class Component</h1>
+  }
+
+  }
+
+  //----- rendering: 컴포넌트는 태그 형식으로 렌더링합니다.
+  ReactDOM.createRoot(document.getElementById('root1')).render(<ClassComp/>);
+
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script type="text/babel">
+
+//----- 함수형 컴포넌트 만들기: 함수 선언식, 함수 표현식 모두 사용할 수 있습니다.
+const FunctionComp = () => {
+
+  return (
+    <>
+    <div>Hello Function Component</div>
+    <div>Nice to meet you</div>
+    </>
+  )
+
+}
+
+// rendering
+ReactDOM.createRoot(document.getElementById('root2')).render(<FunctionComp/>);
+
+</script>
+
+<hr>
+
+<div id="root3"></div>
+<script type="text/babel">
+
+//----- 내부 컴포넌트 만들기
+const InnerComp = () => {
+  return (
+    <h1>Inner Component</h1>
+  )
+} 
+
+//----- 외부 컴포넌트 만들기
+const OuterComp = () => {
+  return (
+    <>
+    <InnerComp/>
+    <InnerComp/>
+    <InnerComp/>
+    </>
+    )
+}
+
+// rendering
+ReactDOM.createRoot(document.getElementById('root3')).render(<OuterComp/>);
+
+</script>
+
+</body>
+</html>
