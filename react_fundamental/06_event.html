@@ -26,10 +26,11 @@
     (2) 리액트에서는 camelCase 방식(onClick, onChange)으로 작성합니다.
   3) 이벤트 핸들러 전달 방식
     (1) 이벤트 핸들러는 이벤트 발생 시 실행할 코드를 작성해 놓은 함수입니다.
-    (2) HTML에서는 함수를 문자열로 전달하지만, 리액트에서는 함수를 중괄호({})로 전달합니다.
+    (2) HTML에서는 함수를 문자열로 전달하지만, 리액트에서는 함수를 중괄호({})로 전달합니다.*
     (3) 함수명 뒤에 괄호를 붙이지 않고 함수 참조만 전달해야 합니다. 괄호를 붙이면 즉시 실행됩니다.
     (4) 예시
-      <button onClick={onClickHandler}>클릭</button>
+     HTML---<button onClick="onClickHandler()">클릭</button>
+     React--<button onClick={onClickHandler}>클릭</button>
   4) 이벤트 객체
     (1) 이벤트가 발생하면 이벤트 핸들러 함수의 첫 번째 인자로 이벤트 객체가 전달됩니다.
     (2) 이벤트 객체는 이벤트가 발생한 요소, 입력 값 등 다양한 정보를 담고 있습니다.
@@ -46,7 +47,7 @@
     (1) 이벤트 핸들러도 props로 자식 컴포넌트에 전달할 수 있습니다.
 
 
-3. 이벤트 처리 방법
+3. 이벤트 처리 방법 - 리액트에서는 인라인이벤트 모델 사용용
   1) 이벤트 핸들러
     function App() {
       function onClickHandler(e) {
@@ -60,6 +61,112 @@
   2) 익명 함수 (간단한 작업)
     <button onClick={() => alert('클릭!')}>클릭</button>
 -->
+
+<div id="root1"></div>
+<script type="text/babel">
+
+//----- 콜백을 이용한 이벤트 핸들러 직접 작성
+  const EventComp1 = () => {
+    return (
+      <button onClick={() => alert('EventComp1')}>버튼</button>
+    )
+  }
+
+ReactDOM.createRoot(document.getElementById('root1')).render(<EventComp1 />)
+
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script type="text/babel">
+
+//----- 이벤트 핸들러 별도 작성 후 이벤트 속성으로로 전달
+  const EventComp2 = () => {
+
+    const onClickHandler = (e) => {   //e - 이벤트 객체
+      alert('EventComp2');
+    }
+
+    return (
+      <button onClick={onClickHandler}>버튼2</button>
+    )
+
+  }
+
+ReactDOM.createRoot(document.getElementById('root2')).render(<EventComp2 />)
+
+</script>
+
+<hr>
+
+<div id="root3"></div>
+<script type="text/babel">
+
+//----- 이벤트 핸들러를 컴포넌트로 전달
+
+// 컴포넌트
+  const EventComp3 = ({onClickHandler}) => {
+
+  return (
+    <button onClick={onClickHandler}>버튼3</button>
+  )
+
+  }
+
+  // 이벤트 핸들러
+  const onClickHandler = (e) => {   
+    alert('EventComp3');
+}
+
+ReactDOM.createRoot(document.getElementById('root3')).render(<EventComp3 onClickHandler={onClickHandler} />)
+
+</script>
+
+<hr>
+
+<div id="root4"></div>
+<script type="text/babel">
+
+// 연습) 입력상자와 버튼으로 구성된 폼 화면을 만드세요.
+//       입력상자가 비어 있으면 서브밋을 하지 못하도록 서브밋 이벤트를 작성하세요.
+
+const InputField = ({type, id}) => {
+  return (
+    <input type={type} id={id} />
+  )
+}
+
+const Button = ({type, onClick, children}) => {
+  return (
+    <button type={type} onClick={onClick}>{children}</button>
+  )
+} 
+  
+  const FormComp = () => {
+
+  const id='search';
+  
+  const onClick = () => {
+    if(document.getElementById(id).value === '') {
+      alert('서브밋이 취소되었습니다.');
+    }
+  }
+
+  return(
+    <form onSubmit={e => {
+      e.preventDefault();
+    }}>
+      <InputField type={'text'} id={id} />
+      <Button type={'submit'} onClick={onClick}>제출</Button>
+      </form>
+  ) 
+  
+}
+
+  ReactDOM.createRoot(document.getElementById('root4')).render(<FormComp />)
+
+</script> 
 
 </body>
 </html>

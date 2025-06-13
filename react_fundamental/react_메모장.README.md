@@ -128,6 +128,7 @@ ReactDOM.createRoot(document.getElementById('root3')).render([
 ])
 
 </script>
+
 props drilling은 하위 컴포넌트에 값을 연속해서 전달하는 방식입니다.
                  좋은 방식이 아니므로 권장하지 않음.
 

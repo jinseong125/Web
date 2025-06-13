@@ -66,5 +66,95 @@
   }
 -->
 
+<div id="root1"></div>
+<script type="text/babel">
+
+  class Spin1 extends React.Component {
+
+//----- state 선언 및 초기화
+    state = {
+      number: 0,
+    }
+
+//----- 증가용 이벤트 핸들러
+increaseHandler = () => {
+  this.setState({
+    number: this.state.number + 1
+  })
+}
+
+//----- 감소용 이벤트 핸들러
+decreaseHandler = () => {
+ this.setState({
+  number: this.state.number - 1
+ })
+}
+
+    //----- render
+    render() { 
+      const {number} = this.state;  //state는 객체이므로 구조 분해 할당이 가능합니다.
+      return (
+        <>
+        <h1 style={{ color:number === 0 ? 'black' : number > 0 ? 'red' : 'blue'}}>{number}</h1> 
+        <button onClick={this.increaseHandler}>▲</button>
+        <button onClick={this.decreaseHandler}>▼</button>
+        </>
+      )
+    }
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root1')).render(<Spin1 />);
+
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script type="text/babel">
+
+ class Spin2 extends React.Component {
+
+//----- 생성자를 이용한 state 선언 및 초기화
+constructor(props) {
+  super(props);
+  this.state = {
+    number: 0
+  }
+}
+
+//----- 증가용 이벤트 핸들러
+increaseHandler = () => {
+  this.setState((prevState) => {
+    return {
+      number: prevState.number + 1
+    }
+  })
+}
+
+//----- 감소용 이벤트 핸들러
+decreaseHandler = () => {
+  this.setState(prevState => {
+    return {
+      number: prevState.number - 1
+    }
+  })
+}
+//----- render
+    render() {
+      return (
+        <>
+        <h1>{this.state.number}</h1> 
+        <button onClick={this.increaseHandler}>↑</button>
+        <button onClick={this.decreaseHandler}>↓</button>
+        </>
+      )
+    }
+}
+ReactDOM.createRoot(document.getElementById('root2')).render(<Spin2 />);
+
+</script>
+
+
 </body>
 </html>
