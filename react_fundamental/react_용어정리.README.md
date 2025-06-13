@@ -7,8 +7,10 @@ JSX를 사용하는이유
 * 표현력: JavaScript 변수나 함수 호출 결과를 {}안에 바로 삽입가능.
 * 안전성: 텍스트 노드나 속성 값에 자동으로 이스케이프 처리가 되어 XSS
           공격 위험이 줄어든다.
+```
 rendering
 ReactDOM.createRoot(document.getElementById('...')).render(...);          
+
 
 <div id="root1"></div>
 
@@ -24,7 +26,8 @@ ReactDOM.createRoot(document.getElementById('...')).render(...);
   //    앞서 만든 h1Element(JSX)를 실제 DOM에 그려 줍니다.
   ReactDOM.createRoot(document.getElementById('root1')).render(h1Element);
 </script>
-
+```
+```
 여러 태그를 단일태그로 생성하기 - <React.Fragment></React.Fragment>로 가능하지만,
 <></>로 줄여서 사용 가능
 예시 코드
@@ -42,7 +45,7 @@ div id="root2"></div>
     <p>Hello World</p>
     <p>Nice to meet you</p>
     </>
-
+```
 중괄호{}를 이용한 표현식/ 주석 작성하는 법.
 1) // 태그 내부의 주석은 중괄호를 사용하지 않는다.(주로 시작 태그에 주석을 답니다.) 
 2) {/*태그 외부의 주석은 중괄호를 사용해야 한다.*/}
@@ -65,6 +68,7 @@ JSX에서 인라인 스타일을 객체 리터럴로 전달하는 법은
 - 두 번째 중괄호{}: JS 객체 리터럴
 
 * 클래스형 컴포넌트 만들기: 컴포넌트 기능을 활용하기 위해서 React.component를 상속받도록 만든다.
+```
 <div id="root1"></div>
 <script type="text/babel">
 
@@ -81,8 +85,10 @@ JSX에서 인라인 스타일을 객체 리터럴로 전달하는 법은
   //----- rendering: 컴포넌트는 태그 형식으로 렌더링합니다.
   ReactDOM.createRoot(document.getElementById('root1')).render(<ClassComp/>);
 </script>
-
-* 함수형 컴포넌트 만들기: 함수 선언식, 함수 표현식 모두 사용 가능.
+```
+* 함수형 컴포넌트 만들기: 함수 선언식, 함수 
+표현식 모두 사용 가능.
+```
 const FunctionComp = () => {
   // props가 필요없으면 매개변수 빈 괄호만 사용가능
 
@@ -97,10 +103,11 @@ const FunctionComp = () => {
 // rendering
 ReactDOM.createRoot(document.getElementById('root2')).render(<FunctionComp/>);
 </script>
+```
 
 defaultProps는 컴포넌트에 전달된 props가 없거나 undefined일 때 기본으로
 사용할 값을 정의해주는 기능.
-
+```
 props.children은 컴포넌트의 안쪽에 들어온 콘텐츠를 꺼내서 렌더링해 주는 기능.
 const GiftCard1 = (props) => {
   return (
@@ -128,7 +135,7 @@ ReactDOM.createRoot(document.getElementById('root3')).render([
 ])
 
 </script>
-
+```
 props drilling은 하위 컴포넌트에 값을 연속해서 전달하는 방식입니다.
                  좋은 방식이 아니므로 권장하지 않음.
 
