@@ -139,4 +139,94 @@ ReactDOM.createRoot(document.getElementById('root3')).render([
 props drilling은 하위 컴포넌트에 값을 연속해서 전달하는 방식입니다.
                  좋은 방식이 아니므로 권장하지 않음.
 
+key
+- 리스트를 렌더링할 때 각 요소를 고유하게 식별하기 위해 사용하는 값.
+
+- key로 index(i)로 쓰는게 가능은 하지만 추천은 X
+ 이유는 항목의 순서가 바뀌거나 삭제되면 리렌더링이 비효율적이 될 수 있음.
+
+ key props
+ - 리스트 렌더링 시 각 항목을 고유하게 식별하기 위해 key props사용.
+ -key가 없어도 렌더링은 가능..
+
+React event
+- 사용자와의 상호작용(클릭, 입력, 키보드 입력 등 )을 처리 하기 위한 시스템.
+- DOM의 이벤트를 리액트 문법에 맞게 처리한 것.
+
+일반 DOM (일반 HTML) 문법 
+- <button onclick="handle()"> 
+                    이름 - 소문자 (onclick)
+React Event (리액트) 문법 
+- <button onClick={handle}>    
+                    이름 - 카멜표기법(onClick)
+
+e.preventDefault()
+- 기본 동작(브라우저가 자동으로 처리하는 행동)을 막는 메소드.
+- <form>안에서 데이터만 JS로 처리할 때 자주 사용.
+
+e.stopPropagation()
+- 이벤트가 상위(부모) 요소로 전달되는 걸 막는 함수.
+
+이벤트 처리 방법 - 리액트에서는 인라인이벤트 모델 사용
+
+#### state
+- 컴포넌트가 기억하고 관리해야 할 데이터.
+
+#### state를 사용해야 할때.
+- 버튼 누르면 숫자 증가.
+- 텍스트 입력하면 상태 업데이트
+
+```
+<div id="root1"></div>
+<script type="text/babel">
+
+  //  클래스형 컴포넌트 정의
+  class Spin1 extends React.Component {
+
+    //  state 선언: 상태값 number를 0으로 초기화
+    state = {
+      number: 0,
+    }
+
+    // 🔺 증가 버튼 클릭 시 실행될 핸들러 함수
+    increaseHandler = () => {
+      this.setState({
+        number: this.state.number + 1  // 기존 값에 +1
+      })
+    }
+
+    // 🔻 감소 버튼 클릭 시 실행될 핸들러 함수
+    decreaseHandler = () => {
+      this.setState({
+        number: this.state.number - 1  // 기존 값에 -1
+      })
+    }
+
+    // 화면에 보여질 내용을 정의
+    render() {
+      const { number } = this.state;  // 구조 분해 할당으로 state 값 가져오기
+
+      return (
+        <>
+          {/* 현재 숫자를 표시하는 부분, 숫자 값에 따라 색상 변경 */}
+          <h1 style={{ color: number === 0 ? 'black' : number > 0 ? 'red' : 'blue' }}>
+            {number}
+          </h1>
+
+          {/* ▲ 버튼 클릭 시 increaseHandler 실행 */}
+          <button onClick={this.increaseHandler}>▲</button>
+
+          {/* ▼ 버튼 클릭 시 decreaseHandler 실행 */}
+          <button onClick={this.decreaseHandler}>▼</button>
+        </>
+      )
+    }
+  }
+
+  //  Spin1 컴포넌트를 root1 위치에 렌더링
+  ReactDOM.createRoot(document.getElementById('root1')).render(<Spin1 />);
+</script>
+```
+
+
 
