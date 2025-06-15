@@ -2,7 +2,7 @@ JSX(JavaScript XML)란?
 * XML/HTML 문법을 JavaScript 안에 직접 쓸 수 있게 해주는 문법 확장.
 * 브라우저가 직접 읽는 건 아니고, Babel 같은 트랜스파일러가 React.createElement() 호출로 변환해 준다.
 
-JSX를 사용하는이유
+#### JSX를 사용하는이유
 * 가독성: 컴포넌트의 구조를 HTML처럼 한눈에 보기 쉽고,
 * 표현력: JavaScript 변수나 함수 호출 결과를 {}안에 바로 삽입가능.
 * 안전성: 텍스트 노드나 속성 값에 자동으로 이스케이프 처리가 되어 XSS
@@ -49,19 +49,20 @@ div id="root2"></div>
 중괄호{}를 이용한 표현식/ 주석 작성하는 법.
 1) // 태그 내부의 주석은 중괄호를 사용하지 않는다.(주로 시작 태그에 주석을 답니다.) 
 2) {/*태그 외부의 주석은 중괄호를 사용해야 한다.*/}
-3){
+3) {
     // 슬래시 2개 주석 (single line comment)은 중괄호와 다른 줄에 작성해야한다.
   }  
 셀프 클로징 태그란? (*반드시 뒤에 슬래시(/)를 추가해야함.)
 JSX를 쓸 때는 “내용 없으면 무조건 <… />” 
 내용이 있으면 <Tag>…</Tag>, 없으면 <Tag />로 작성 가능.
-
+```
 삼항 연산자: 조건 ? 참문장 : 거짓문장
 JSX 안에 태그도 넣을 수 있고, 변수 할당도 가능
 논리 연산자(&&, ||)와 용도는 비슷하지만, 둘 중 하나만 확실하게 렌더링할 땐 삼항이 더 직관적
 너무 복잡해지면 if/else나 별도 함수로 빼서 가독성 유지하기.
+```
 
-객체 리터럴 형식으로 스타일 전달하기.
+#### 객체 리터럴 형식으로 스타일 전달하기.
 JSX에서 인라인 스타일을 객체 리터럴로 전달하는 법은
 * style 속성에 중괄호 두번{{...}} 사용하기
 - 첫 번째 중괄호{}: JSX에서 JS표현식 사용
@@ -105,7 +106,8 @@ ReactDOM.createRoot(document.getElementById('root2')).render(<FunctionComp/>);
 </script>
 ```
 
-defaultProps는 컴포넌트에 전달된 props가 없거나 undefined일 때 기본으로
+#### defaultProps
+ 컴포넌트에 전달된 props가 없거나 undefined일 때 기본으로
 사용할 값을 정의해주는 기능.
 ```
 props.children은 컴포넌트의 안쪽에 들어온 콘텐츠를 꺼내서 렌더링해 주는 기능.
@@ -136,35 +138,35 @@ ReactDOM.createRoot(document.getElementById('root3')).render([
 
 </script>
 ```
-props drilling은 하위 컴포넌트에 값을 연속해서 전달하는 방식입니다.
-                 좋은 방식이 아니므로 권장하지 않음.
+#### props drilling은 하위 컴포넌트에 값을 연속해서 전달하는 방식입니다.
+ 좋은 방식이 아니므로 권장하지 않음.
 
-key
+#### key
 - 리스트를 렌더링할 때 각 요소를 고유하게 식별하기 위해 사용하는 값.
 
 - key로 index(i)로 쓰는게 가능은 하지만 추천은 X
  이유는 항목의 순서가 바뀌거나 삭제되면 리렌더링이 비효율적이 될 수 있음.
 
- key props
+ #### key props
  - 리스트 렌더링 시 각 항목을 고유하게 식별하기 위해 key props사용.
  -key가 없어도 렌더링은 가능..
 
-React event
+#### React event
 - 사용자와의 상호작용(클릭, 입력, 키보드 입력 등 )을 처리 하기 위한 시스템.
 - DOM의 이벤트를 리액트 문법에 맞게 처리한 것.
 
-일반 DOM (일반 HTML) 문법 
+#### 일반 DOM (일반 HTML) 문법 
 - <button onclick="handle()"> 
                     이름 - 소문자 (onclick)
-React Event (리액트) 문법 
+#### React Event (리액트) 문법 
 - <button onClick={handle}>    
                     이름 - 카멜표기법(onClick)
 
-e.preventDefault()
+#### e.preventDefault()
 - 기본 동작(브라우저가 자동으로 처리하는 행동)을 막는 메소드.
 - <form>안에서 데이터만 JS로 처리할 때 자주 사용.
 
-e.stopPropagation()
+#### e.stopPropagation()
 - 이벤트가 상위(부모) 요소로 전달되는 걸 막는 함수.
 
 이벤트 처리 방법 - 리액트에서는 인라인이벤트 모델 사용
@@ -228,5 +230,17 @@ e.stopPropagation()
 </script>
 ```
 
+#### Life Cycle
+-크게 3단계 (마운트, 업데이트, 언마운트)로 나뉨
+1. 마운트(Mount) - 컴포넌트가 처음 생성될 때
+ - constructor() -> 처음 생성자 호출
+ - render(     ) -> JSX 그리기
+ - componentDidMount -> 화면에 나타난 뒤 실행됨.
 
+2. 업데이트(Update) - props나 state가 바뀔 때
+- shouldComponentUpdate() -> 리렌더링 할지 말지 결정 (최적화)
+- render() -> 변경된 내용 반영
+- componentDidUpdate -> 업데이트 완료 후 실행됨
 
+3. 언마운트(Unmount) - 컴포넌트가 화면에서 사라질 때
+- componentWillUnmount() = 타이머 제거, 이벤트 제거 등 정리 작업에 사용 
