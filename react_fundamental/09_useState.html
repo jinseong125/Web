@@ -253,8 +253,107 @@ ReactDOM.createRoot(document.getElementById('root6')).render(<LoginComponent />)
 <div id="root7"></div>
 <script type="text/babel">
 
+//----- 로그인 화면과 state (state 1개만 사용)
 
-  
+const LoginComponent2 = () => {
+
+// state (id와 pw를 가진 user 객체)
+const [user, setUser] = React.useState({
+  id: '',
+  pw: '',
+})
+
+// 입력 상자(아이디, 비밀번호)의 입력 변경 시 발생하는 이벤트 핸들러: onChange
+const handleChange = (e) => {
+ // console.log(e.target);  //-- 입력하고 있는 입력 상자 확인(e가 input을 가리킴)
+ // console.log(e.target.id, e.target.value);  입력하고 있는 입력상자의 id와 입력값
+
+setUser({
+  ...user,  //----- 기존 user 객체가 가진 값을 그대로 시용합니다.
+  [e.target.id]: e.target.value,  //-- 입력하고 있는 입력 상자의(id,pw) 입력값을 덮어쓰기 합니다.
+})                                //-- 대괄호[]는 프로퍼티를 변수나 표현식의 값으로 동적으로 지정하는 경우에 반드시 필요한 ES6 문법입니다.
+
+}
+
+// 서브밋 이벤트 핸들러
+const handleSubmit = (e) => {
+  if(user.id === '' || user.pw ==='') {
+    alert('아이디와 비밀번호 입력을 확인하세요.');
+    e.preventDefault();
+    return;
+  }
+  alert(`id: ${user.id}, pw ${user.pw}`);
+}
+
+  return (
+    <form
+    action="/login"
+    method="post"
+    onSubmit={handleSubmit}
+    >
+      <input 
+      type="text"
+      id="id" //-- id값은 state user 객체의 id프로퍼티 이름과 동일하게 맞춥니다.
+      value={user.id}
+      onChange={handleChange}
+      placeholder="아이디"
+      />
+      <br/>
+      <input
+      type="password"
+      id="pw"  //-- id값은 state user 객체의 pw 프로퍼티 이름과 동일하게 맞춥니다.       
+      value={user.pw}
+      onChange={handleChange}
+      placeholder="비밀번호"
+      />
+      <br/>
+      <button type="submit">로그인</button>
+    </form>
+  )
+
+}
+// const user = {id:'', pw:''}
+// const user = {...user}
+
+ReactDOM.createRoot(document.getElementById('root7')).render(<LoginComponent2 />);
+</script>
+
+<hr>
+
+<div id="root8"></div>
+<script type="text/babel">
+
+const AnimalComponent = () => {
+
+// state
+const [inputValue, setInputValue] = React.useState('');
+const [animals, setAnimals] = React.useState([]);
+
+// 입력 상자 입력 이벤트
+const handleChange = (e) => {
+  setInputValue(e.target.value);  
+}
+
+return (
+  <>
+    <input
+    type="text"
+    value={inputValue}
+    onChange={handleChange}
+    placeholder="동물 입력"
+    />
+    <button
+      type="button"
+      >추가</button>
+      <ul>
+      
+      </ul>  
+  </>
+)
+
+}
+
+ReactDOM.createRoot(document.getElementById('root8')).render(<AnimalComponent />);
 </script>
 
 </body>
