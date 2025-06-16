@@ -324,36 +324,63 @@ ReactDOM.createRoot(document.getElementById('root7')).render(<LoginComponent2 />
 <script type="text/babel">
 
 const AnimalComponent = () => {
+  const [inputValue, setInputValue] = React.useState('');
+  const [animals, setAnimals] = React.useState([]);
 
-// state
-const [inputValue, setInputValue] = React.useState('');
-const [animals, setAnimals] = React.useState([]);
+  // 입력값 변경
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
-// 입력 상자 입력 이벤트
-const handleChange = (e) => {
-  setInputValue(e.target.value);  
-}
+  // 동물 추가
+  const handleClick = () => {
+    if (!inputValue.trim()) {
+      alert('동물 이름을 입력하세요.');
+      return;
+    }
+    setAnimals([
+      ...animals,
+      inputValue.trim(),
+    ]);
+    setInputValue('');
+  };
 
-return (
-  <>
-    <input
-    type="text"
-    value={inputValue}
-    onChange={handleChange}
-    placeholder="동물 입력"
-    />
-    <button
-      type="button"
-      >추가</button>
+  // 동물 삭제 (인덱스 기준)
+  const handleDelete = (indexToRemove) => {
+    setAnimals(animals.filter((_, i) => i !== indexToRemove));
+  };
+
+  return (
+    <>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleChange}
+        placeholder="동물 입력"
+      />
+      <button type="button" onClick={handleClick}>
+        추가
+      </button>
+
       <ul>
-      
-      </ul>  
-  </>
-)
-
-}
+        {animals.map((animal, i) => (
+          <li key={i}>
+            {animal}{' '}
+            <button
+              type="button"
+              onClick={() => handleDelete(i)}
+            >
+              삭제
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
 
 ReactDOM.createRoot(document.getElementById('root8')).render(<AnimalComponent />);
+
 </script>
 
 </body>
