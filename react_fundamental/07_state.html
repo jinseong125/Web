@@ -71,12 +71,12 @@
 
   class Spin1 extends React.Component {
 
-//----- state 선언 및 초기화
+//----- state 선언 및 초기화 (07 예시)
     state = {
       number: 0,
     }
 
-//----- 증가용 이벤트 핸들러
+//----- 증가용 이벤트 핸들러 (앞에 set 자주 쓰임)
 increaseHandler = () => {
   this.setState({
     number: this.state.number + 1
