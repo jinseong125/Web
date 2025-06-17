@@ -365,7 +365,7 @@ const AnimalComponent = () => {
       <ul>
         {animals.map((animal, i) => (
           <li key={i}>
-            {animal}{' '}
+            {animal}{''}
             <button
               type="button"
               onClick={() => handleDelete(i)}
@@ -392,6 +392,7 @@ ReactDOM.createRoot(document.getElementById('root8')).render(<AnimalComponent />
 const TextComponent = () => {
   // state
   const [text, setText] = React.useState('좋아요');
+  // text = '시러' === setText('시러')
   // click event handler
   const handleClick = () => {
     setText(prev => (prev === '좋아요' ? '싫어요' : '좋아요'));
@@ -416,19 +417,19 @@ ReactDOM.createRoot(document.getElementById('root9')).render(<TextComponent/>);
 
 const ArrayComponent = () => {
 
-  const [array, setArray] = React.useState(1);
+  const [number, setNumber] = React.useState(1);
   const [numbers, setNumbers] = React.useState([]);
   const handleClick = (e) => {
-    setArray(array + 1);
-    setNumbers([...numbers, array])
+    setNumber(number + 1);
+    setNumbers([...numbers, number])
   } 
   return (
     <>
-    <button onClick={handleClick}>{array}추가</button>
+    <button onClick={handleClick}>{number} 추가</button>
     <div>
       {
-        numbers.map((array, i) => (
-          <span key={i} style={{marginRight: 10}}>{array}</span>
+        numbers.map((number, i) => (
+          <span key={i} style={{marginRight: 10}}>{number}</span>
         ))
       }
     </div>
@@ -505,22 +506,37 @@ ReactDOM.createRoot(document.getElementById('root12')).render(<BoxComponent/>)
 <script type="text/babel">
 // 연습) 버튼 3개를 화면에 표시하세요.
 //       "스위치1 OFF", "스위치2 OFF", "스위치3 OFF"
-//      각 스위치를 클릭할때마다 ON/OFF흫 바꾸세요. state는 하나의 배열만 사용하세요.
-const ButtonComponent = () => {
-const[buttons,setButtons] = React.useState([false,false,false])
-const handleChange = (e) => {
- 
-
-}
-
-  return (
-    <>
-    <button id=''>스위치1</button>
-    </>
-  )
-}
-ReactDOM.createRoot(document.getElementById('root13')).render(<ButtonComponent/>)
-</script>
+//      각 스위치를 클릭할때마다 ON/OFF로 바꾸세요. state는 하나의 배열만 사용하세요.
+const MultiSwitch = () => {
+    // 1) switches 상태 선언
+    //    세 개의 스위치 상태를 담은 배열([false, false, false])로 초기화
+    //    false = OFF, true = ON
+    const [switches, setSwitches] = React.useState([false, false, false]);
+    
+    // click event 발생 시 동작하는 toggleSwitch 함수
+    // 2) toggleSwitch 함수 정의
+    //    id(인덱스)를 받아서 해당 위치의 불리언 값을 반전(!) 시킴
+    //    setSwitches에 새 배열을 전달해서 상태 업데이트
+    const toggleSwitch = id => {
+      setSwitches(prev => prev.map((value,index) =>
+      // index === id인 항목만 !value, 나머지는 그대로 value 유지
+      index === id ? !value : value))
+    };
+    return (
+      <>
+        {  // switches 배열을 map 돌면서 버튼 3개 생성
+          switches.map((value, index) => (
+          <button key={index}   // React가 리스트를 효율적으로 렌더링 할 수 있도록 key 설정.
+          onClick={() => toggleSwitch(index)}  // 클릭하면 해당 인덱스를 넘겨 토글 실행
+          >
+          {`스위치${index + 1} ${value ? 'ON' : 'OFF'}`}
+          </button>
+        ))}
+      </>
+    )
+  }
+  ReactDOM.createRoot(document.getElementById('root13')).render(<MultiSwitch/>)
+  </script>
 
 </body>
 </html>

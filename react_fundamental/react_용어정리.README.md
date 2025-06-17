@@ -244,3 +244,95 @@ ReactDOM.createRoot(document.getElementById('root3')).render([
 
 3. 언마운트(Unmount) - 컴포넌트가 화면에서 사라질 때
 - componentWillUnmount() = 타이머 제거, 이벤트 제거 등 정리 작업에 사용 
+```
+<div id="root13"></div>
+<script type="text/babel">
+  // MultiSwitch 컴포넌트 선언
+  const MultiSwitch = () => {
+    // 1 switches 상태 선언
+    //    - 세 개의 스위치 상태를 담은 배열([false, false, false])로 초기화
+    //    - false = OFF, true = ON
+    const [switches, setSwitches] = React.useState([false, false, false]);
+
+    // 2 toggleSwitch 함수 정의
+    //    - id(인덱스)를 받아서 해당 위치의 불리언 값을 반전(!)시킴
+    //    - setSwitches에 새 배열을 전달해서 상태 업데이트
+    const toggleSwitch = id => {
+      setSwitches(prev =>
+        prev.map((value, index) =>
+          // index === id인 항목만 !value, 나머지는 그대로 value 유지
+          index === id ? !value : value
+        )
+      );
+    };
+```
+    // 3 렌더링할 JSX
+    ```
+    return (
+      <>
+        {
+          // switches 배열을 map 돌면서 버튼 3개 생성
+          switches.map((sw, index) => (
+            <button
+              key={index}                     // React가 리스트를 효율적으로 렌더링하도록 key 설정
+              onClick={() => toggleSwitch(index)} // 클릭하면 해당 인덱스를 넘겨 토글 실행
+            >
+              {`스위치${index + 1} ${sw ? 'ON' : 'OFF'}`}
+              {/* sw가 true면 'ON', false면 'OFF' */}
+            </button>
+          ))
+        }
+      </>
+    );
+  };
+  
+  // 4 ReactDOM으로 컴포넌트 실제 화면에 마운트
+  ReactDOM.createRoot(document.getElementById('root13')).render(<MultiSwitch />);
+</script>
+```
+상태 선언 (useState)
+const [switches, setSwitches] = React.useState([false, false, false]);
+switches에는 3개의 불리언값이 담긴 배열이 들어가요.
+처음에 모두 false(OFF)로 시작하도록 설정했습니다.
+setSwitches는 이 상태를 바꿔줄 때 사용하는 함수예요.
+토글 함수 (toggleSwitch)
+
+const toggleSwitch = id => {
+  setSwitches(prev =>
+    prev.map((value, index) =>
+      index === id ? !value : value
+    )
+  );
+};
+id는 클릭한 버튼의 인덱스(0, 1, 2)를 의미해요.
+
+prev.map(...)로 배열을 순회하며,
+
+index === id인 항목만 !value(반전)
+
+나머지는 기존 value를 그대로 유지
+
+이렇게 새로 만들어진 배열 전체를 setSwitches로 업데이트합니다.
+
+버튼 렌더링
+```
+switches.map((sw, index) => (
+  <button key={index} onClick={() => toggleSwitch(index)}>
+    {`스위치${index + 1} ${sw ? 'ON' : 'OFF'}`}
+  </button>
+))
+```
+switches.map으로 3번 반복하면서 버튼을 그려요.
+
+sw는 현재 요소의 값(false 또는 true), index는 그 위치(0,1,2)
+
+버튼 텍스트는 스위치1 OFF처럼, sw ? 'ON' : 'OFF'로 결정
+
+onClick에 toggleSwitch(index)를 걸어, 클릭된 버튼만 토글되도록 합니다.
+
+렌더링 마운트
+
+ReactDOM.createRoot(document.getElementById('root13')).render(<MultiSwitch />);
+HTML의 <div id="root13">에 MultiSwitch 컴포넌트를 붙여 실제 화면에 보이게 해 줍니다.
+
+label, 
