@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Todo List</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+  const TodoAppend = ({description, onChange, onClick}) => {
+    return (
+      <div className ="todo-append">
+        <label htmlFor="description">할 일 세부 내용</label>
+        <input
+         type="text"
+         id="description"
+         value={description}
+         onChange={onChange}
+         />
+         <button type="button" onClick={onClick}>추가</button>
+      </div> 
+    )
+  }
+
+  const TodoListItem = ({todo, onChange, onClick}) => {
+    return (
+      <div className="todo" key={todo.todoNo}>
+       <input type="checkbox" id={todo.todoNo} onChange={onChange} />
+       <label htmlFor={todo.todoNo} style={{textDecoration: todo.isDone ? 'line-through' : 'none'}}>{todo.description}</label>
+       <button type="button" data-todo-no={todo.todoNo} onClick={onClick}>❌</button> 
+       </div>
+    )
+  }
+
+  const TodoList = () => {
+    // state
+    const [todos, setTodos] = React.useState([])   //-- 할 일 리스트
+    const [todo,setTodo] = React.useState({        //-- 할 일
+      todoNo: 1,
+      description: '',
+      isDone: false,
+    })
+    // description 입력 이벤트 핸들러
+    const onDescriptionChange = (e) => {
+      setTodo({
+        ...todo,  //---------------------- 기존 todp를 모두 그대로 사용합니다.
+        description: e.target.value,  //-- descrition 값을 사용자가 입력한 description 값으로 덮어쓰기합니다.
+      })
+    }
+    // 추가 버튼 이벤트 핸들러
+    const onAddClick = (e) => {
+      if(todo.description.trim() === '') {
+        alert('할 일 세부 내용을 입력하세요.')
+        return;
+      }
+      setTodos(todos.concat(todo));  //-- todos 배열에 todo를 연결한 새로운 배열을 전달하기.
+      setTodo({   //--------------------- todo 초기화
+        todoNo: todo.todoNo + 1,
+        description: '',
+        isDone: false,
+      })  
+    }
+    // 체크박스 체크 변경 이벤트 핸들러
+    const onCheckboxChange = (e) => {
+      setTodos(todos.map(todo => {         
+        if(e.target.id == todo.todoNo) {   //------------------- 체크한 항목과 일치하는 todo를 찾습니다. if(Number(e.target.id) === todo.todoNo){}
+          return {...todo, isDone: e.target.checked}  //-------- 완료 여부(isDone)를 체크되어 있으면 true로, 아니면 false로 업데이트합니다.
+        }
+          return todo;
+      }))
+    }
+    // 삭제 버튼 클릭 이벤트 핸들러
+    const onDeleteClick = (e) => {
+      setTodos(todos.filter(todo => e.target.dataset.todoNo != todo.todoNo))
+    }
+    return (
+      <>
+        <TodoAppend
+          description={todo.description}
+          onChange={onDescriptionChange}
+          onClick ={onAddClick}
+        />
+        <div className="todos">
+          {
+            todos.map(todo => (
+              // 아래 div를 <TodoListItem> 컴포넌트로 분리해 보세요.  
+              <TodoListItem 
+              key={todo.todoNo}
+                todo={todo}
+                onChange={onCheckboxChange}
+                onClick={onDeleteClick}
+
+              />
+             //  <div className="todo" key={todo.todoNo}>
+             //  <input type="checkbox" id={todo.todoNo} onChange={onCheckboxChange} />
+             //<label htmlFor={todo.todoNo} style={{textDecoration: todo.isDone ? 'line-through' : 'none'}}>{todo.description}</label>
+             //<button type="button" data-todo-no={todo.todoNo} onClick={onDeleteClick}>❌</button> 
+             // </div>
+            ))
+          }
+        </div>
+      </>
+    )
+  }
+  
+
+  const Todoheader = () => {
+   return (
+    <div className="header">
+      <h1>오늘의 TodoList ({new Date().toLocaleDateString()})</h1>
+    </div>
+   )
+  }
+
+  const TodoBody = () => {
+    return (
+      <div className="body">
+        <TodoList/>
+      </div>
+    )
+  }
+
+  const TodoFooter = () => {
+    return (
+      <div className="footer">
+        <p>Copyright 2025. All rights reserved.</p>
+      </div>
+    )
+  }
+
+  const TodoApp = () => {
+    return (
+      <>
+        <Todoheader/>
+        <TodoBody/>
+        <TodoFooter/>
+      </>
+    )
+  } 
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<TodoApp/>)
+
+</script>
+  
+</body>
+</html>

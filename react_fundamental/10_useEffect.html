@@ -11,14 +11,14 @@
 <body>
 
 <!--
-1. React.useEffect()
+1. React.useEffect()  
   1) 함수형 컴포넌트에서 사이드 이펙트(side effect)를 처리하기 위한 훅(Hooks) 입니다.
   2) 사이드 이펙트란 데이터 가져오기, 구독 설정, DOM 직접 수정, 타이머 설정 등 컴포넌트 외부와 상호작용하거나 비동기 로직을 실행하는 작업을 의미합니다.
   
   
 2. React.useEffect() 구문
-  1) 형식
-    React.useEffect(setup, [dependencies]);
+  1) 형식            필수  ,  선택(의존배열)
+    React.useEffect(setup[, [dependencies]);
   2) 설명
     (1) setup
       - 사이드 이펙트가 동작할 코드가 작성된 함수입니다.
@@ -29,6 +29,7 @@
       - setup 함수에서 사용하는 모든 반응형 값(props, state, 변수, 함수 등)이 포함될 수 있습니다.
 
 
+   state를 바꾸면 재 렌더링
 3. 의존성 배열(dependencies)에 따른 사이드 이펙트 실행 시점
   1) 의존성 배열이 없는 경우
     ▶︎ 컴포넌트가 렌더링될 때마다 실행
@@ -55,6 +56,135 @@
       };
     }, []);
 -->
+
+버튼을 클릭하면 현재 시간을 출력하는 컴포넌트를 만들어 보자.
+
+<div id="root1"></div>
+<script type="text/babel">
+
+const Now = () => {
+  const [now, setNow] = React.useState(new Date().toLocaleTimeString());
+  React.useEffect(() => {
+    alert('useEffect 동작')
+  })   //----- 의존 배열이 없으면 모든 렌더링에서 useEffect에 등록한 함수가 동작합니다.
+  const handleClick = (e) => {
+    setNow(new Date().toLocaleTimeString());
+  }
+  
+  return (
+    <>
+    <button onClick={handleClick}>Now</button>
+    <h1>{now}</h1>
+    </>
+  )
+}
+
+const Now2 = () => {
+  const [now, setNow] = React.useState(new Date().toLocaleTimeString());
+  React.useEffect(() => {
+    alert('useEffect 동작')
+  }, [])     //----------------------------------------------------------- 의존 배열이 빈 배열이면 최초 렌더링시에만 useEffect에 등록한 함수가 동작합니다.
+  const handleClick = (e) => {
+    setNow(new Date().toLocaleTimeString());
+  }
+
+  return (
+    <>
+    <button onClick={handleClick}>Now</button>
+    <h1>{now}</h1>
+    </>
+  )
+}
+
+const Today = () => {
+  
+  const [date, setDate] = React.useState({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    day: new Date().getDate(),
+  })
+  React.useEffect(() => {
+   alert('useEffect 동작')
+  }, [date.year, date.month]);  // 의존배열에 명시한 date.year, date.month 값이 변하면 useEffect에 등록한 함수가 동작합니다.
+  // handleYear, handleMonth, handleDay 이벤트를 handleChange 이벤트로 모아보세요.
+   const handleChange = (e) => {
+    setDate({
+      ...date,
+      [e.target.id]: Number(e.target.value)
+    })
+   }
+  /*const handleYear = (e) => {
+    setDate({
+      ...date, 
+      year: Number(e.target.value),
+    })
+  }
+   const handleMonth= (e) => {
+  setDate({...date,month: Number(e.target.value),})
+ }
+ const handleDay = (e) => {
+  setDate({...date, day: Number(e.target.value),})
+ }*/
+  return (
+    <>
+    <input id="year" type="text" placeholder="년" value={date.year}   onChange={handleChange} />
+    <input id="month"type="text" placeholder="월" value={date.month}  onChange={handleChange} />
+    <input id="day"  type="text" placeholder="일" value={date.date}   onChange={handleChange} />
+    <h1>{JSON.stringify(date)}</h1>
+    </>
+  )
+}
+
+ReactDOM.createRoot(document.getElementById('root1')).render(<Today/>)
+
+</script>
+
+<hr>
+
+<div id="root2"></div>
+<script type="text/babel">
+
+  // 연습) 이름, 나이, 닉네임을 가지는 유저 state를 작성합니다.
+  //       이름을 입력할 때 공백 검사를 수행해서 공백이면 경고창을 띄웁니다.
+  //       나이를 입력할 때 범위 검사를 수행해서 0 미만 120 초과이면 경고창을 띄웁니다.
+  //       닉네임을 입력할 때는 아무 검사도 수행하지 않습니다.
+  //       화면에는 입력한 이름, 나이, 닉네임을 출력합니다.
+
+  const User = () => {
+    const[user, setUser] = React.useState({
+      name:'',
+      age: 0,
+      nickname:'',
+    });
+  React.useEffect(() => {
+  if(user.name.length === 0) {
+    alert('이름을 입력하세요')
+  }
+  if(user.age < 0 || user.age > 120 ){
+    alert('올바른 나이를 입력하세요.')
+  }
+}, [user.name, user.age])   //----- user.name, user.age가 변할때마다 useEffect에 등록한 함수가 동작합니다.
+
+
+
+const handleChange = (e) => {
+  setUser({
+    ...user,
+    [e.target.id]: e.target.value
+  })
+}
+return(
+<>
+  <input id="name"      type="text"  onChange={handleChange} />
+  <input id="age"       type="text"  onChange={handleChange} />
+  <input id="nickname"  type="text"  onChange={handleChange} />
+  <h1>{JSON.stringify(user)}</h1>
+  </>
+)
+  }
+
+ReactDOM.createRoot(document.getElementById('root2')).render(<User/>)
+</script>
 
 </body>
 </html>
