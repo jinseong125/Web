@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>review</title>
+<script>
+{/*상황	               JSX Prop	    Handler 이름	    설명
+버튼 클릭	              onClick	    handleClick	      클릭 시 실행
+input·textarea 변경	   onChange	    handleChange	    글자를 입력·수정할 때마다 실행
+체크박스 상태 변경	    onChange 	   handleCheckbox	   체크/언체크 시 실행
+라디오 버튼 상태 변경  	onChange    	handleRadio	     라디오 선택 바뀔 때 실행
+폼 제출(submit) 	     onSubmit	    handleSubmit	    <form> 에서 Enter 또는 제출 버튼 클릭 시 실행
+마우스 올릴 때	        onMouseOver	 handleMouseOver	마우스 포인터가 요소 위에 있을 때 실행
+포커스 받을 때	        onFocus	     handleFocus	    input 등에 포커스가 갔을 때 실행
+포커스 잃을 때	        onBlur	     handleBlur	      input 포커스가 다른 곳으로 이동할 때 실행
+키보드 누를 때	        onKeyPress 	handleKeyPress 등	키보드 입력 이벤트를 처리할 때 
+                       onKeyDown       ''                                                                 
+                       onKeyUp         ''                           */}
+</script>
+  <div id="root1"></div>
+  <script type="text/babel">
+  // 연습) 좋아요 버튼 누를때 마다 버튼 텍스트가 "좋아요". "싫어요"가 반복되도록 컴포넌트를 구현하세요. 
+  const TextComponent = () => {
+    const [text, setText] = React.useState('좋아요');
+    const handleClick = () => {
+    setText(prev => (prev === '좋아요' ? '싫어요' : '좋아요'));
+    }  //prev는 이전상태값(previous state)를 가리킴.그래서 prev 사용
+    return (
+      <button type="button" onClick={handleClick}>{text}</button>
+    )
+  }
+  ReactDOM.createRoot(document.getElementById('root1')).render(<TextComponent/>);
+  </script>
+
+  <hr>
+
+  <div id="root2"></div>
+  <script type="text/babel">
+
+
+                                                                            */
+//  연습) 휴대전화번호를 입력 받는 입력 상자를 반환하는 컴포넌트를 구형하세요.
+//        휴대전화번호를 입력 할 때 하이픈('-')을 입력하면 자동으로 지워버리세요.
+//        String의 replace 함수를 이용해서 모든 하이픈('-')을 빈 문자열('')로 바꾸시면 됩니다.
+const NumberComponent = () => {
+  const[phoneNumber, setPhoneNumber] = React.useState()
+}
+
+
+  </script>
+
+</head>
+<body>
+  
+</body>
+</html>
