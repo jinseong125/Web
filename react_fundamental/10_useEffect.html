@@ -358,8 +358,18 @@ ReactDOM.createRoot(document.getElementById('root7')).render(<Todos/>)
 <div id="root8"></div>
 <script type="text/babel">
 
+// 연습) 화면에 적당한 길이의 랜덤 문자열을 표시합니다. (window.crypto.randomUUID()를 활용해 보세요.)
+//       문자열 아래에는 입력 상자를 배치합니다.
+//       입력 상자에 랜덤 문자열을 그대로 입력합니다. 입력이 끝나면 Enter를 누르세요.
+//       랜덤 문자열을 그대로 잘 입력하고 Enter를 누르면, 입력하는데 걸린 시간을 경고창에 출력하세요.
+//       입력을 잘못한 뒤 Enter를 누르면, 아무일도 일어나지 않도록 처리하세요.
 
-ReactDOM.createRoot(document.getElementById('root8')).render
+const TextComponent = () => {
+const[text, setText] = React.useState('');
+
+}
+
+ReactDOM.createRoot(document.getElementById('root8')).render(<TextComponent />)
 </script>
 
 </body>

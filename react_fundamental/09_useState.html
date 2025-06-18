@@ -7,8 +7,7 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <title>useState</title>
-</head>
-<body>
+</head><body>
 
 <!--
 1. React.useState() (false), (0), ('빈 문자열'), ({객체}), ([배열])
@@ -543,11 +542,45 @@ const MultiSwitchi = () => {
 
 <div id="root14"></div>
 <script type="text/babel">
+
 // 연습) 추가버튼을 누를때마다 화면에 <input> 태그를 새롭게 추가합니다.
 //       각 <input> 태그에 입력한 값들은 state 배열에 저장합니다.
 //       state 배열에 저장된 값들을 화면에 리스트 형식으로 출력하세요.
 const CreateInput = () => {
-
+  // state
+  const [values, setValues] = React.useState(['']);
+  // function
+  const valueChange = (value, i) => {
+    const changedValues = [...values];
+    changedValues[i] = value;
+    setValues(changedValues);
+  }
+  // click event handler
+  const handleClick = (e) => {
+    setValues([ ...values, '' ]);
+  }
+  return (
+    <>
+      <button onClick={handleClick}>Input추가</button>
+      {
+         values.map((value, i) => (
+        <input
+        key={i}
+        value={value}
+        onChange={e => valueChange(e.target.value, i)}
+        style={{ display: 'block' }}
+        />
+      ))
+    }
+    <ul>
+      {
+        values.map((value, i) => (   // ()는 return,
+          <li key={i}>{value}</li>
+        ))
+      }
+    </ul>
+    </>
+  )
 }
 ReactDOM.createRoot(document.getElementById('root14')).render(<CreateInput/>)
 </script>
@@ -561,7 +594,7 @@ ReactDOM.createRoot(document.getElementById('root14')).render(<CreateInput/>)
 //       비밀번호: 4글자 미만이면 "비밀번호는 4자 이상입니다."
 //       이메일, 비밀번호, 유효성 검사 결과 모두 state로 관리해야 합니다.
 const ValidateInput = () => {
-
+ 
 }
 
 ReactDOM.createRoot(document.getElementById('root15')).render(ValidateInput)
