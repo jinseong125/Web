@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Openweather API</title>
+</head>
+<body>
+
+<div id="root"></div>
+<script type="text/babel">
+
+const WeatherIcon = ({icon}) => {
+  return icon && <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />
+}
+
+const CurrentWeather = () => {
+
+  const { useState, useEffect } = React;                //----- React 객체에서 useState, useEffect를 객체 구조 분해 할당으로 빼면 useState(), useEffect처럼 React 명시 없이 사용 가능합니다.
+
+  const [ weatherData, setWeatherData ] = useState({});  //----- API 응답 결과
+  const [ position, setPosition ] = useState({          //------------- 현재 위치 정보(위도, 경도)
+    latitude: 0,   //-- 위도
+    longitude: 0,  //-- 경도
+  })
+  const [ completed, setCompleted ] = useState(false);  //----- API 응답 완료 여부
+  const API_KEY = 'MY_API_KEY';
+
+  //-----------------------------------------------------------------------------------------
+  
+  const getCurrentPosition = () => {   //----- 현재 위도/경도 정보를 가져오는 함수 (이 작업은 비동기 작업이므로, Promise를 이용해서 처리합니다.)
+    return new Promise((resolve, reject) => {    //----- 성공했을때 resolve, 실패했을때 reject
+      //----- 자바스크립트의 Geolocation 인터페이스는 장치의 현재 위치 정보를 제공하는 getCurrentPosition 메소드를 제공합니다.
+      //      getCurrentPosition 메소드의 첫 번째 콜백 함수의 매개변수(currentPosition)로 현재 위치 정보가 전달됩니다.
+      window.navigator.geolocation.getCurrentPosition((currentPosition) => {
+        setPosition({
+          latitude: currentPosition.coords.latitude,
+          longitude: currentPosition.coords.longitude,
+        })
+        // Promise의 이행 값은 resolve함수에 저장합니다.
+        // resolve 함수에 저장한 값이 promise로 반환하는 실제 값입니다.
+        resolve(currentPosition);
+      })
+    });
+  }
+  
+  const getCurrentWeather = async(pos) => {   //----- 전달 받은 위도/경도(pos) 정보를 이용해  해당 위치의 날씨를 가져오는 함수.
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    //----- OpenWeather API (일 1000번 호출 무료, 넘어가면 등록하신 신용카드로 결제됩니다.)
+    //      lat: 위도
+    //      lon: 경도
+    //      appid: API KEY
+    //      units: metric (응답 결과의 온도 단위를 섭씨로 받을 수 있습니다.)
+    const apiURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    const response = await fetch(apiURL);
+    const jsonData = await response.json()
+    return jsonData;
+  }
+  
+  const fetchCurrentWeather = async () => {
+    
+  /**************************************************
+  //----- then()으로 promise 처리하는 방법 -----//
+    getCurrentPosition()
+    .then((현재위치) => {
+      fetch()
+      .then((현재날씨) => {
+
+      })
+      })
+
+  //----- await/async로 promise처리하는 방법 -----// 
+      await 키워드를 붙이면 promise의 이행 값을 정상적으로 처리할 수 있습니다.
+      함수 내부에서 await 카워드를 사용하기 위해서는 반드시 async 키워드를 함수에 추가해야 합니다.  
+      const 현재위치 = await getCurrentPosition()
+      const 현재날씨 = await fetch()
+      ************************************************/
+     
+  const currentPosition = await getCurrentPosition();
+  const currentWeather  = await getCurrentWeather(currentPosition);
+  setWeatherData(currentWeather);
+  setCompleted(true); 
+     
+    }
+    
+    //-----------------------------------------------------------------------------------------
+    
+    useEffect(() => {
+      fetchCurrentWeather();
+    }, [])
+    
+    //-----------------------------------------------------------------------------------------
+
+    if(!completed)
+      return <div>Loading...</div>
+
+    return (
+      <>
+        <div>현재 위도: {position.latitude}</div>
+        <div>현재 경도: {position.longitude}</div>
+        <div>현재 시간: {new Date(weatherData.current.dt * 1000).toLocaleString()}</div>
+        <div>현재 온도: {weatherData.current.temp}℃</div>
+        <div>현재 습도: {weatherData.current.humidity}%</div>
+        <WeatherIcon icon={weatherData.current.weather[0].icon} />
+      </>
+    )
+    
+  }
+  
+  ReactDOM.createRoot(document.getElementById('root')).render(<CurrentWeather/>)
+  
+</script>
+
+</body>
+</html>

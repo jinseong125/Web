@@ -13,7 +13,7 @@
 <!--
 1. React.useEffect()  
   1) 함수형 컴포넌트에서 사이드 이펙트(side effect)를 처리하기 위한 훅(Hooks) 입니다.
-  2) 사이드 이펙트란 데이터 가져오기, 구독 설정, DOM 직접 수정, 타이머 설정 등 컴포넌트 외부와 상호작용하거나 비동기 로직을 실행하는 작업을 의미합니다.
+  2) 사이드 이펙트란 데이터 가져오기 (API 호출), 구독 설정, DOM 직접 수정, 타이머 설정 등 컴포넌트 외부와 상호작용하거나 비동기 로직을 실행하는 작업을 의미합니다.
   
   
 2. React.useEffect() 구문
@@ -22,7 +22,7 @@
   2) 설명
     (1) setup
       - 사이드 이펙트가 동작할 코드가 작성된 함수입니다.
-      - cleanup 코드를 가지고 있는 함수를 반환할 수 있습니다. (선택)
+      - cleanup 코드를 가지고 있는 함수를 반환할 수 있습니다. (선택)  사이드 이펙트에서 사용했던 자원을 정리하다
       - setup 함수에서 return한 cleanup 함수는 컴포넌트가 언마운트될 때 실행됩니다. (componentWillUnmount 역할)
     (2) dependencies
       - 의존성 배열입니다. 필수가 아닌 선택 인자입니다.
@@ -57,10 +57,10 @@
     }, []);
 -->
 
-버튼을 클릭하면 현재 시간을 출력하는 컴포넌트를 만들어 보자.
 
 <div id="root1"></div>
 <script type="text/babel">
+//버튼을 클릭하면 현재 시간을 출력하는 컴포넌트를 만들어 보자.
 
 const Now = () => {
   const [now, setNow] = React.useState(new Date().toLocaleTimeString());
@@ -135,7 +135,7 @@ const Today = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root1')).render(<Today/>)
+//ReactDOM.createRoot(document.getElementById('root1')).render(<Today/>)
 
 </script>
 
@@ -183,7 +183,183 @@ return(
 )
   }
 
-ReactDOM.createRoot(document.getElementById('root2')).render(<User/>)
+//ReactDOM.createRoot(document.getElementById('root2')).render(<User/>)
+</script>
+
+<hr>
+
+<div id="root3"></div>
+<script type="text/babel">
+
+  const ConsoleTimer = () => {
+    React.useEffect(() => {
+      //----- setup 함수가 수행하는 작업
+  //    console.log('Timer start');
+      const intervalId = setInterval(() => {
+  //    console.log(new Date().toLocaleTimeString())
+      }, 1000)  
+      //----- cleanup 함수 반환 (setup 함수가 사용한 자원 정리, consoleTimer 컴포넌트의 렌더링이 끝나면 동작)
+      return () => {
+        clearInterval(intervalId)
+  //     console.log('Timer stop');
+      }
+    }, [])
+  }
+
+  const ConsoleTimerButton = () => {
+    const [flag, setFlag] = React.useState(false);
+    const handleClick = e => {
+      setFlag(!flag)
+    }
+    return (
+      <>
+        <button onClick={handleClick}>
+          Timer {flag ? 'ON' :'OFF'}
+        </button>
+        {flag ? <ConsoleTimer/> : null}
+        {/*flag && <ConsoleTimer/>*/}
+      </>
+    )
+  }
+
+//ReactDOM.createRoot(document.getElementById('root3')).render(<ConsoleTimerButton/>);
+
+</script>
+
+<hr>
+
+<div id="root4"></div>
+<script type="text/babel">
+
+// 연습) 타이머 시작 버튼을 클릭하면 5초 타이머가 동작하도록 컴포넌트를 구현하세요.
+//       화면에 5  4  3  2  1  0  순차적으로 표시됩니다.
+const Timer = ({seconds = 5}) => {
+// state  
+const [count, setCount] = React.useState(seconds);
+const [start, setStart] = React.useState(false);
+// useEffect
+React.useEffect(() => {
+  if(start === false)  //-- if(!start)
+  return;
+  if(count === 0)
+  return;
+const timeoutId = setTimeout(() => {
+  setCount(count - 1);
+}, 1000)            //----- 1초 후에 값을 감소시킵니다.
+return () => clearTimeout(timeoutId);
+}, [count, start])  //----- count, start 값이 변할대마다 useEffect에 등록한 함수가 동작합니다.
+return (
+  <>
+  <button onClick={() => setStart(true)} disabled={start}>타이머시작</button> {/*disabled 한번 클릭 후 다시 클릭 불가능*/}
+  <h1>{count}</h1>
+  </>
+)
+
+}
+ReactDOM.createRoot(document.getElementById('root4')).render(<Timer seconds="5"/>)
+</script>
+
+<hr>
+
+<div id="root5"></div>
+<script type="text/babel">
+
+//----- window 이벤트 리스너와 cleanup 함수
+
+  const KeyLogger = () => {
+    React.useEffect(() => {
+//----- 할 일 (window 이벤트 리스너 등록)
+    const handleKeydown = e => {
+     console.log('눌린 키:', e.key)
+      
+    }
+    window.addEventListener('keydown', handleKeydown);  // 이벤트때 동작하기위해 괄호 X
+//----- cleanup (window 이벤트 리스너 해제)    
+    return () => window.removeEventListener('keydown', handleKeydown);
+    }, [])  //----- 최초 렌더링할때만 동작
+    return (
+      <div>콘솔을 열고 아무 키나 눌러보세요.</div>
+    )
+  }
+
+  ReactDOM.createRoot(document.getElementById('root5')).render(<KeyLogger/>)
+
+</script>
+
+<hr>
+
+<div id="root6"></div>
+<script type="text/babel">
+
+// 연습) 창 너비를 변경하면 (resize 이벤트) 화면에 현재 창의 너비를 출력하세요.
+//       창 너비는 window.innerWidth 값을 확인하면 됩니다.
+//       창 높이는 window.innerHeight 값을 확인하면 됩니다.
+
+const WindowComponent = () => {
+  const [size, setSize] = React.useState({
+  width: window.innerWidth,
+  height:window.innerHeight,
+});
+  React.useEffect(() => {
+  const handleResize = (e) => {
+    setSize({
+      width: window.innerWidth,
+      height:window.innerHeight,
+    });
+  }  
+  window.addEventListener('resize', handleResize)  // 이벤트때 동작하기위해 괄호 X
+  return () =>  window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return (
+    <>
+    <h1>현재 창 너비: {size.width}px</h1>
+    <h1>현재 창 높이: {size.height}px </h1>
+    </>
+  )
+}
+ReactDOM.createRoot(document.getElementById('root6')).render(<WindowComponent/>);
+</script>
+
+<hr>
+
+<div id="root7"></div>
+<script type="text/babel">
+
+//----- API 호출과 useEffect
+
+const Todos = () => {
+
+
+
+const [todos, setTodos] = React.useState([]);
+
+React.useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/todos')
+  .then(response => response.json())
+  .then(jsonData => {
+    setTodos(jsonData);   // API로부터 가져온 데이터를 렌더링 할 수 있도록 state에 저장합니다.
+  })
+}, [])  // 최초 렌더링할 때 가져온 데이터를 출력합니다. 
+return (
+  <>
+  {
+    todos.map(todo => <div key={todo.id}>{todo.title}</div>)
+  }
+  </>
+)
+
+}
+ReactDOM.createRoot(document.getElementById('root7')).render(<Todos/>)
+</script>
+
+<hr>
+
+<div id="root8"></div>
+<script type="text/babel">
+
+
+ReactDOM.createRoot(document.getElementById('root8')).render
 </script>
 
 </body>
