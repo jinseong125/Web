@@ -335,4 +335,5 @@ onClick에 toggleSwitch(index)를 걸어, 클릭된 버튼만 토글되도록 �
 ReactDOM.createRoot(document.getElementById('root13')).render(<MultiSwitch />);
 HTML의 <div id="root13">에 MultiSwitch 컴포넌트를 붙여 실제 화면에 보이게 해 줍니다.
 
+// 메타 facebook -react를 만듬*
 label, 
