@@ -358,19 +358,71 @@ ReactDOM.createRoot(document.getElementById('root7')).render(<Todos/>)
 <div id="root8"></div>
 <script type="text/babel">
 
-// 연습) 화면에 적당한 길이의 랜덤 문자열을 표시합니다. (window.crypto.randomUUID()를 활용해 보세요.)
-//       문자열 아래에는 입력 상자를 배치합니다.
-//       입력 상자에 랜덤 문자열을 그대로 입력합니다. 입력이 끝나면 Enter를 누르세요.
-//       랜덤 문자열을 그대로 잘 입력하고 Enter를 누르면, 입력하는데 걸린 시간을 경고창에 출력하세요.
-//       입력을 잘못한 뒤 Enter를 누르면, 아무일도 일어나지 않도록 처리하세요.
+  // 연습) 화면에 적당한 길이의 랜덤 문자열을 표시합니다. (window.crypto.randomUUID()를 활용해 보세요.)
+  //       문자열 아래에는 입력 상자를 배치합니다.
+  //       입력 상자에 랜덤 문자열을 그대로 입력합니다. 입력이 끝나면 Enter를 누르세요.
+  //       랜덤 문자열을 그대로 잘 입력하고 Enter를 누르면, 입력하는데 걸린 시간을 경고창에 출력하세요.
+  //       입력을 잘못한 뒤 Enter를 누르면, 아무 일도 일어나지 않도록 처리하세요.
 
-const TextComponent = () => {
-const[text, setText] = React.useState('');
+  const Typing = ({ randText, setIsDone }) => {
 
-}
+    const [ input, setInput ] = React.useState('');  //----- 사용자가 입력한 값
 
-ReactDOM.createRoot(document.getElementById('root8')).render(<TextComponent />)
+    React.useEffect(() => {
+      const begin = new Date().getTime();  //--------- 최초 렌더링 시 시간 체크 (타임스탬프)
+      return () => {
+        const end = new Date().getTime();  //--------- 렌더링 종료 시 시간 체크 (타임스탬프)
+        const due = end - begin;
+        alert(`입력에 걸린 시간 : ${due / 1000}s`);
+      }
+    }, []);
+
+    const handleKeydown = (e) => {
+      if(e.key === 'Enter') {  //--------------------- Enter를 누르면 input과 randText가 동일하면 완료 처리
+        setIsDone(input === randText);
+      }
+    }
+
+    return (
+      <>
+        <h1>아래 텍스트를 그대로 입력한 뒤 Enter를 누르세요!</h1>
+        <h1>{randText}</h1>
+        <input 
+          type="text" size="50" placeholder="Try" 
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={handleKeydown}
+        />
+      </>
+    )
+
+  }
+
+  const TypingApp = () => {
+
+    const [ randText, setRandText ] = React.useState('');  //----- 랜덤 문자열
+    const [ isDone, setIsDone ] = React.useState(false);  //------ 완료 여부
+    const [ visible, setVisible ] = React.useState(false);  //---- Typing 컴포넌트를 보여줄 것인지 여부
+
+    React.useEffect(() => {
+      // window.crypto.randomUUID(): 36자로 구성된 Level4 UUID 생성 (Universal Unique IDentifier)
+      setRandText(window.crypto.randomUUID().split('-')[0]);
+    }, []);
+
+    React.useEffect(() => {
+      setVisible(!visible);  //----- 완료하면 Typing 컴포넌트를 제거
+    }, [isDone]);
+
+    return (
+      <>
+        { visible && <Typing randText={randText} setIsDone={setIsDone}/> }
+      </>
+    )
+
+  }
+
+  ReactDOM.createRoot(document.getElementById('root8')).render(<TypingApp/>);
+
 </script>
-
 </body>
 </html>
